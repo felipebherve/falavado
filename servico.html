@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Literata:opsz,wght@7..72,400;7..72,600&family=Lexend:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/acess.js"></script>
+<link rel="icon" href="mesa/img/triboulet_pin.jpg">
+<title>Uma mesa só sua</title>
+</head>
+<body class="brilho">
+<main class="wrap">
+  <section class="painel"><h1 data-t="sv_title"></h1><p data-t="sv_intro"></p></section>
+  <section class="painel"><h2 data-t="sv_inc"></h2><ul class="inclui"><li data-t="sv_i1"></li><li data-t="sv_i2"></li><li data-t="sv_i3"></li><li data-t="sv_i4"></li><li data-t="sv_i5"></li></ul>
+    <h2 data-t="sv_how"></h2><ol class="passos"><li data-t="sv_h1"></li><li data-t="sv_h2"></li><li data-t="sv_h3"></li></ol></section>
+  <section class="painel"><h2 data-t="sv_form"></h2>
+    <form class="pedido" id="pedido" novalidate>
+      <div class="grid2"><label><span data-t="f_nome"></span><input name="nome" autocomplete="name" required maxlength="80"></label>
+      <label><span data-t="f_email"></span><input name="email" type="email" autocomplete="email" required maxlength="120"></label></div>
+      <label><span data-t="f_tipo"></span><select name="tipo"><option data-t="f_t1"></option><option data-t="f_t2"></option><option data-t="f_t3"></option><option data-t="f_t4"></option><option data-t="f_t5"></option></select></label>
+      <label><span data-t="f_msg"></span><textarea name="msg" required maxlength="3000" data-ta="placeholder:f_msg_ph"></textarea></label>
+      <button class="btn ouro" type="submit"><span class="ic" aria-hidden="true">✉️</span><span data-t="f_send"></span></button>
+      <p class="nota" id="f-nota" role="status" aria-live="polite" data-t="f_note"></p>
+      <p class="nota"><span data-t="f_direct"></span> <b class="cod" id="f-mail">felipebherve@gmail.com</b></p>
+    </form></section>
+</main>
+<script src="assets/site.js"></script>
+<script>
+document.getElementById('pedido').addEventListener('submit',function(e){
+  e.preventDefault(); var f=e.target, n=f.nome.value.trim(), m=f.email.value.trim(), x=f.msg.value.trim(), nota=document.getElementById('f-nota');
+  if(!n||!m||!x){ nota.textContent=SITE.t('f_need'); return; }
+  var corpo=SITE.t('f_nome')+': '+n+'\n'+SITE.t('f_email')+': '+m+'\n'+SITE.t('f_tipo')+' '+f.tipo.value+'\n\n'+x+'\n';
+  location.href='mailto:'+SITE.EMAIL+'?subject='+encodeURIComponent(SITE.t('f_subject')+': '+n)+'&body='+encodeURIComponent(corpo);
+  nota.textContent=SITE.t('f_note');
+});
+</script>
+</body>
+</html>

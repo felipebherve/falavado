@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700&family=Literata:opsz,wght@7..72,400;7..72,600&family=Lexend:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/acess.js"></script>
+<link rel="icon" href="mesa/img/triboulet_pin.jpg">
+<title>falavado</title>
+<meta name="description" content="falavado: a mesa dos pensadores, servida pelo bufão Triboulet.">
+</head>
+<body class="brilho">
+<div id="careta" hidden aria-hidden="true">
+  <span class="cara ri"><img src="assets/careta-ri.png" alt="" width="380" height="420"></span>
+  <span class="cara chora"><img src="assets/careta-chora.png" alt="" width="380" height="420"><i class="lagrima"></i><i class="lagrima b"></i><i class="lagrima c"></i></span>
+</div>
+<main class="wrap brilho" data-pagina="inicio">
+
+  <!-- 1. faixa de boas-vindas: fita de cetim curvada -->
+  <header class="faixa-box">
+    <img class="faixa-img" src="assets/faixa.png" alt="Bem-vindo ao falavado" width="1400" height="294">
+    <svg class="fita" viewBox="0 0 1000 300" role="img" aria-labelledby="fita-t">
+      <defs>
+        <linearGradient id="cetim" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2c0c4a"/><stop offset=".22" stop-color="#7e3fc4"/><stop offset=".4" stop-color="#a46ae0"/>
+          <stop offset=".55" stop-color="#6a2fa8"/><stop offset=".85" stop-color="#3e1468"/><stop offset="1" stop-color="#26093f"/>
+        </linearGradient>
+        <linearGradient id="cetim-ponta" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3a1260"/><stop offset=".4" stop-color="#6a2fa8"/><stop offset="1" stop-color="#1e0733"/>
+        </linearGradient>
+        <linearGradient id="ouro-fita" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#a8751a"/><stop offset=".3" stop-color="#ffe08a"/><stop offset=".5" stop-color="#f5c542"/><stop offset=".72" stop-color="#fff1b8"/><stop offset="1" stop-color="#a8751a"/>
+        </linearGradient>
+        <!-- fios da seda: ruído fino e alongado no sentido da fita -->
+        <filter id="seda" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.9" numOctaves="2" seed="3" result="fio"/>
+          <feColorMatrix in="fio" type="matrix" values="0 0 0 0 1  0 0 0 0 .92  0 0 0 0 1  0 0 0 1.3 -.55"/>
+          <feComposite in2="SourceGraphic" operator="in"/>
+        </filter>
+        <linearGradient id="brilho-cetim" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          <animate attributeName="x1" values="-1;1.2" dur="6s" repeatCount="indefinite"/><animate attributeName="x2" values="0;2.2" dur="6s" repeatCount="indefinite"/>
+        </linearGradient>
+        <path id="arco-texto" d="M140 236 Q500 82 860 236"/>
+      </defs>
+      <!-- pontas em rabo de andorinha, atrás da fita -->
+      <path d="M150 196 L22 214 L78 252 L30 294 L170 278 Z" fill="url(#cetim-ponta)" stroke="url(#ouro-fita)" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M850 196 L978 214 L922 252 L970 294 L830 278 Z" fill="url(#cetim-ponta)" stroke="url(#ouro-fita)" stroke-width="4" stroke-linejoin="round"/>
+      <!-- dobras onde o pano vira -->
+      <path d="M118 180 L170 278 L150 196 Z" fill="#14041f"/><path d="M882 180 L830 278 L850 196 Z" fill="#14041f"/>
+      <!-- corpo da fita -->
+      <path d="M118 180 Q500 22 882 180 L882 268 Q500 110 118 268 Z" fill="url(#cetim)"/>
+      <path d="M118 180 Q500 22 882 180" fill="none" stroke="url(#ouro-fita)" stroke-width="6"/>
+      <path d="M118 268 Q500 110 882 268" fill="none" stroke="url(#ouro-fita)" stroke-width="6"/>
+      <path d="M118 192 Q500 36 882 192" fill="none" stroke="#ffe08a" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="7 6"/>
+      <path d="M118 256 Q500 98 882 256" fill="none" stroke="#ffe08a" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="7 6"/>
+      <!-- textura de seda e brilho de cetim correndo pela fita -->
+      <path d="M118 180 Q500 22 882 180 L882 268 Q500 110 118 268 Z" fill="#fff" filter="url(#seda)" opacity=".28"/>
+      <path d="M150 196 L22 214 L78 252 L30 294 L170 278 Z M850 196 L978 214 L922 252 L970 294 L830 278 Z" fill="#fff" filter="url(#seda)" opacity=".2"/>
+      <path class="reflexo" d="M118 180 Q500 22 882 180 L882 268 Q500 110 118 268 Z" fill="url(#brilho-cetim)"/>
+      <text class="fita-texto" text-anchor="middle"><textPath id="fita-t" href="#arco-texto" startOffset="50%" textLength="600" lengthAdjust="spacingAndGlyphs" data-t="welcome"></textPath></text>
+    </svg>
+  </header>
+
+  <!-- 2. as três versões do Herbs, atrás do painel "por que criei" (o painel cobre a parte de baixo) -->
+  <figure class="trio">
+    <img class="trio-img" src="assets/herbs-trio.png" alt="" data-ta="alt:trip_alt" width="763" height="540" decoding="async">
+  </figure>
+
+  <!-- 3. por que criei o falavado -->
+  <section class="painel porque">
+    <h2 data-t="why_title"></h2>
+    <h3 class="sub-porque" data-t="why_sub"></h3>
+    <button type="button" class="ouvir" data-ler=".porque" aria-pressed="false"><span aria-hidden="true">▶</span> <span data-t="l_play"></span></button>
+    <div class="etimo" data-th="why_name"></div>
+    <p data-th="why_p1"></p>
+    <p data-th="why_p2"></p>
+    <p data-th="why_p3"></p>
+    <p data-th="why_p4"></p>
+    <p data-th="why_p5" class="aviso-psi"></p>
+    <p data-th="why_p6"></p>
+    <p data-th="why_p7"></p>
+    <blockquote class="citacao autor"><p data-th="why_p8"></p><cite data-t="why_by8"></cite></blockquote>
+    <blockquote class="citacao"><p data-t="why_q2"></p><cite data-t="why_by2"></cite></blockquote>
+    <p data-th="why_p9" class="fecho"></p>
+  </section>
+
+  <!-- 4. iniciar a mesa -->
+  <section class="painel palco-box">
+    <div class="palco">
+      <span class="bufao chorando" aria-hidden="true"><img src="assets/tri-chorando.png" alt="" width="220" height="300"></span>
+      <a class="placa" href="mesa/index.html"><span class="titulo-mesa" data-t="mesa_title"></span></a>
+      <span class="bufao rindo" aria-hidden="true"><img src="assets/tri-rindo.png" alt="" width="220" height="300"></span>
+    </div>
+    <p class="convite" data-t="tri_say"></p>
+  </section>
+
+  <!-- 5. botões -->
+  <nav class="painel botoes" aria-label="falavado">
+    <a class="btn" href="pensadores.html"><span class="ic" aria-hidden="true">🎭</span><span><span data-t="btn_pens"></span><small data-t="btn_pens_s"></small></span></a>
+    <a class="btn ouro" href="usar.html"><span class="ic" aria-hidden="true">🍷</span><span><span data-t="btn_usar"></span><small data-t="btn_usar_s"></small></span></a>
+    <a class="btn" href="navegador.html"><span class="ic" aria-hidden="true">🧭</span><span><span data-t="btn_nav"></span><small data-t="btn_nav_s"></small></span></a>
+    <a class="btn" href="servico.html"><span class="ic" aria-hidden="true">🃏</span><span><span data-t="btn_serv"></span><small data-t="btn_serv_s"></small></span></a>
+  </nav>
+
+  <!-- 6. apoie -->
+  <section class="painel"><div class="pix" id="pix"></div></section>
+
+  <!-- 7. uso livre -->
+  <section class="painel">
+    <div class="licenca"><h3 data-t="lic_title"></h3><p data-th="lic_text"></p></div>
+    <p class="cuidado" data-t="care"></p>
+  </section>
+</main>
+<script src="assets/site.js"></script>
+<script>
+/* carinhas do Herbs: logo que a página abre, a que ri ri e a que chora chora; depois as duas são sugadas para dentro do site */
+(function(){ var c=document.getElementById('careta'), foi=false;
+  function some(){ if(c.hidden) return; c.classList.add('sugar'); setTimeout(function(){ c.hidden=true; c.className=''; },1100); }
+  c.addEventListener('click',some);
+  window.addEventListener('load',function(){ setTimeout(function(){ if(foi) return; foi=true;
+    var ims=c.querySelectorAll('img'), ok=Array.prototype.every.call(ims,function(i){ return i.complete&&i.naturalWidth; }); if(!ok) return;
+    c.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('on'); }); }); setTimeout(some,3600); },500); }); })();
+</script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+/* falavado: site de entrada. Tema do circo do Triboulet: fundo do bufão, ouro, roxo e verde.
+   O fundo estampado fica sempre atrás de painéis escuros: nenhum texto fica direto sobre a estampa. */
+:root{
+  --fundo:#120b18; --painel:rgba(17,10,24,.95); --painel2:#1b1226; --borda:#3e2c52;
+  --ouro:#f5c542; --ouro2:#e0a92b; --ouro-claro:#ffe08a; --roxo:#5b2a86; --verde:#1f7a4a;
+  --texto:#f3ecdf; --texto2:#c9bfd6; --mudo:#9a8fab;
+  --raio:18px; --sombra:0 10px 40px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:var(--fundo);color:var(--texto);overflow-x:clip;
+  font-family:"Literata",Georgia,serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+/* fundo do bufão em camada fixa e desfocada, com vinheta: dá profundidade atrás dos painéis nítidos */
+body::before{content:"";position:fixed;inset:-30px;z-index:-1;pointer-events:none;background:var(--fundo) url(../mesa/img/fundo_tri.jpg) repeat;background-size:320px;
+  filter:blur(5px) brightness(.55) saturate(1.1);transform:scale(1.04)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(8,4,12,.75) 100%)}
+a{color:var(--ouro)}
+img{max-width:100%;display:block}
+.wrap{max-width:960px;margin:0 auto;padding:84px 16px 40px}
+.painel{background:var(--painel);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);padding:28px clamp(18px,4vw,40px);margin:0 0 22px}
+h1,h2,h3,.cinzel{font-family:"Cinzel",Georgia,serif;letter-spacing:.04em;line-height:1.2;margin:0 0 .5em;color:var(--ouro)}
+h1{font-size:clamp(1.9rem,6vw,3.4rem);text-align:center;text-transform:uppercase;text-shadow:0 0 18px rgba(245,197,66,.35)}
+h2{font-size:clamp(1.3rem,3.6vw,1.8rem)}
+h3{font-size:1.1rem}
+p{margin:0 0 1em}
+.sub{color:var(--texto2)}
+.nota{font-size:.88rem;color:var(--mudo)}
+.tag{display:inline-block;font-family:"Lexend",sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#2a1d00;background:var(--ouro);border-radius:999px;padding:3px 10px;margin-bottom:12px}
+
+/* brilho dourado: o texto sob o mouse acende, para acompanhar a leitura */
+.brilho :is(h1,h2,h3,p,li,blockquote,dt,dd,figcaption,.t){transition:color .25s,text-shadow .25s}
+@media (hover:hover){.brilho :is(h1,h2,h3,p,li,blockquote,dt,dd,figcaption,.t):hover{color:var(--ouro-claro);text-shadow:0 0 8px rgba(245,197,66,.75),0 0 20px rgba(245,197,66,.4)}}
+
+/* barra do topo: voltar e idiomas */
+.topo{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 16px;background:linear-gradient(rgba(10,6,14,.96),rgba(10,6,14,.85));border-bottom:1px solid var(--borda)}
+.marca-vazia{flex:1}
+.topo .marca{font-family:"Cinzel",serif;color:var(--ouro);text-decoration:none;font-size:1.05rem;letter-spacing:.08em;white-space:nowrap}
+.idiomas{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:#15111c;border:1px solid var(--borda)}
+.idiomas button{font:600 .8rem "Lexend",sans-serif;letter-spacing:.06em;border:0;border-radius:999px;padding:6px 11px;background:transparent;color:var(--mudo);cursor:pointer}
+.idiomas button[aria-pressed="true"]{background:linear-gradient(var(--ouro-claro),var(--ouro2));color:#2a1d00;box-shadow:0 0 10px rgba(245,197,66,.5)}
+.idiomas button:focus-visible,.btn:focus-visible,.voltar:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+
+/* botões */
+.btn{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--texto);background:var(--painel2);border:2px solid var(--ouro2);border-radius:16px;padding:16px 18px;font-family:"Lexend",sans-serif;font-weight:600;font-size:1.02rem;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s;text-align:left;width:100%}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 0 1px var(--ouro),0 0 24px rgba(245,197,66,.35);background:#24182f}
+.btn .ic{font-size:1.6rem;flex:none;width:2.2rem;text-align:center}
+.btn small{display:block;font-weight:400;font-size:.84rem;color:var(--texto2);margin-top:2px}
+.btn.ouro{background:linear-gradient(var(--ouro-claro),var(--ouro2));color:#2a1d00;border-color:var(--ouro)}
+.btn.ouro small{color:#4a3500}
+.botoes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:640px){.botoes{grid-template-columns:1fr}}
+.voltar{display:inline-flex;align-items:center;gap:8px;font-family:"Lexend",sans-serif;font-weight:600;font-size:.88rem;color:#2a1d00;background:linear-gradient(var(--ouro-claro),var(--ouro2));border-radius:999px;padding:8px 14px;text-decoration:none;white-space:nowrap}
+.voltar.largo{display:flex;justify-content:center;width:100%;padding:14px;font-size:1rem;border-radius:14px;margin-top:8px}
+
+/* carinhas do Herbs: a que ri e a que chora; no fim são sugadas para dentro do site */
+#careta{position:fixed;inset:0;z-index:130;display:flex;align-items:center;justify-content:center;gap:clamp(8px,4vw,60px);padding:0 16px;
+  background:radial-gradient(circle at 50% 50%,rgba(10,6,14,.35),rgba(10,6,14,.75));opacity:0;transition:opacity .5s ease;cursor:pointer}
+#careta[hidden]{display:none}
+#careta.on{opacity:1}
+#careta .cara{position:relative;display:block;width:min(38vw,300px);transform:scale(.2) rotate(-25deg);opacity:0;
+  transition:transform .7s cubic-bezier(.3,1.6,.5,1),opacity .4s}
+#careta .cara.chora{transform:scale(.2) rotate(25deg);transition-delay:.15s}
+#careta .cara img{width:100%;height:auto;filter:drop-shadow(0 0 14px rgba(170,120,255,.55)) drop-shadow(0 0 30px rgba(120,255,200,.25))}
+#careta.on .cara{transform:none;opacity:1}
+#careta.on .cara.ri img{animation:ri .34s ease-in-out .7s 8 alternate}
+#careta.on .cara.chora img{animation:soluco .9s ease-in-out .8s 3}
+@keyframes ri{from{transform:translateY(0) rotate(-3deg) scaleY(1)}to{transform:translateY(-14px) rotate(3deg) scaleY(.94)}}
+@keyframes soluco{0%,100%{transform:translateY(0)}12%{transform:translateY(5px) scaleX(1.02)}24%{transform:translateY(-2px)}36%{transform:translateY(5px) scaleX(1.02)}50%{transform:translateY(0) rotate(-2deg)}75%{transform:rotate(2deg)}}
+/* lágrimas que caem dos olhos da que chora */
+.lagrima{position:absolute;top:30%;left:27%;width:12px;height:16px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:0;
+  background:radial-gradient(circle at 40% 35%,#eaffff,#7ff3ff 45%,#9a6bff);box-shadow:0 0 10px #8ff;}
+.lagrima.b{left:69%;top:31%}
+.lagrima.c{left:30%;top:33%}
+#careta.on .lagrima{animation:lagrima 1.1s ease-in .9s 3}
+#careta.on .lagrima.b{animation-delay:1.25s}
+#careta.on .lagrima.c{animation-delay:1.6s}
+@keyframes lagrima{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:1}100%{transform:translateY(230%) translateY(120px) scale(1);opacity:0}}
+/* sugadas: giram e encolhem até sumir no centro da página */
+#careta.sugar{opacity:0;transition:opacity .5s ease .55s}
+#careta.sugar .cara{transition:transform 1s cubic-bezier(.6,0,.9,.5),opacity .9s ease .1s,filter 1s;opacity:0;filter:blur(3px)}
+#careta.sugar .cara.ri{transform:translate(45%,35%) scale(0) rotate(540deg)}
+#careta.sugar .cara.chora{transform:translate(-45%,35%) scale(0) rotate(-540deg)}
+@media (prefers-reduced-motion:reduce){#careta .cara img,.lagrima{animation:none!important}#careta .cara{transition-duration:.01s!important}}
+
+/* página principal */
+/* 1. faixa de boas-vindas: fita de cetim roxo curvada, borda dourada, pontas em rabo de andorinha (SVG) */
+.faixa-box{display:flex;justify-content:center;margin:0 0 4px}
+/* faixa de cetim: imagem do Herbs em português; nos outros idiomas fica a faixa desenhada (SVG) com o texto traduzido */
+.faixa-img{display:block;width:min(100%,860px);height:auto;filter:drop-shadow(0 10px 14px rgba(0,0,0,.6))}
+html[lang^="pt"] .faixa-box .fita{display:none}
+html:not([lang^="pt"]) .faixa-img{display:none}
+.wrap[data-pagina="inicio"]{padding-top:58px}
+.fita{width:min(100%,820px);height:auto;overflow:visible;filter:drop-shadow(0 10px 14px rgba(0,0,0,.6))}
+.fita-texto{font-family:"Cinzel",Georgia,serif;font-weight:700;font-size:50px;letter-spacing:.04em;text-transform:uppercase;fill:#ffe08a;
+  paint-order:stroke;stroke:#2a0f3d;stroke-width:5px;filter:drop-shadow(0 0 8px rgba(245,197,66,.45))}
+.fita .reflexo{mix-blend-mode:soft-light}
+
+/* 2. as três versões do Herbs atrás do painel "por que criei": o painel cobre a parte de baixo da foto */
+.faixa-box{position:relative;z-index:2;margin-bottom:calc(-1*clamp(10px,4vw,46px))}
+.trio{position:relative;z-index:0;margin:0 auto;width:min(100%,600px);text-align:center}
+.trio-img{width:100%;height:auto;margin:0 auto;filter:drop-shadow(0 0 1px #000) drop-shadow(0 0 2px #000);
+  animation:respira 6s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes respira{0%,100%{transform:scale(1)}50%{transform:scale(1.015) translateY(-3px)}}
+.porque{position:relative;z-index:1;margin-top:calc(-1*clamp(6px,1.5vw,16px));background:#140c1c;box-shadow:0 -14px 30px rgba(0,0,0,.55),var(--sombra)}
+.nome-autor{font-family:"Cinzel",serif;color:var(--ouro);margin:2px 0 14px;text-align:center;font-size:1rem}
+@media (prefers-reduced-motion:reduce){.trio-img,.fita .reflexo{animation:none}}
+
+/* 3. por que criei */
+.sub-porque{font-size:clamp(1.05rem,2.8vw,1.3rem);color:var(--ouro-claro);margin:.2em 0 .4em}
+.etimo{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 16px}
+.etimo span{font-family:"Cinzel",serif;background:#24182f;border:1px solid var(--borda);border-radius:10px;padding:4px 12px;color:var(--ouro-claro)}
+.etimo b{color:var(--ouro)}
+
+/* 4. palco: placa dourada entre o Triboulet que ri e o que chora */
+.palco-box{padding:22px clamp(10px,3vw,30px);overflow:hidden;background:radial-gradient(ellipse at 50% 60%,rgba(91,42,134,.55),transparent 70%),var(--painel)}
+.palco{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(6px,2vw,20px);text-decoration:none;color:inherit;border-radius:16px}
+.palco:focus-visible{outline:2px solid var(--ouro);outline-offset:4px}
+.bufao{display:block;justify-self:center;width:clamp(64px,16vw,170px);animation:balanca 3.6s ease-in-out infinite;transform-origin:50% 90%}
+.bufao.chorando{animation-delay:-1.8s;animation-duration:4.1s;width:clamp(44px,11vw,118px)}
+.bufao.rindo{width:clamp(70px,19vw,200px)}
+.bufao img{width:100%;height:auto;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
+@keyframes balanca{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+.placa{position:relative;justify-self:center;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;max-width:30rem;
+  padding:clamp(14px,3vw,26px) clamp(14px,3.4vw,34px);border-radius:18px;
+  background:linear-gradient(160deg,#fff1b8,var(--ouro) 38%,var(--ouro2) 70%,#c48a1c);border:2px solid #fff1b8;
+  box-shadow:0 0 0 4px #7a4f00,0 0 0 6px var(--ouro),0 0 28px rgba(245,197,66,.75),0 0 70px rgba(245,197,66,.45);animation:halo 3.2s ease-in-out infinite}
+.titulo-mesa{font-family:"Cinzel Decorative","Cinzel",Georgia,serif;font-weight:900;text-transform:uppercase;color:#2a1600;
+  font-size:clamp(1.05rem,4.4vw,2.35rem);line-height:1.12;letter-spacing:.03em;text-shadow:0 1px 0 rgba(255,241,184,.8)}
+.convite{margin:16px 0 0;text-align:center;font:600 clamp(.95rem,2.8vw,1.15rem) "Lexend",sans-serif;color:var(--ouro-claro);letter-spacing:.02em}
+.placa{text-decoration:none;cursor:pointer;transition:transform .2s}
+.placa:focus-visible{outline:3px solid #fff1b8;outline-offset:4px}
+.placa:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 0 0 4px #7a4f00,0 0 0 6px var(--ouro-claro),0 0 40px rgba(255,224,138,.95),0 0 90px rgba(245,197,66,.6)}
+@keyframes halo{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
+@media (max-width:560px){
+  .palco{grid-template-columns:1fr 1fr;grid-template-areas:"a b" "p p";row-gap:0}
+  .bufao.chorando{grid-area:a;justify-self:start;margin-left:8%;width:clamp(62px,19vw,96px)}.bufao.rindo{grid-area:b;justify-self:end;margin-right:4%;width:clamp(96px,30vw,150px)}
+  .bufao{position:relative;z-index:2}
+  .placa{grid-area:p;margin-top:-18px;padding-top:26px}
+  .titulo-mesa{font-size:clamp(1.25rem,6.6vw,1.8rem)}
+  .convite{font-size:.8rem}}
+@media (prefers-reduced-motion:reduce){.bufao,.placa{animation:none}}
+.pix{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center}
+@media (max-width:640px){.pix{grid-template-columns:1fr;justify-items:center}}
+.pix img{width:220px;border-radius:14px;background:#fff8e6;padding:6px}
+.chave-pix{font-family:"Lexend",sans-serif;font-size:clamp(.8rem,3.4vw,1rem);overflow-wrap:anywhere;color:var(--ouro-claro);margin:4px 0 12px}
+.copiar{font:600 .9rem "Lexend",sans-serif;border:1px solid var(--ouro2);background:transparent;color:var(--ouro);border-radius:999px;padding:8px 14px;cursor:pointer}
+.licenca{border-left:4px solid var(--ouro2);padding:4px 0 4px 16px}
+.cuidado{font-size:.9rem;color:var(--texto2)}
+.rodape{text-align:center;font-size:.85rem;color:var(--mudo);padding:8px 0 30px}
+.rodape p{background:var(--painel);display:inline-block;border-radius:12px;padding:8px 16px;border:1px solid var(--borda)}
+
+/* pensadores */
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.card{display:block;text-decoration:none;color:var(--texto);background:var(--painel2);border:1px solid var(--borda);border-radius:16px;overflow:hidden;transition:transform .15s,box-shadow .2s,border-color .2s}
+.card:hover,.card:focus-visible{transform:translateY(-3px);border-color:var(--ouro);box-shadow:0 0 22px rgba(245,197,66,.3);outline:none}
+.card img{aspect-ratio:1;object-fit:cover;width:100%}
+.card .info{padding:10px 12px 14px}
+.card b{display:block;font-family:"Cinzel",serif;color:var(--ouro);font-size:.98rem;line-height:1.25}
+.card span{font-size:.8rem;color:var(--texto2);font-family:"Lexend",sans-serif}
+.estilos{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:#15111c;border:1px solid var(--borda);margin-bottom:16px}
+.estilos button{font:600 .82rem "Lexend",sans-serif;border:0;border-radius:999px;padding:7px 14px;background:transparent;color:var(--mudo);cursor:pointer}
+.estilos button[aria-pressed="true"]{background:var(--roxo);color:#fff}
+
+/* ficha de um pensador */
+.cabeca{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+@media (max-width:640px){.cabeca{grid-template-columns:1fr}}
+.retratos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.retratos figure{margin:0}
+.retratos img{border-radius:12px;border:1px solid var(--borda);cursor:zoom-in}
+.retratos figcaption{font-size:.75rem;color:var(--mudo);text-align:center;margin-top:4px;font-family:"Lexend",sans-serif}
+.classe{font-family:"Lexend",sans-serif;color:var(--ouro-claro);font-size:.95rem;margin:-4px 0 10px}
+.atribs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:14px 0}
+@media (max-width:640px){.atribs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.atrib{background:#24182f;border:1px solid var(--borda);border-radius:12px;text-align:center;padding:8px 4px}
+.atrib b{display:block;font:600 .75rem "Lexend",sans-serif;color:var(--texto2);letter-spacing:.08em}
+.atrib .v{font-family:"Cinzel",serif;font-size:1.6rem;color:var(--ouro)}
+.atrib .m{font:500 .78rem "Lexend",sans-serif;color:var(--mudo)}
+.atrib .barra{height:4px;border-radius:2px;background:#3e2c52;margin:6px 8px 0;overflow:hidden}
+.atrib .barra i{display:block;height:100%;background:linear-gradient(90deg,var(--verde),var(--ouro))}
+dl.lista{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:0}
+dl.lista dt{font-family:"Lexend",sans-serif;font-weight:600;color:var(--ouro);font-size:.9rem}
+dl.lista dd{margin:0}
+@media (max-width:640px){dl.lista{grid-template-columns:1fr}dl.lista dd{margin-bottom:8px}}
+.hab{background:#24182f;border:1px solid var(--borda);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.hab b{font-family:"Cinzel",serif;color:var(--ouro)}
+.hab.especial{border-color:var(--ouro2);box-shadow:0 0 18px rgba(245,197,66,.18)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--texto);background:#24182f;border:1px solid var(--borda);border-radius:999px;padding:4px 12px 4px 4px;font-size:.88rem}
+.chip img{width:28px;height:28px;border-radius:50%}
+.chip:hover{border-color:var(--ouro)}
+.chip small{color:var(--mudo)}
+ul.ref{padding-left:1.1em}
+.navp{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.zoom{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}
+.zoom img{max-height:90vh;border-radius:14px;border:2px solid var(--ouro2)}
+
+/* passos e exemplos */
+ol.passos{counter-reset:p;list-style:none;padding:0;margin:0}
+ol.passos>li{counter-increment:p;position:relative;padding:0 0 14px 52px;min-height:40px}
+ol.passos>li::before{content:counter(p);position:absolute;left:0;top:-2px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:"Cinzel",serif;font-weight:600;color:#2a1d00;background:linear-gradient(var(--ouro-claro),var(--ouro2))}
+.exemplo{background:#1b1226;border:1px solid var(--borda);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.exemplo h3{margin-bottom:6px}
+.exemplo .quem{font-size:.85rem;color:var(--mudo);font-family:"Lexend",sans-serif;margin-bottom:10px}
+.exemplo details summary{cursor:pointer;color:var(--ouro);font-family:"Lexend",sans-serif;font-weight:600;font-size:.92rem}
+.fala{display:flow-root;margin:12px 0}
+.fala img{float:left;width:56px;height:56px;border-radius:50%;margin:2px 12px 4px 0;border:1px solid var(--ouro2)}
+.fala b{font-family:"Cinzel",serif;color:var(--ouro)}
+.fala .papel{font-size:.78rem;color:var(--mudo);font-family:"Lexend",sans-serif;margin-left:6px}
+.acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.acoes .btn{width:auto;padding:10px 16px;font-size:.92rem}
+code,.cod{font-family:"Lexend",monospace;background:#24182f;border:1px solid var(--borda);border-radius:8px;padding:2px 8px;color:var(--ouro-claro)}
+
+/* formulário */
+form.pedido{display:grid;gap:14px}
+form.pedido label{font-family:"Lexend",sans-serif;font-weight:600;font-size:.92rem;color:var(--ouro)}
+form.pedido input,form.pedido textarea,form.pedido select{width:100%;margin-top:6px;font:inherit;font-size:1rem;color:var(--texto);background:#120b18;border:1px solid var(--borda);border-radius:12px;padding:12px 14px}
+form.pedido textarea{min-height:150px;resize:vertical}
+form.pedido input:focus,form.pedido textarea:focus,form.pedido select:focus{outline:2px solid var(--ouro);border-color:var(--ouro)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+ul.inclui{padding-left:1.1em}
+ul.inclui li{margin-bottom:6px}
+
+/* acessibilidade no topo: letra para dislexia e caixa de daltonismo */
+.topo-dir{display:flex;align-items:center;gap:8px;margin-left:auto}
+.acess{position:relative;display:inline-flex;gap:4px}
+.a-btn{display:inline-flex;align-items:center;gap:6px;font:600 .8rem "Lexend",sans-serif;color:var(--mudo);background:#15111c;border:1px solid var(--borda);border-radius:999px;padding:6px 11px;cursor:pointer;white-space:nowrap}
+.a-btn .a-ic{font-weight:700;color:var(--ouro-claro)}
+.a-btn[aria-pressed="true"],.a-btn.ativo{background:linear-gradient(var(--ouro-claro),var(--ouro2));color:#2a1d00;border-color:transparent;box-shadow:0 0 10px rgba(245,197,66,.5)}
+.a-btn[aria-pressed="true"] .a-ic,.a-btn.ativo .a-ic{color:#2a1d00}
+.a-btn:focus-visible,.dalt-op:focus-visible,.dalt-fechar:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+.dalt-caixa{position:absolute;top:calc(100% + 10px);right:0;z-index:60;width:min(300px,calc(100vw - 32px));padding:12px;border-radius:14px;background:#140c1c;border:1px solid var(--ouro2);box-shadow:0 14px 40px rgba(0,0,0,.6)}
+.dalt-caixa[hidden]{display:none}
+.dalt-tit{margin:0 0 8px;font:600 .9rem "Lexend",sans-serif;color:var(--ouro-claro)}
+.dalt-op{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px 10px;margin:0 0 4px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--texto);cursor:pointer;font:500 .9rem "Lexend",sans-serif}
+.dalt-op:hover{background:var(--painel2)}
+.dalt-op[aria-checked="true"]{border-color:var(--ouro2);background:var(--painel2)}
+.dalt-op small{display:block;font-weight:400;font-size:.78rem;color:var(--texto2)}
+.amostra{flex:none;width:30px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.25)}
+.amostra.nenhum{background:linear-gradient(90deg,#e23 0 25%,#2b4 25% 50%,#36f 50% 75%,#fc2 75%)}
+.amostra.protan{background:linear-gradient(90deg,#e23 0 50%,#2b4 50%)}
+.amostra.deutan{background:linear-gradient(90deg,#2b4 0 50%,#e23 50%)}
+.amostra.tritan{background:linear-gradient(90deg,#36f 0 50%,#fc2 50%)}
+.amostra.acromat{background:linear-gradient(90deg,#000,#fff)}
+.dalt-fechar{display:block;margin:6px 0 0 auto;font:600 .8rem "Lexend",sans-serif;color:#2a1d00;background:linear-gradient(var(--ouro-claro),var(--ouro2));border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
+@media (max-width:720px){.a-btn .a-txt{display:none}.a-btn{padding:6px 9px}}
+@media (max-width:480px){.topo{padding:8px 10px;gap:6px}.topo .voltar:not(.largo){font-size:0;gap:0;padding:8px 12px}.topo .voltar:not(.largo)::before{content:"←";font-size:1rem}.idiomas button{padding:6px 8px}.topo-dir{gap:4px}}
+
+/* celulares: área segura (entalhe e barra de gestos), alvos de toque de pelo menos 40px e telas bem estreitas */
+.topo{padding-top:max(10px,env(safe-area-inset-top));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+.wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+.rodape{padding-bottom:max(30px,env(safe-area-inset-bottom))}
+img,svg,video{max-width:100%}
+p,li,h1,h2,h3{overflow-wrap:break-word}
+@media (pointer:coarse){
+  .a-btn,.idiomas button,.estilos button,.dalt-fechar{min-height:40px}
+  .a-btn{min-width:40px;justify-content:center}
+  .topo .voltar:not(.largo){min-height:40px;min-width:40px;justify-content:center}
+  .dalt-op{min-height:48px}
+}
+@media (max-width:480px){.topo{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}}
+@media (max-width:340px){
+  .idiomas button{padding:6px 6px;font-size:.74rem}
+  .a-btn{padding:6px 7px}
+  .wrap{padding-left:10px;padding-right:10px}
+  .painel{padding-left:14px;padding-right:14px}
+}
+@media (max-width:720px){.dalt-caixa{position:fixed;top:calc(58px + env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));width:auto;max-height:calc(100dvh - 76px);overflow:auto}}
+.dalt-caixa{max-height:calc(100dvh - 76px);overflow:auto;overscroll-behavior:contain}
+/* texto do "O que é o falavado?": aviso do psicólogo, lema e agradecimento */
+.porque .aviso-psi{border-left:3px solid var(--ouro2);background:rgba(245,197,66,.08);padding:10px 14px;border-radius:0 10px 10px 0;color:var(--ouro-claro)}
+.porque .lema{font-family:"Cinzel",serif;font-size:1.08em;color:var(--ouro-claro);text-align:center;margin:22px 0}
+.porque .fecho{font-style:italic;color:var(--texto2);text-align:center}
+
+/* leitura em voz alta: botão e painel que abre embaixo dele */
+.ouvir{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:4px 0 12px;padding:8px 18px;border-radius:999px;border:2px solid var(--ouro2);background:var(--painel2);color:var(--ouro-claro);font:600 .95rem "Lexend",sans-serif;cursor:pointer}
+.ouvir:hover,.ouvir[aria-pressed="true"]{background:linear-gradient(var(--ouro-claro),var(--ouro2));color:#2a1d00}
+.leitor{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px;padding:10px 12px;border-radius:14px;background:#1c1226;border:1px solid var(--ouro2);font:500 .88rem "Lexend",sans-serif;color:var(--texto)}
+.leitor[hidden]{display:none}
+.leitor-txt{flex:1 1 120px;color:var(--ouro-claro)}
+.leitor button,.leitor select{min-height:40px;border-radius:999px;border:1px solid var(--borda);background:#15111c;color:var(--texto);font:600 .85rem "Lexend",sans-serif;padding:6px 14px;cursor:pointer}
+.leitor .leitor-pausa{border-color:var(--ouro2);color:var(--ouro-claro)}
+.leitor-vel{display:inline-flex;align-items:center;gap:6px;color:var(--texto2)}
+.leitor .leitor-fechar,.leitor .leitor-volta,.leitor .leitor-avanca{min-width:40px;padding:6px 0;font-size:1rem}
+.leitor button:focus-visible,.leitor select:focus-visible,.ouvir:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+.leitor-onda{display:inline-flex;gap:3px;align-items:flex-end;height:16px}
+.leitor-onda i{width:4px;height:6px;border-radius:2px;background:var(--ouro);animation:onda 1s ease-in-out infinite}
+.leitor-onda i:nth-child(2){animation-delay:.2s}.leitor-onda i:nth-child(3){animation-delay:.4s}
+.leitor.pausado .leitor-onda i,.leitor.parado .leitor-onda i{animation:none}
+@keyframes onda{50%{height:16px}}
+.lendo-agora{background:rgba(245,197,66,.12);border-radius:8px;box-shadow:0 0 0 6px rgba(245,197,66,.12)}
+@media (prefers-reduced-motion:reduce){.leitor-onda i{animation:none}}
+.leitor{position:sticky;top:calc(64px + env(safe-area-inset-top));z-index:5;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.leitor-ctl{display:inline-flex;gap:6px;align-items:center}
+@media (max-width:560px){.leitor-onda{order:1}.leitor-txt{order:2;flex:1 1 calc(100% - 80px)}.leitor-fechar{order:3}.leitor-ctl{order:4}.leitor-parar{order:5}.leitor-vel{order:6}}
+/* frases em destaque: a do Herbs e a do Marco Aurélio, cada uma assinada em itálico */
+.porque .citacao{margin:26px 0;padding:18px 22px;border-radius:14px;background:linear-gradient(135deg,rgba(245,197,66,.10),rgba(126,63,196,.14));border:1px solid rgba(245,197,66,.35);text-align:center}
+.porque .citacao p{margin:0;font-family:"Literata",Georgia,serif;font-weight:600;font-size:clamp(1.08rem,2.8vw,1.3rem);line-height:1.5;color:var(--ouro-claro)}
+.porque .citacao cite{display:block;margin-top:10px;font-style:italic;font-size:.92rem;color:var(--texto2)}
+.porque .citacao.autor{border-color:var(--ouro2);box-shadow:0 0 22px rgba(245,197,66,.15)}
+.porque .citacao + .citacao{margin-top:-8px}
+
+/* botão de copiar ao lado das frases que a pessoa digita */
+.copiar-frase{display:inline-flex;align-items:center;vertical-align:middle;margin:2px 0 2px 8px;min-height:32px;padding:4px 12px;font:600 .8rem Lexend,sans-serif;border-radius:999px;border:1px solid var(--ouro,#e0a92b);background:transparent;color:inherit;cursor:pointer}
+.copiar-frase.ok{background:var(--ouro,#e0a92b);color:#2a1d00}
+.copiar-frase:focus-visible{outline:2px solid var(--ouro,#e0a92b);outline-offset:2px}
+@media (pointer:coarse){.copiar-frase{min-height:40px}}
+/* frases para chamar a mesa (lista dentro de um passo): sem número, uma por linha com o botão de copiar */
+ol.passos ul{list-style:none;padding:8px 0 0;margin:0;display:flex;flex-direction:column;gap:8px}
+ol.passos ul li{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+/* botão de contato no fim de todas as páginas */
+.btn-fale{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0 0 12px;padding:10px 22px;border-radius:999px;border:2px solid var(--ouro2);color:var(--ouro-claro);font:600 1rem Lexend,sans-serif;text-decoration:none;background:rgba(0,0,0,.25)}
+.btn-fale:hover,.btn-fale:focus-visible{background:var(--ouro2);color:#2a1d00;outline:none}
+.rodape .btn-fale+p{display:block;width:fit-content;margin:0 auto}

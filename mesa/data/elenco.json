@@ -1,0 +1,172 @@
+{
+ "elenco": [
+  {
+   "id": "marco",
+   "nome": "Marco Aurélio",
+   "genero": "m",
+   "img": "marco",
+   "sobre": "Imperador romano e estoico. Pergunta sempre: o que depende de você?"
+  },
+  {
+   "id": "jung",
+   "nome": "Carl Jung",
+   "genero": "m",
+   "img": "jung",
+   "sobre": "Psiquiatra suíço. Fala de sombra, símbolos, sonhos e do que a gente reprime."
+  },
+  {
+   "id": "espinosa",
+   "nome": "Espinosa",
+   "genero": "m",
+   "img": "espinosa",
+   "sobre": "Filósofo racionalista. Compreender as causas e passar da tristeza à alegria."
+  },
+  {
+   "id": "diogenes",
+   "nome": "Diógenes",
+   "genero": "m",
+   "img": "diogenes",
+   "sobre": "Cínico do barril. Provoca, ri da aprovação alheia e vive sem pedir licença."
+  },
+  {
+   "id": "nietzsche",
+   "nome": "Nietzsche",
+   "genero": "m",
+   "img": "nietzsche",
+   "sobre": "Filósofo duro e intenso. Ressentimento, vontade e tornar-se quem se é."
+  },
+  {
+   "id": "sartre",
+   "nome": "Sartre",
+   "genero": "m",
+   "img": "sartre",
+   "sobre": "Existencialista. Você escolhe o que faz de si, sem álibi."
+  },
+  {
+   "id": "hipatia",
+   "nome": "Hipátia de Alexandria",
+   "genero": "f",
+   "iniciais": "HI",
+   "cor": "#7b5ea7",
+   "img": "hipatia",
+   "sobre": "Matemática e filósofa de Alexandria. Método: medir antes de julgar."
+  },
+  {
+   "id": "arendt",
+   "nome": "Hannah Arendt",
+   "genero": "f",
+   "iniciais": "AR",
+   "cor": "#3f6d7f",
+   "img": "arendt",
+   "sobre": "Filósofa política. Agir, recomeçar e responder pelo que se faz."
+  },
+  {
+   "id": "duchatelet",
+   "nome": "Émilie du Châtelet",
+   "genero": "f",
+   "iniciais": "EC",
+   "cor": "#b8652a",
+   "img": "duchatelet",
+   "sobre": "Física e filósofa do século 18. Razão, paixões compreendidas e alegria."
+  },
+  {
+   "id": "hiparquia",
+   "nome": "Hipárquia de Maroneia",
+   "genero": "f",
+   "iniciais": "HQ",
+   "cor": "#a8403a",
+   "img": "hiparquia",
+   "sobre": "Filósofa cínica. Coragem é ato; vida sem pedir licença."
+  },
+  {
+   "id": "weil",
+   "nome": "Simone Weil",
+   "genero": "f",
+   "iniciais": "SW",
+   "cor": "#3a6ea5",
+   "img": "weil",
+   "sobre": "Filósofa da atenção e do sofrimento. Olhar claro e exigente."
+  },
+  {
+   "id": "sorjuana",
+   "nome": "Sor Juana Inés de la Cruz",
+   "genero": "f",
+   "iniciais": "SJ",
+   "cor": "#6b4a7a",
+   "img": "sorjuana",
+   "sobre": "Freira, poeta e pensadora do México. Defendeu o direito de estudar."
+  },
+  {
+   "id": "barres",
+   "nome": "Ben Barres",
+   "genero": "tm",
+   "iniciais": "BB",
+   "cor": "#2f7d8c",
+   "img": "barres",
+   "sobre": "Neurobiólogo trans de Stanford. Estudou as células da glia e defendeu a igualdade na ciência."
+  },
+  {
+   "id": "preciado",
+   "nome": "Paul B. Preciado",
+   "genero": "tm",
+   "iniciais": "PP",
+   "cor": "#7a4aa3",
+   "img": "preciado",
+   "sobre": "Filósofo e escritor trans. Pensa o corpo como laboratório e questiona o que chamam de natural."
+  },
+  {
+   "id": "wilson",
+   "nome": "Sophie Wilson",
+   "genero": "tf",
+   "iniciais": "SW",
+   "cor": "#4a7fb0",
+   "img": "wilson",
+   "sobre": "Cientista da computação trans. Projetou o processador ARM, presente em bilhões de aparelhos."
+  },
+  {
+   "id": "connell",
+   "nome": "Raewyn Connell",
+   "genero": "tf",
+   "iniciais": "RC",
+   "cor": "#c0577f",
+   "img": "connell",
+   "sobre": "Socióloga trans. Estudou masculinidades e o conhecimento que nasce longe dos centros de poder."
+  },
+  {
+   "id": "freire",
+   "nome": "Paulo Freire",
+   "genero": "m",
+   "iniciais": "PF",
+   "cor": "#b5651d",
+   "img": "freire",
+   "sobre": "Educador brasileiro. Diálogo, leitura do mundo e educação que liberta em vez de depositar."
+  },
+  {
+   "id": "foucault",
+   "nome": "Michel Foucault",
+   "genero": "m",
+   "iniciais": "MF",
+   "cor": "#5a5f8a",
+   "img": "foucault",
+   "sobre": "Filósofo francês. Poder, saber e vigilância; pergunta quem definiu o que é normal."
+  },
+  {
+   "id": "marx",
+   "nome": "Karl Marx",
+   "genero": "m",
+   "iniciais": "KM",
+   "cor": "#a33a3a",
+   "img": "marx",
+   "sobre": "Filósofo e economista alemão. Trabalho, dinheiro, classe e o que dá para mudar juntos."
+  },
+  {
+   "id": "haraway",
+   "nome": "Donna Haraway",
+   "genero": "f",
+   "iniciais": "DH",
+   "cor": "#3f8a5a",
+   "img": "haraway",
+   "sobre": "Bióloga e filósofa. Ciborgues, saberes situados e parentesco com outras espécies."
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Literata:opsz,wght@7..72,400;7..72,600&family=Lexend:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/acess.js"></script>
+<link rel="icon" href="mesa/img/triboulet_pin.jpg">
+<title>Como usar no navegador</title>
+</head>
+<body class="brilho">
+<main class="wrap">
+  <section class="painel"><h1 data-t="nav_title"></h1><p data-t="nav_intro"></p></section>
+  <section class="painel"><ol class="passos"><li data-th="n1"></li><li data-th="n2"></li><li data-th="n3"></li><li data-th="n4"></li><li data-th="n5"></li><li data-th="n6"></li></ol>
+    <a class="btn ouro" href="mesa/index.html"><span class="ic" aria-hidden="true">🍷</span><span data-t="go_mesa"></span></a></section>
+  <section class="painel"><h2 data-t="ex_title"></h2><p data-t="ex_intro"></p><div id="exemplos"></div></section>
+</main>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  var box=document.getElementById('exemplos'), DADOS=null;
+  function el(t,c,x){ var e=document.createElement(t); if(c) e.className=c; if(x!=null) e.textContent=x; return e; }
+  function pintar(){
+    if(!DADOS) return; box.textContent='';
+    DADOS.forEach(function(r){
+      var d=el('article','exemplo'); d.appendChild(el('h3',null,r.titulo));
+      var q=el('p','quem'); q.textContent=SITE.t('ex_who')+' '+r.participantes; d.appendChild(q);
+      d.appendChild(el('p',null,r.pergunta));
+      var det=el('details'); det.appendChild(el('summary',null,SITE.t('ex_read')));
+      r.falas.forEach(function(f){ var b=el('div','fala'), i=el('img'); i.src='mesa/img/'+f.img+'_pin.jpg'; i.alt=''; i.width=56; i.height=56; b.appendChild(i); b.appendChild(el('b',null,f.quem)); b.appendChild(el('span','papel',f.papel)); b.appendChild(el('p',null,f.texto)); det.appendChild(b); });
+      d.appendChild(det);
+      var ac=el('div','acoes'), a=el('a','btn'); a.href='mesa/index.html#r-'+r.id; a.innerHTML='<span class="ic" aria-hidden="true">🔊</span><span></span>'; a.lastChild.textContent=SITE.t('ex_open'); ac.appendChild(a); d.appendChild(ac);
+      box.appendChild(d);
+    });
+  }
+  fetch('mesa/data/rodadas.json').then(function(r){ return r.json(); }).then(function(d){ DADOS=d.rodadas||[]; pintar(); });
+  document.addEventListener('idioma',pintar);
+})();
+</script>
+</body>
+</html>

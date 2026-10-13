@@ -1,0 +1,668 @@
+{
+ "PROMPTS-GEMINI": {
+  "links": [],
+  "creditos": []
+ },
+ "arendt": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Hannah Arendt",
+    "u": "https://plato.stanford.edu/entries/arendt/"
+   },
+   {
+    "t": "Wikipedia (pt): Hannah Arendt",
+    "u": "https://pt.wikipedia.org/wiki/Hannah_Arendt"
+   },
+   {
+    "t": "Wikipedia (en): Hannah Arendt",
+    "u": "https://en.wikipedia.org/wiki/Hannah_Arendt"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Hannah Arendt Büste, 2021 Rákospalota.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Hannah_Arendt_Büste,_2021_Rákospalota.jpg",
+    "x": "CC BY-SA 3.0, Globetrotter19"
+   },
+   {
+    "t": "Hannah Arendt auf dem 1. Kulturkritikerkongress, Barbara Niggl Radloff, FM-2019-1-5-9-16 (cropped).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Hannah_Arendt_auf_dem_1._Kulturkritikerkongress,_Barbara_Niggl_Radloff,_FM-2019-1-5-9-16_(cropped",
+    "x": ".jpg): CC BY-SA 4.0, Barbara Niggl Radloff"
+   },
+   {
+    "t": "Hannah Arendt 1933.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Hannah_Arendt_1933.jpg",
+    "x": "Domínio público, autor desconhecido"
+   }
+  ]
+ },
+ "barres": {
+  "links": [
+   {
+    "t": "Wikipedia (en): Ben Barres",
+    "u": "https://en.wikipedia.org/wiki/Ben_Barres"
+   },
+   {
+    "t": "Nature (2006): \"Does gender matter?\"",
+    "u": "https://www.nature.com/articles/442133a"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Dr. Ben Barres.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Dr._Ben_Barres.jpg",
+    "x": "CC BY 2.0, Myelin Repair Foundation"
+   }
+  ]
+ },
+ "connell": {
+  "links": [
+   {
+    "t": "Wikipedia (en): Raewyn Connell",
+    "u": "https://en.wikipedia.org/wiki/Raewyn_Connell"
+   },
+   {
+    "t": "Site da autora: raewynconnell.net",
+    "u": "http://www.raewynconnell.net/"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Dianne-Reggett.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Dianne-Reggett.jpg",
+    "x": "CC BY 2.0, kyeleek"
+   }
+  ]
+ },
+ "diogenes": {
+  "links": [
+   {
+    "t": "Internet Encyclopedia of Philosophy: Cynics",
+    "u": "https://iep.utm.edu/cynics/"
+   },
+   {
+    "t": "Wikipedia (pt): Diógenes de Sinope",
+    "u": "https://pt.wikipedia.org/wiki/Diógenes_de_Sinope"
+   },
+   {
+    "t": "Wikipedia (en): Diogenes",
+    "u": "https://en.wikipedia.org/wiki/Diogenes"
+   },
+   {
+    "t": "Diógenes Laércio, Vidas, livro VI (Wikisource, domínio público)",
+    "u": "https://en.wikisource.org/wiki/Lives_of_the_Eminent_Philosophers/Book_VI"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Diogenes mit der Lampe auf Menschensuche deutsch 17 Jh.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Diogenes_mit_der_Lampe_auf_Menschensuche_deutsch_17_Jh.jpg",
+    "x": "Domínio público, atribuída a Johann Heinrich Wilhelm Tischbein"
+   },
+   {
+    "t": "The meeting of Diogenes of Sinope and Alexander the Great MET DP878763.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:The_meeting_of_Diogenes_of_Sinope_and_Alexander_the_Great_MET_DP878763.jpg",
+    "x": "CC0, Quirin Mark"
+   },
+   {
+    "t": "The meeting of Diogenes of Sinope and Alexander the Great MET DP878759.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:The_meeting_of_Diogenes_of_Sinope_and_Alexander_the_Great_MET_DP878759.jpg",
+    "x": "CC0, Quirin Mark"
+   }
+  ]
+ },
+ "duchatelet": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Émilie du Châtelet",
+    "u": "https://plato.stanford.edu/entries/emilie-du-chatelet/"
+   },
+   {
+    "t": "Project Vox (Universidade Duke): Du Châtelet",
+    "u": "https://projectvox.org/du-chatelet-1706-1749/"
+   },
+   {
+    "t": "Wikipedia (pt): Émilie du Châtelet",
+    "u": "https://pt.wikipedia.org/wiki/Émilie_du_Châtelet"
+   },
+   {
+    "t": "Wikipedia (en): Émilie du Châtelet",
+    "u": "https://en.wikipedia.org/wiki/Émilie_du_Châtelet"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Inconnu, portrait de madame Du Châtelet à sa table de travail, détail (château de Breteuil) -002.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Inconnu,_portrait_de_madame_Du_Châtelet_à_sa_table_de_travail,_détail_(château_de_Breteuil",
+    "x": "_-002.jpg): Domínio público, atribuído a Maurice Quentin de La Tour"
+   },
+   {
+    "t": "Okänd - Gabrielle-Émilie Le Tonnelier de Breteuil (1706–1749), Marquise du Châtelet - NMDrh 796 - Nationalmuseum.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Okänd_-_Gabrielle-Émilie_Le_Tonnelier_de_Breteuil_(1706–1749",
+    "x": ",_Marquise_du_Châtelet_-_NMDrh_796_-_Nationalmuseum.jpg): Domínio público, anônimo"
+   },
+   {
+    "t": "Gabrielle Emilie de Breteuil. 2022.0.1428.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Gabrielle_Emilie_de_Breteuil._2022.0.1428.jpg",
+    "x": "CC0, gravador anônimo"
+   }
+  ]
+ },
+ "espinosa": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Baruch Spinoza",
+    "u": "https://plato.stanford.edu/entries/spinoza/"
+   },
+   {
+    "t": "Wikipedia (pt): Baruch Espinoza",
+    "u": "https://pt.wikipedia.org/wiki/Baruch_Spinoza"
+   },
+   {
+    "t": "Wikipedia (en): Baruch Spinoza",
+    "u": "https://en.wikipedia.org/wiki/Baruch_Spinoza"
+   },
+   {
+    "t": "Ética, texto integral em inglês (Projeto Gutenberg, domínio público)",
+    "u": "https://www.gutenberg.org/ebooks/3800"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Spinoza.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Spinoza.jpg",
+    "x": "Domínio público, anônimo"
+   },
+   {
+    "t": "Benedictus (Baruch) de Spinoza - Tegel Amsterdam.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Benedictus_(Baruch",
+    "x": "_de_Spinoza_-_Tegel_Amsterdam.jpg): CC0, RoMaVo"
+   },
+   {
+    "t": "Baruch Spinoza portrait HAB original.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Baruch_Spinoza_portrait_HAB_original.jpg",
+    "x": "Domínio público, anônimo"
+   }
+  ]
+ },
+ "foucault": {
+  "links": [
+   {
+    "t": "Wikipedia (pt): Michel Foucault",
+    "u": "https://pt.wikipedia.org/wiki/Michel_Foucault"
+   },
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Michel Foucault",
+    "u": "https://plato.stanford.edu/entries/foucault/"
+   },
+   {
+    "t": "Collège de France: Michel Foucault",
+    "u": "https://www.college-de-france.fr/fr/personne/michel-foucault"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Michel Foucault c. 1968.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Michel_Foucault_c._1968.jpg",
+    "x": "domínio público"
+   },
+   {
+    "t": "Michel Foucault 1974 Brasil.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Michel_Foucault_1974_Brasil.jpg",
+    "x": "domínio público (Arquivo Nacional)"
+   },
+   {
+    "t": "Photo of Michel Foucault on 1970 dustjacket of The Order of Things.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Photo_of_Michel_Foucault_on_1970_dustjacket_of_The_Order_of_Things.jpg",
+    "x": "domínio público, Jerry Bauer"
+   }
+  ]
+ },
+ "freire": {
+  "links": [
+   {
+    "t": "Wikipedia (pt): Paulo Freire",
+    "u": "https://pt.wikipedia.org/wiki/Paulo_Freire"
+   },
+   {
+    "t": "Wikipedia (en): Paulo Freire",
+    "u": "https://en.wikipedia.org/wiki/Paulo_Freire"
+   },
+   {
+    "t": "Instituto Paulo Freire",
+    "u": "https://www.paulofreire.org/"
+   },
+   {
+    "t": "Acervo Paulo Freire (Instituto Paulo Freire)",
+    "u": "https://acervo.paulofreire.org/"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Paulo Freire 1977.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Paulo_Freire_1977.jpg",
+    "x": "CC BY-SA 3.0, Slobodan Dimitrov"
+   },
+   {
+    "t": "2016-07-04 - Paulo Freire no Portal EBC.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:2016-07-04_-_Paulo_Freire_no_Portal_EBC.jpg",
+    "x": "CC BY 3.0 BR, Leandro Melito / Portal EBC"
+   },
+   {
+    "t": "Paulo Freire.png",
+    "u": "https://commons.wikimedia.org/wiki/File:Paulo_Freire.png",
+    "x": "CC BY 4.0, Prosa (arte gráfica sobre foto; usar só o rosto como referência)"
+   }
+  ]
+ },
+ "haraway": {
+  "links": [
+   {
+    "t": "Wikipedia (pt): Donna Haraway",
+    "u": "https://pt.wikipedia.org/wiki/Donna_Haraway"
+   },
+   {
+    "t": "Wikipedia (en): Donna Haraway",
+    "u": "https://en.wikipedia.org/wiki/Donna_Haraway"
+   },
+   {
+    "t": "Wikipedia (en): A Cyborg Manifesto",
+    "u": "https://en.wikipedia.org/wiki/A_Cyborg_Manifesto"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Donna Haraway (4555839936).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Donna_Haraway_(4555839936",
+    "x": ".jpg): CC BY-SA 2.0, jeanbaptisteparis"
+   },
+   {
+    "t": "Donna Haraway 2006 (cropped).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Donna_Haraway_2006_(cropped",
+    "x": ".jpg): CC BY-SA 3.0, Rusten Hogness"
+   },
+   {
+    "t": "Donna Haraway 2016.png",
+    "u": "https://commons.wikimedia.org/wiki/File:Donna_Haraway_2016.png",
+    "x": "CC BY 3.0, Fabbula Magazine"
+   }
+  ]
+ },
+ "hiparquia": {
+  "links": [
+   {
+    "t": "Internet Encyclopedia of Philosophy: Cynics",
+    "u": "https://iep.utm.edu/cynics/"
+   },
+   {
+    "t": "Wikipedia (pt): Hipárquia",
+    "u": "https://pt.wikipedia.org/wiki/Hipárquia"
+   },
+   {
+    "t": "Wikipedia (en): Hipparchia of Maroneia",
+    "u": "https://en.wikipedia.org/wiki/Hipparchia_of_Maroneia"
+   },
+   {
+    "t": "Diógenes Laércio, Vidas, livro VI (Wikisource, domínio público)",
+    "u": "https://en.wikisource.org/wiki/Lives_of_the_Eminent_Philosophers/Book_VI"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Hipparchia of Maroneia Villa Farnesina.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Hipparchia_of_Maroneia_Villa_Farnesina.jpg",
+    "x": "Domínio público, autor desconhecido"
+   },
+   {
+    "t": "Crates and Hipparchia Villa Farnesina.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Crates_and_Hipparchia_Villa_Farnesina.jpg",
+    "x": "Domínio público, autor desconhecido"
+   },
+   {
+    "t": "Hipparchia en Krates, RP-P-1938-2026.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Hipparchia_en_Krates,_RP-P-1938-2026.jpg",
+    "x": "CC0, Rijksmuseum"
+   }
+  ]
+ },
+ "hipatia": {
+  "links": [
+   {
+    "t": "MacTutor (Universidade de St Andrews): Hypatia",
+    "u": "https://mathshistory.st-andrews.ac.uk/Biographies/Hypatia/"
+   },
+   {
+    "t": "Wikipedia (pt): Hipátia de Alexandria",
+    "u": "https://pt.wikipedia.org/wiki/Hipátia"
+   },
+   {
+    "t": "Wikipedia (en): Hypatia",
+    "u": "https://en.wikipedia.org/wiki/Hypatia"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Mural feminista de Gandia - Hipàtia.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Mural_feminista_de_Gandia_-_Hipàtia.jpg",
+    "x": "CC BY-SA 4.0, Francesc Fort"
+   },
+   {
+    "t": "Hypatia (Charles Mitchell).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Hypatia_(Charles_Mitchell",
+    "x": ".jpg): Domínio público, Charles William Mitchell"
+   },
+   {
+    "t": "Alfred Seifert Hypatia.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Alfred_Seifert_Hypatia.jpg",
+    "x": "Domínio público, Alfred Seifert"
+   }
+  ]
+ },
+ "jung": {
+  "links": [
+   {
+    "t": "Encyclopaedia Britannica: Carl Jung",
+    "u": "https://www.britannica.com/biography/Carl-Jung"
+   },
+   {
+    "t": "Wikipedia (pt): Carl Gustav Jung",
+    "u": "https://pt.wikipedia.org/wiki/Carl_Gustav_Jung"
+   },
+   {
+    "t": "Wikipedia (en): Carl Jung",
+    "u": "https://en.wikipedia.org/wiki/Carl_Jung"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Carl-Jung-mod.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Carl-Jung-mod.jpg",
+    "x": "Domínio público, autor não informado"
+   },
+   {
+    "t": "Wohnhaus von Carl Gustav Jung in Basel-Kleinhüningen, Tafel.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Wohnhaus_von_Carl_Gustav_Jung_in_Basel-Kleinhüningen,_Tafel.jpg",
+    "x": "CC BY-SA 3.0, Andreas Schwarzkopf"
+   },
+   {
+    "t": "Carl Jung (1912).png",
+    "u": "https://commons.wikimedia.org/wiki/File:Carl_Jung_(1912",
+    "x": ".png): Domínio público, autor desconhecido"
+   }
+  ]
+ },
+ "marco": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Marcus Aurelius",
+    "u": "https://plato.stanford.edu/entries/marcus-aurelius/"
+   },
+   {
+    "t": "Wikipedia (pt): Marco Aurélio",
+    "u": "https://pt.wikipedia.org/wiki/Marco_Aurélio"
+   },
+   {
+    "t": "Wikipedia (en): Marcus Aurelius",
+    "u": "https://en.wikipedia.org/wiki/Marcus_Aurelius"
+   },
+   {
+    "t": "Meditações, texto integral (Projeto Gutenberg, domínio público)",
+    "u": "https://www.gutenberg.org/ebooks/2680"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Marcus Aurelius Arch Tripoli Libya.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Marcus_Aurelius_Arch_Tripoli_Libya.jpg",
+    "x": "CC BY 2.0, Daniel and Kate Pett"
+   },
+   {
+    "t": "Marcus Aurelius Capitoline Hill September 2015-1.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Marcus_Aurelius_Capitoline_Hill_September_2015-1.jpg",
+    "x": "Domínio público, Alvesgaspar"
+   },
+   {
+    "t": "Head Marcus Aurelius archmus Heraklion.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Head_Marcus_Aurelius_archmus_Heraklion.jpg",
+    "x": "CC0, Jebulon"
+   }
+  ]
+ },
+ "marx": {
+  "links": [
+   {
+    "t": "Wikipedia (pt): Karl Marx",
+    "u": "https://pt.wikipedia.org/wiki/Karl_Marx"
+   },
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Karl Marx",
+    "u": "https://plato.stanford.edu/entries/marx/"
+   },
+   {
+    "t": "Marxists Internet Archive: obras de Marx e Engels (domínio público)",
+    "u": "https://www.marxists.org/portugues/marx/index.htm"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Karl Marx 001.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Karl_Marx_001.jpg",
+    "x": "domínio público, John Jabez Edwin Mayall (1875)"
+   },
+   {
+    "t": "Karl Marx, May 1861.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Karl_Marx,_May_1861.jpg",
+    "x": "domínio público, Richard Beard"
+   },
+   {
+    "t": "An Interesting Photograph of Karl Marx 1882.png",
+    "u": "https://commons.wikimedia.org/wiki/File:An_Interesting_Photograph_of_Karl_Marx_1882.png",
+    "x": "CC0, The New York Public Library"
+   }
+  ]
+ },
+ "nietzsche": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Friedrich Nietzsche",
+    "u": "https://plato.stanford.edu/entries/nietzsche/"
+   },
+   {
+    "t": "Wikipedia (pt): Friedrich Nietzsche",
+    "u": "https://pt.wikipedia.org/wiki/Friedrich_Nietzsche"
+   },
+   {
+    "t": "Wikipedia (en): Friedrich Nietzsche",
+    "u": "https://en.wikipedia.org/wiki/Friedrich_Nietzsche"
+   },
+   {
+    "t": "Assim falou Zaratustra, texto em inglês (Projeto Gutenberg, domínio público)",
+    "u": "https://www.gutenberg.org/ebooks/1998"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Nietzsche187a.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Nietzsche187a.jpg",
+    "x": "Domínio público, Friedrich Hermann Hartmann"
+   },
+   {
+    "t": "Portrait Bust of Friedrich Nietzsche (SM sgp1).png",
+    "u": "https://commons.wikimedia.org/wiki/File:Portrait_Bust_of_Friedrich_Nietzsche_(SM_sgp1",
+    "x": ".png): PDM, Max Klinger"
+   },
+   {
+    "t": "Nietzsche1882.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Nietzsche1882.jpg",
+    "x": "Domínio público, Gustav-Adolf Schultze"
+   }
+  ]
+ },
+ "preciado": {
+  "links": [
+   {
+    "t": "Wikipedia (en): Paul B. Preciado",
+    "u": "https://en.wikipedia.org/wiki/Paul_B._Preciado"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "2017-06-07 Documenta 14 Paul B. Preciado by Olaf Kosinsky-10.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:2017-06-07_Documenta_14_Paul_B._Preciado_by_Olaf_Kosinsky-10.jpg",
+    "x": "CC BY-SA 3.0 de, Olaf Kosinsky"
+   }
+  ]
+ },
+ "sartre": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Jean-Paul Sartre",
+    "u": "https://plato.stanford.edu/entries/sartre/"
+   },
+   {
+    "t": "Wikipedia (pt): Jean-Paul Sartre",
+    "u": "https://pt.wikipedia.org/wiki/Jean-Paul_Sartre"
+   },
+   {
+    "t": "Wikipedia (en): Jean-Paul Sartre",
+    "u": "https://en.wikipedia.org/wiki/Jean-Paul_Sartre"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Jean Paul Sartre 1967.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Jean_Paul_Sartre_1967.jpg",
+    "x": "CC BY 3.0, User:T1980"
+   },
+   {
+    "t": "Jean Paul Sartre 1965.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Jean_Paul_Sartre_1965.jpg",
+    "x": "CC BY-SA 3.0 nl, autor desconhecido"
+   },
+   {
+    "t": "Jean Paul Sartre circa 1910.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Jean_Paul_Sartre_circa_1910.jpg",
+    "x": "Domínio público, autor desconhecido"
+   }
+  ]
+ },
+ "sorjuana": {
+  "links": [
+   {
+    "t": "Project Vox (Universidade Duke): Sor Juana",
+    "u": "https://projectvox.org/sor-juana-1648-1695/"
+   },
+   {
+    "t": "Wikipedia (pt): Juana Inés de la Cruz",
+    "u": "https://pt.wikipedia.org/wiki/Juana_Inés_de_la_Cruz"
+   },
+   {
+    "t": "Wikipedia (en): Juana Inés de la Cruz",
+    "u": "https://en.wikipedia.org/wiki/Juana_Inés_de_la_Cruz"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Retrato de Sor Juana Inés de la Cruz (Miguel Cabrera).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Retrato_de_Sor_Juana_Inés_de_la_Cruz_(Miguel_Cabrera",
+    "x": ".jpg): Domínio público, Miguel Cabrera"
+   },
+   {
+    "t": "Sor Juana Inés de la Cruz, 1732 - Fray Miguel de Herrera.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Sor_Juana_Inés_de_la_Cruz,_1732_-_Fray_Miguel_de_Herrera.jpg",
+    "x": "Domínio público, Fray Miguel de Herrera"
+   },
+   {
+    "t": "Retrato de Sor Juana Inés de la Cruz, de Miguel Cabrera, en el Castillo de Chapultepec 05.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Retrato_de_Sor_Juana_Inés_de_la_Cruz,_de_Miguel_Cabrera,_en_el_Castillo_de_Chapultepec_05.jpg",
+    "x": "CC BY-SA 4.0, Luisalvaz"
+   }
+  ]
+ },
+ "triboulet": {
+  "links": [
+   {
+    "t": "Wikipedia (en): Triboulet",
+    "u": "https://en.wikipedia.org/wiki/Triboulet"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "De rechtspraak van den nar, RP-P-OB-203.491.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:De_rechtspraak_van_den_nar,_RP-P-OB-203.491.jpg",
+    "x": "CC0, Rijksmuseum"
+   },
+   {
+    "t": "Bouffon J2.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Bouffon_J2.jpg",
+    "x": "CC BY-SA 4.0, Jamain"
+   },
+   {
+    "t": "Joker at parade at UNESCO celebrations 2009 in Třebíč, Třebíč District.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Joker_at_parade_at_UNESCO_celebrations_2009_in_Třebíč,_Třebíč_District.jpg",
+    "x": "CC BY 3.0, Frettie"
+   },
+   {
+    "t": "Carnival scene with figures in Commedia dell'Arte costumes eating spaghetti (School of Verona, 18th century).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Carnival_scene_with_figures_in_Commedia_dell'Arte_costumes_eating_spaghetti_(School_of_Verona,_18th_century",
+    "x": ".jpg): Domínio público, anônimo"
+   },
+   {
+    "t": "Harlequin and Antoinette.JPG",
+    "u": "https://commons.wikimedia.org/wiki/File:Harlequin_and_Antoinette.JPG",
+    "x": "CC BY-SA 3.0, Bouffonz"
+   },
+   {
+    "t": "Drawing, Embroidery Design of Two Commedia dell'Arte Figures, 1820–50 (CH 18475505).jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Drawing,_Embroidery_Design_of_Two_Commedia_dell'Arte_Figures,_1820–50_(CH_18475505",
+    "x": ".jpg): Domínio público, artista desconhecido"
+   }
+  ]
+ },
+ "weil": {
+  "links": [
+   {
+    "t": "Stanford Encyclopedia of Philosophy: Simone Weil",
+    "u": "https://plato.stanford.edu/entries/simone-weil/"
+   },
+   {
+    "t": "Wikipedia (pt): Simone Weil",
+    "u": "https://pt.wikipedia.org/wiki/Simone_Weil"
+   },
+   {
+    "t": "Wikipedia (en): Simone Weil",
+    "u": "https://en.wikipedia.org/wiki/Simone_Weil"
+   }
+  ],
+  "creditos": [
+   {
+    "t": "Simone Weil streetart.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Simone_Weil_streetart.jpg",
+    "x": "CC BY-SA 4.0, Marko Kafé"
+   },
+   {
+    "t": "Simone Weil 1943.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Simone_Weil_1943.jpg",
+    "x": "Domínio público, desconhecido"
+   },
+   {
+    "t": "Simone Weil 1921.jpg",
+    "u": "https://commons.wikimedia.org/wiki/File:Simone_Weil_1921.jpg",
+    "x": "Domínio público, anônimo"
+   }
+  ]
+ },
+ "wilson": {
+  "links": [
+   {
+    "t": "Wikipedia (en): Sophie Wilson",
+    "u": "https://en.wikipedia.org/wiki/Sophie_Wilson"
+   },
+   {
+    "t": "Computer History Museum: Sophie Wilson (Fellow, 2012)",
+    "u": "https://www.computerhistory.org/profile/sophie-wilson/"
+   }
+  ],
+  "creditos": []
+ }
+}

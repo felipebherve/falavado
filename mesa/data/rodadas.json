@@ -1,0 +1,207 @@
+{
+  "rodadas": [
+    {
+      "id": "exemplo-arte",
+      "exemplo": true,
+      "titulo": "EXEMPLO: Larguei o banco para viver de ilustração. Errei?",
+      "pergunta": "Tenho 32 anos e, há um ano, larguei um emprego estável num banco para tentar viver de ilustração. Agora abro o Instagram e vejo os colegas da faculdade comprando apartamento e sendo promovidos, enquanto eu conto as moedas no fim do mês. Sinto que fiquei para trás e que errei. Volto para o banco?",
+      "idioma": "pt",
+      "data": "13 de outubro de 2026",
+      "participantes": "Marco Aurélio, Hipátia de Alexandria, Sartre, Diógenes, Nietzsche",
+      "falas": [
+        {
+          "quem": "Triboulet",
+          "papel": "bufão da corte, abertura",
+          "img": "triboulet",
+          "texto": "Senhoras e senhores da mesa, chegou um pensamento com cheiro de tinta e de boleto! Nosso anfitrião tem 32 anos e, faz um ano, trocou a cadeira firme de um banco pelo pincel da ilustração. Agora abre o Instagram, vê os colegas da faculdade comprando apartamento e ganhando promoção, e ele contando moedas no fim do mês. Sente que ficou para trás, acha que errou, e pergunta sem rodeio: volto para o banco? Sirvo o pão, encho as taças, e a palavra é de vocês."
+        },
+        {
+          "quem": "Marco Aurélio",
+          "papel": "estoico, abertura",
+          "img": "marco",
+          "texto": "Separe primeiro o fato do juízo. O fato é este: um ano de ilustração, pouco dinheiro, colegas com apartamento. O juízo, que você mesmo acrescentou, é \"fiquei para trás\" e \"errei\". Atrás de quem? O apartamento do outro não depende de você, e a promoção dele também não; o que depende de você é o desenho de amanhã de manhã e a conta que você faz hoje à noite. Nas minhas notas eu me lembrava, em paráfrase, de que não é a coisa que nos perturba, mas a opinião sobre ela. Antes de decidir sobre o banco, escreva, com a calma de quem conversa sozinho numa tenda, quanto você precisa por mês e quanto a ilustração já trouxe."
+        },
+        {
+          "quem": "Hipátia de Alexandria",
+          "papel": "matemática · indagação filosófica",
+          "img": "hipatia",
+          "texto": "Concordo com Marco e quero números. Você diz que conta moedas: quantas, exatamente? Quantos clientes teve neste ano, quanto cada um pagou, e a renda cresceu do primeiro semestre para o segundo? Um ano é pouco para julgar um ofício, mas é o suficiente para traçar uma curva. Se a curva sobe, o problema é tempo e reserva; se está parada, o problema é método, e método se corrige. Comparar a sua curva com a fotografia de um apartamento no Instagram é como medir uma estrela com a régua de outra noite."
+        },
+        {
+          "quem": "Sartre",
+          "papel": "existencialista · pergunta para doer",
+          "img": "sartre",
+          "texto": "Você pergunta se volta para o banco como se alguém pudesse responder por você. Ninguém pode, e é isso que pesa. Voltar é uma escolha, ficar também é, e esconder-se atrás do \"errei\" é uma pequena má-fé: transforma uma decisão que continua aberta num veredicto sobre o passado. Há um ano você se escolheu ilustrador. A pergunta que dói é outra: você quer voltar para o banco porque a ilustração não funciona, ou porque o olhar dos colegas no Instagram te fixou no papel de quem perdeu?"
+        },
+        {
+          "quem": "Diógenes",
+          "papel": "cínico · ponto de vista de fora",
+          "img": "diogenes",
+          "texto": "Ha! Um homem livre olhando a vida dos outros por uma janelinha de vidro e chorando! Para quem você desenha, para os clientes ou para a turma da faculdade? Eu morava num jarro e dormia melhor que muito rico de Atenas. Faça um exercício: passe uma semana sem abrir o Instagram e desenhe na praça, de graça, para quem passar. Se ainda assim quiser o banco, vá. Mas vá por você, não pelo apartamento do vizinho."
+        },
+        {
+          "quem": "Nietzsche",
+          "papel": "genealogista · discordância forte",
+          "img": "nietzsche",
+          "texto": "Discordo de Marco Aurélio: não basta acalmar o juízo, é preciso perguntar de onde ele vem! Esse \"fiquei para trás\" não é seu, é a régua do rebanho, a moral de quem mede a vida em metros quadrados. Eu proponho o teste mais duro: você viveria este último ano de novo, infinitas vezes, com as moedas contadas e os desenhos feitos? Se a resposta for sim, você não errou, você começou a se tornar quem é. Se for não, mude, mas mude por uma vontade sua, não pelo ressentimento diante da vitrine dos outros."
+        },
+        {
+          "quem": "Triboulet",
+          "papel": "bufão da corte, encerramento",
+          "img": "triboulet",
+          "texto": "Ufa, que corte agitada! Um quer as contas, outra quer a curva, um quer a escolha, outro quer a praça, e o do bigode quer a eternidade. Recolho as taças e deixo uma só pergunta na bandeja: se ninguém da faculdade fosse ver, o que você desenharia amanhã?"
+        }
+      ],
+      "narracao": "audio/exemplo-arte.mp3",
+      "narracao_marcas": [
+        0,
+        27.55,
+        70.55,
+        105.68,
+        135.07,
+        160.18,
+        189.2
+      ],
+      "narracao_vozes": [
+        "Daniel",
+        "Daniel",
+        "Maria",
+        "Daniel",
+        "Daniel",
+        "Daniel",
+        "Daniel"
+      ],
+      "narracao_duracao": "3 min 25 s"
+    },
+    {
+      "id": "exemplo-pai",
+      "exemplo": true,
+      "titulo": "EXEMPLO: Cinco anos sem falar com meu pai, e ele adoeceu",
+      "pergunta": "Meu pai e eu não nos falamos há cinco anos, desde uma briga sobre política na ceia de Natal. Esta semana soube por uma tia que ele está doente. Tenho medo de ligar e ele me rejeitar de novo, e medo de não ligar e me arrepender para sempre. O que eu faço?",
+      "idioma": "pt",
+      "data": "13 de outubro de 2026",
+      "participantes": "Hannah Arendt, Simone Weil, Carl Jung, Espinosa",
+      "falas": [
+        {
+          "quem": "Triboulet",
+          "papel": "bufão da corte, abertura",
+          "img": "triboulet",
+          "texto": "Hoje sirvo a mesa em silêncio de pantufa, porque o pensamento é delicado. Nosso anfitrião não fala com o pai há cinco anos, desde uma briga sobre política na ceia de Natal. Esta semana, por uma tia, soube que o pai está doente. E está preso entre dois medos: ligar e ser rejeitado de novo, ou não ligar e se arrepender para sempre. Ele pergunta o que fazer. Pensadores, falem baixo e falem bem."
+        },
+        {
+          "quem": "Hannah Arendt",
+          "papel": "filósofa política · abertura",
+          "img": "arendt",
+          "texto": "O que aconteceu naquela ceia de Natal é irreversível: as palavras foram ditas e não voltam. Para isso existe uma faculdade humana muito precisa, o perdão, que não apaga o passado mas impede que ele decida todo o futuro. Perdoar não exige concordar com o seu pai sobre política; exige separar a pessoa da opinião que ela defendeu numa noite. E há a promessa, que é a outra metade: você pode prometer a si mesmo uma coisa pequena e cumprível, como um telefonema esta semana. Começar algo novo é exatamente o que um ser humano pode fazer, mesmo depois de cinco anos."
+        },
+        {
+          "quem": "Simone Weil",
+          "papel": "filósofa da atenção · pergunta para doer",
+          "img": "weil",
+          "texto": "Antes de decidir, quero perguntar para onde está indo a sua atenção. Ela está no seu pai doente ou na cena em que ele rejeita você de novo? O medo ocupa todo o espaço e não deixa olhar para o homem que está, agora, num corpo que sofre. A atenção é a forma mais rara de generosidade: ligar não para ganhar a discussão de cinco anos atrás, mas para perguntar como ele está, e ouvir. Se ele recusar, a recusa será dele; a atenção que você ofereceu continuará sendo sua."
+        },
+        {
+          "quem": "Carl Jung",
+          "papel": "psiquiatra · indagação filosófica",
+          "img": "jung",
+          "texto": "Uma briga sobre política que dura cinco anos raramente é só sobre política. Pergunto com cuidado: o que em você reagiu tão forte naquela noite? Às vezes o pai carrega para nós uma figura maior, a do juiz ou a da autoridade que nunca nos aprova, e brigar com ele é brigar com essa imagem. Antes de telefonar, escreva o que você gostaria de ouvir dele e o que você teme ouvir. Você vai descobrir que parte da conversa é com ele, e parte é com algo seu que vale a pena conhecer."
+        },
+        {
+          "quem": "Espinosa",
+          "papel": "racionalista · ponto de vista de fora",
+          "img": "espinosa",
+          "texto": "Quero apenas definir os dois afetos que prendem você. O medo e a esperança andam juntos: ambos dependem de algo incerto, e por isso nos deixam passivos, oscilando sem agir. Você não sabe se ele vai rejeitar, e também não sabe se vai acolher. O que você sabe com certeza é a causa do seu desejo de ligar: ele está doente e você ainda o ama. Agir a partir dessa causa clara, e não da imaginação do que ele pode dizer, é passar da paixão à ação, e isso, por si só, já diminui a tristeza."
+        },
+        {
+          "quem": "Triboulet",
+          "papel": "bufão da corte, encerramento",
+          "img": "triboulet",
+          "texto": "Arrumo a mesa devagar: perdão e promessa, atenção, a imagem do pai e o medo que caminha com a esperança. Ninguém aqui decidiu por você, e isso é bom sinal. Deixo uma pergunta só, quietinha na bandeja: qual é a primeira frase que você diria se ele atendesse hoje?"
+        }
+      ],
+      "narracao": "audio/exemplo-pai.mp3",
+      "narracao_marcas": [
+        0,
+        24.56,
+        65.7,
+        101.04,
+        130.69,
+        165.35
+      ],
+      "narracao_vozes": [
+        "Daniel",
+        "Maria",
+        "Maria",
+        "Daniel",
+        "Daniel",
+        "Daniel"
+      ],
+      "narracao_duracao": "3 min 01 s"
+    },
+    {
+      "id": "exemplo-ia",
+      "exemplo": true,
+      "titulo": "EXEMPLO: A inteligência artificial vai tomar meu trabalho de designer?",
+      "pergunta": "Sou designer há oito anos e vejo a inteligência artificial fazendo em segundos o que eu levo dias para entregar. Tenho 35 anos e medo de virar obsoleto. Devo largar a profissão, competir com a máquina ou aprender a usá-la?",
+      "idioma": "pt",
+      "data": "13 de outubro de 2026",
+      "participantes": "Sophie Wilson, Émilie du Châtelet, Raewyn Connell, Hipárquia de Maroneia",
+      "falas": [
+        {
+          "quem": "Triboulet",
+          "papel": "bufão da corte, abertura",
+          "img": "triboulet",
+          "texto": "Atenção, corte: o pensamento de hoje veio com faísca de computador! Nosso anfitrião é designer há oito anos, tem 35, e vê a inteligência artificial fazendo em segundos o que ele leva dias para entregar. Tem medo de virar obsoleto e coloca três caminhos na mesa: largar a profissão, competir com a máquina ou aprender a usá-la. Eu, que fui substituído por um bobo mais novo três vezes, sirvo o vinho com solidariedade."
+        },
+        {
+          "quem": "Sophie Wilson",
+          "papel": "cientista da computação · abertura",
+          "img": "wilson",
+          "texto": "Vamos desenhar o sistema antes de decidir. A máquina gera rápido, mas alguém ainda precisa entender o problema do cliente, escolher entre cem versões e responder pelo resultado; essa parte do seu trabalho não ficou mais barata. Quando projetamos o ARM, a vantagem não era fazer tudo, era fazer poucas coisas bem escolhidas com muito pouca energia. Faça o mesmo com a sua profissão: liste as tarefas que você leva dias para fazer e marque quais a ferramenta acelera e quais só você resolve. Depois, um teste pequeno: um projeto inteiro usando a ferramenta onde ela é boa, e medindo o tempo."
+        },
+        {
+          "quem": "Émilie du Châtelet",
+          "papel": "física · discordância forte",
+          "img": "duchatelet",
+          "texto": "Discordo de que \"competir com a máquina\" seja um dos caminhos: é um falso dilema, como perguntar se um astrônomo deve competir com o telescópio. No meu tempo, quem entendia Newton não perdia o emprego para as fórmulas; ganhava uma alavanca. Oito anos de olho treinado são uma força acumulada, e força, quando se move, cresce mais depressa do que se imagina. O seu medo é compreensível, mas paixões compreendidas viram motor. Estude a ferramenta como eu estudei os Principia: com método, com alegria, e sem aceitar que alguém diga que isso não é para você."
+        },
+        {
+          "quem": "Raewyn Connell",
+          "papel": "socióloga · ponto de vista de fora",
+          "img": "connell",
+          "texto": "Quero olhar para fora do indivíduo por um instante. O medo de ficar obsoleto aos 35 não é uma falha pessoal sua; é uma pressão do mercado que joga nos trabalhadores o risco de uma mudança decidida por poucas empresas. Por isso, além da sua estratégia, vale buscar outras pessoas: designers da sua cidade, associações, grupos que discutem preço, autoria e uso dessas ferramentas. O conhecimento que nasce no coletivo, longe dos centros de poder, também é teoria e também protege. Ninguém precisa atravessar essa mudança sozinho."
+        },
+        {
+          "quem": "Hipárquia de Maroneia",
+          "papel": "cínica · pergunta para doer",
+          "img": "hiparquia",
+          "texto": "Muito bonito tudo isso, mas eu quero saber: o que te impede de começar amanhã? Você listou três caminhos e não escolheu nenhum, e o medo adora uma lista sem escolha. Largar a profissão por medo seria entregar a casa antes do incêndio. Escolha um projeto real desta semana e faça com a ferramenta, mesmo mal, mesmo com vergonha. Coragem não se declara, se prova fazendo."
+        },
+        {
+          "quem": "Triboulet",
+          "papel": "bufão da corte, encerramento",
+          "img": "triboulet",
+          "texto": "Que banquete! Uma desenhou o sistema, outra trouxe o telescópio, outra chamou a vizinhança e a última chutou a porta. Recolho os pratos e deixo uma pergunta na bandeja: qual parte do seu trabalho você faria mesmo que nenhuma máquina existisse?"
+        }
+      ],
+      "narracao": "audio/exemplo-ia.mp3",
+      "narracao_marcas": [
+        0,
+        24.94,
+        64.3,
+        97.23,
+        133.27,
+        157.25
+      ],
+      "narracao_vozes": [
+        "Daniel",
+        "Maria",
+        "Maria",
+        "Maria",
+        "Maria",
+        "Daniel"
+      ],
+      "narracao_duracao": "2 min 52 s"
+    }
+  ]
+}
