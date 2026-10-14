@@ -80,6 +80,10 @@ p{margin:0 0 1em}
 #careta.sugar .cara{transition:transform 1s cubic-bezier(.6,0,.9,.5),opacity .9s ease .1s,filter 1s;opacity:0;filter:blur(3px)}
 #careta.sugar .cara.ri{transform:translate(45%,35%) scale(0) rotate(540deg)}
 #careta.sugar .cara.chora{transform:translate(-45%,35%) scale(0) rotate(-540deg)}
+#careta .cara{cursor:pointer}
+#careta .cara.estoura{transition:transform .25s ease-out,opacity .25s ease-out!important;transform:scale(1.35)!important;opacity:0!important;pointer-events:none}
+.bolha{position:fixed;z-index:131;border-radius:50%;pointer-events:none;opacity:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9) 0 8%,rgba(200,170,255,.35) 22%,rgba(120,255,200,.18) 60%,rgba(255,255,255,.05) 70%);border:1px solid rgba(255,255,255,.55);box-shadow:0 0 8px rgba(170,120,255,.5);animation:bolha 1.4s ease-out forwards}
+@keyframes bolha{0%{transform:scale(.2);opacity:0}15%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.15);opacity:0}}
 @media (prefers-reduced-motion:reduce){#careta .cara img,.lagrima{animation:none!important}#careta .cara{transition-duration:.01s!important}}
 
 /* página principal */

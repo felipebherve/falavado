@@ -119,8 +119,19 @@
 <script>
 /* carinhas do Herbs: logo que a página abre, a que ri ri e a que chora chora; depois as duas são sugadas para dentro do site */
 (function(){ var c=document.getElementById('careta'), foi=false;
-  function some(){ if(c.hidden) return; c.classList.add('sugar'); setTimeout(function(){ c.hidden=true; c.className=''; },1100); }
+  function limpa(){ c.hidden=true; c.className=''; [].forEach.call(c.querySelectorAll('.cara'),function(x){ x.classList.remove('estoura'); }); }
+  function some(){ if(c.hidden) return; c.classList.add('sugar'); setTimeout(limpa,1100); }
   c.addEventListener('click',some);
+  /* tocou numa carinha antes de ela sumir: só ela estoura e vira bolhas */
+  function estourar(cara,e){ e.stopPropagation(); if(cara.classList.contains('estoura')||c.classList.contains('sugar')) return;
+    var r=cara.getBoundingClientRect(), calmo=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    for(var i=0;i<(calmo?0:18);i++){ var b=document.createElement('i'), sz=10+Math.random()*34; b.className='bolha'; b.style.width=b.style.height=sz+'px';
+      b.style.left=(r.left+Math.random()*r.width-sz/2)+'px'; b.style.top=(r.top+r.height*.15+Math.random()*r.height*.7-sz/2)+'px';
+      b.style.setProperty('--dx',(Math.random()*140-70)+'px'); b.style.setProperty('--dy',(-60-Math.random()*180)+'px'); b.style.animationDelay=(Math.random()*.25)+'s';
+      document.body.appendChild(b); setTimeout(function(x){ return function(){ x.remove(); }; }(b),1900); }
+    cara.classList.add('estoura');
+    if(!c.querySelector('.cara:not(.estoura)')) setTimeout(limpa,350); }
+  [].forEach.call(c.querySelectorAll('.cara'),function(cara){ cara.addEventListener('click',function(e){ estourar(cara,e); }); });
   window.addEventListener('load',function(){ setTimeout(function(){ if(foi) return; foi=true;
     var ims=c.querySelectorAll('img'), ok=Array.prototype.every.call(ims,function(i){ return i.complete&&i.naturalWidth; }); if(!ok) return;
     c.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('on'); }); }); setTimeout(some,3600); },500); }); })();
