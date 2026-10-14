@@ -176,12 +176,12 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 :root[data-disl="1"] .ptexto{font-size:clamp(1.15rem,5vw,1.5rem)}
 /* estilo lovecraftiano (cores e filtro; as ilustrações próprias vêm depois) */
 :root[data-estilo="lovecraft"]:not([data-x]){--bg:#090d0b;--surface:#121916;--ink:#dfe3d0;--muted:#92a08c;--line:#25332b;--accent:#82b58f;--accent-ink:#08100b;--warm:#c29a52;--shadow:rgba(0,0,0,.7);color-scheme:dark}
-:root[data-estilo="lovecraft"] body{background:var(--bg)}
-:root[data-estilo="lovecraft"] body::before{content:"";position:fixed;inset:-24px;z-index:-1;pointer-events:none;background:url(img/lc/fundo_mesa.jpg) center/cover no-repeat;filter:blur(2px) brightness(1.15) saturate(1.1);transform:scale(1.03)}
-:root[data-estilo="lovecraft"] body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(9,13,11,.15),rgba(9,13,11,.62) 30%,rgba(9,13,11,.62) 70%,rgba(9,13,11,.15))}
-/* modo claro: a mesma imagem do corredor, clareada para o creme (img/fundo_mesa.jpg), com o centro mais apagado para o texto */
-:root:not([data-estilo="lovecraft"]) body::before{content:"";position:fixed;inset:-24px;z-index:-1;pointer-events:none;background:url(img/fundo_mesa.jpg) center/cover no-repeat;filter:blur(2px);transform:scale(1.03)}
-:root:not([data-estilo="lovecraft"]) body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(233,239,236,.1),rgba(233,239,236,.66) 30%,rgba(233,239,236,.66) 70%,rgba(233,239,236,.1))}
+/* fundo: o corredor de joias do Herbs, o mesmo nos dois modos (pedido de Herbs, 2026-10-14); o modo claro só suaviza balões, botões e troca os retratos */
+body{background:var(--bg)}
+body::before{content:"";position:fixed;inset:-24px;z-index:-1;pointer-events:none;background:url(img/lc/fundo_mesa.jpg) center/cover no-repeat;filter:blur(2px) brightness(1.15) saturate(1.1);transform:scale(1.03)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(9,13,11,.15),rgba(9,13,11,.62) 30%,rgba(9,13,11,.62) 70%,rgba(9,13,11,.15))}
+/* modo claro: as mesmas cores escuras, um pouco mais claras nos balões e botões */
+:root:not([data-estilo="lovecraft"]):not([data-x]){--bg:#0f1b1d;--surface:#22302f;--ink:#eef3ef;--muted:#a9bab6;--line:#3a5250;--accent:#6fcfc2;--accent-ink:#0b1a19;--warm:#e6a46c;--shadow:rgba(0,0,0,.5);color-scheme:dark}
 :root[data-estilo="lovecraft"] h1,:root[data-estilo="lovecraft"] .pergunta b,:root[data-estilo="lovecraft"] .pnome{font-family:"Cinzel",Georgia,serif;letter-spacing:.04em}
 :root[data-estilo="lovecraft"][data-disl="1"] h1,:root[data-estilo="lovecraft"][data-disl="1"] .pergunta b,:root[data-estilo="lovecraft"][data-disl="1"] .pnome{font-family:var(--serif)}
 /* suas IAs: guia do Triboulet (as contas são de quem usa) */
