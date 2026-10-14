@@ -484,7 +484,8 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <label class="papel esp-dor"><input type="checkbox" name="cfg-papel" value="dor"> pergunta para doer</label>
 <label class="papel esp-ind"><input type="checkbox" name="cfg-papel" value="ind"> indagação filosófica</label>
 <label class="papel esp-fora"><input type="checkbox" name="cfg-papel" value="fora"> ponto de vista de fora</label>
-<label class="papel esp-bonus"><input type="checkbox" name="cfg-papel" value="bonus"> resposta bônus</label></fieldset>
+<label class="papel esp-bonus"><input type="checkbox" name="cfg-papel" value="bonus"> resposta bônus</label>
+<label class="papel esp-bufao"><input type="checkbox" name="cfg-papel" value="tri"> falas a mais do Triboulet: ele pede desculpas por se intrometer, diz com clareza o que acha do pensamento e anota o pedido de alguém da mesa</label></fieldset>
 </div></details>
 
 <section class="novo" aria-label="Novo pensamento para a mesa">
@@ -601,7 +602,7 @@ var I18N=(function(){
 'pergunta para doer':'question that hurts',
 'indagação filosófica':'philosophical inquiry',
 'ponto de vista de fora':'outside point of view',
-'resposta bônus':'bonus answer',
+'resposta bônus':'bonus answer',"falas a mais do Triboulet: ele pede desculpas por se intrometer, diz com clareza o que acha do pensamento e anota o pedido de alguém da mesa":"extra lines from Triboulet: he apologizes for butting in, says clearly what he thinks of the thought and takes someone's order at the table","O Triboulet voltou à mesa. Ele é o coringa: não conta no número de participantes.":"Triboulet is back at the table. He is the joker: he does not count toward the number of participants.","Você tirou o Triboulet da mesa por vontade própria. Os pensadores vão se recusar a responder e dizer por quê. Toque nele de novo para trazê-lo de volta.":"You removed Triboulet from the table of your own free will. The thinkers will refuse to answer and say why. Tap him again to bring him back.","Escolha de participantes limpa. O Triboulet fica: ele é o coringa da mesa.":"Participant choice cleared. Triboulet stays: he is the joker of the table.",
 'Leve um pensamento à mesa':'Bring a thought to the table',
 'Seu pensamento':'Your thought',
 'Quem participa':'Who takes part',
@@ -1176,18 +1177,26 @@ var USO={db:null,uid:null,dono:false,local:false,
       try{ navigator.clipboard.writeText(R.md).then(function(){ st.textContent='Registro copiado. Cole numa conversa nova do falavado ou guarde como '+nome()+'.'; },falha); }catch(x){ falha(); }
     });
   })();
-  function montarPrompt(pens,sel){
+  function montarPrompt(pens,sel,tri){
+    if(!tri) return promptRecusa(pens,sel);
     var n=sel.length, total=n===1?4:(n===2?5:n+2);
     var lista=sel.map(function(p){ return '- '+p.nome+': '+(STY[p.id]||p.sobre||''); }).join('\n');
     var DESC={disc:'"discordância forte" (um participante discorda com força de outro ou de '+ANF()+')',dor:'"pergunta para doer" (desconfortável, que mexe de verdade, sem crueldade)',ind:'"indagação filosófica"',fora:'"ponto de vista de fora" (algo totalmente fora do que já foi dito)',bonus:'"resposta bônus" (uma fala extra de um participante sorteado, colocada depois das demais e antes do encerramento de Triboulet, além do total de falas)'};
     var esc=(CFG.papeis||[]).filter(function(k){ return DESC[k]; }).map(function(k){ return DESC[k]; });
     var papeis=esc.length?('A rodada deve conter, entre as falas, exatamente uma de cada um destes papéis especiais: '+esc.join('; ')+'. Marque isso somente no campo papel, por exemplo "cínico · discordância forte", nunca dentro do texto.'):'Não use papéis especiais; o campo papel é só um rótulo curto do pensador, como estoico.';
     var estrutura=n===1?'Com um só participante, escreva 4 falas dele em sequência, cada uma avançando a ideia.':(n===2?'Com dois participantes, 2 falas de cada e uma a mais para um dos dois, sorteada.':'Depois das primeiras falas, mais 2 falas extras de participantes sorteados, com inclinação para quem mais discordaria do que '+ANF()+' disse; as falas extras comentam as de outros.');
-    var hist=historico(null), fichas=sel.filter(function(p){ return !p.tri; }).map(function(p){ return fichaTexto(p.id,p.nome); }).concat([fichaTexto('triboulet','Triboulet')]).filter(Boolean).join('\n\n')+(sel.some(function(p){ return p.tri; })?'\n\nTriboulet também foi escolhido como participante: além de abrir e encerrar, ele tem falas próprias como os demais (4 a 7 frases), com as ideias e o humor da ficha dele.':'');
-    return 'Você escreve uma mesa redonda de pensadores para '+ANF()+'.\n\nSobre '+ANF()+':\n'+CTXF(CTX)+'\n\n'+REGRAS+(fichas?'\n\nOrdem de leitura: '+ORDEMF()+'\n\n1) Fichas de quem está à mesa (a base de cada fala: ideias reais, jeito de falar e obras de cada um):\n\n'+fichas:'')+(hist?'\n\n2) Rodadas anteriores de '+ANF()+' nesta mesa (do mais recente ao mais antigo):\n'+hist+'\n\nMemória da mesa: os pensadores lembram dessas conversas. Quando houver ligação com o pensamento novo, retomem o que '+ANF()+' já trouxe, o que cada um já respondeu e o que '+ANF()+' disse nas respostas, e construam a resposta nova sobre isso: aprofundem, mostrem a evolução ou a mudança de posição, sem repetir o que já foi dito. Se um pensamento anterior não tiver nada a ver com o novo, usem dele no máximo as informações sobre '+ANF()+' (quem é, onde vive, o que faz) e foquem só no pensamento novo, abaixo.':'')+'\n\nParticipantes (use exatamente estes nomes no campo quem):\n'+lista+'\n\n3) O pensamento que '+ANF()+' leva à mesa agora, completo e exatamente como foi escrito:\n"'+pens+'"\n\nFidelidade ao pensamento: leia o texto inteiro com atenção e leve em conta cada detalhe que '+ANF()+' escreveu (lugar, país, rede ou instituição, público, idade, época, nomes, condições, sentimentos e cada pergunta feita). Nada pode ser omitido, generalizado ou trocado por algo parecido. A abertura de Triboulet retoma o pensamento por inteiro, com todos os seus termos. Cada participante responde ao que foi escrito, e não a uma versão resumida: retoma pelo menos um detalhe concreto do pensamento e desenvolve o raciocínio com as próprias ideias reais (um conceito dele, por que ele se aplica a esse caso específico, um exemplo ou consequência concreta e uma posição clara). Se houver várias partes ou perguntas, a mesa como um todo responde a todas.\n\nComo cada um responde: antes de falar, cada participante leu as falas dos que falaram antes dele nesta rodada (inclusive a abertura de Triboulet), o pensamento de '+ANF()+' e as rodadas anteriores; ele conversa com essas falas (concorda, rebate ou aprofunda, citando quem falou) em vez de repetir. A fala nasce da ficha dele: usa a ficha D&D (habilidades, golpe especial, aliados e rivais, e os atributos mais altos como pontos fortes), os trabalhos e cargos que exerceu e as obras e publicações dele, sem inventar nada fora disso.\n\nEstrutura: primeiro uma fala de Triboulet (o bufão e garçom leal, brincalhão, rima de vez em quando) abrindo; depois as falas dos participantes. Todo participante tem direito a uma primeira fala completa. '+estrutura+' Por fim, Triboulet encerra com uma única pergunta aberta e curta. Total de falas dos participantes: '+total+'. '+papeis+'\n\nResponda somente com um array JSON, sem texto fora dele. Cada item: {"quem":"nome exato","papel":"rótulo curto","texto":"a fala"}. Triboulet usa os papéis "bufão da corte, abertura" e "bufão da corte, encerramento".';
+    var hist=historico(null), fichas=sel.map(function(p){ return fichaTexto(p.id,p.nome); }).concat([fichaTexto('triboulet','Triboulet')]).filter(Boolean).join('\n\n');
+    var palpite=(CFG.papeis||[]).indexOf('tri')>=0?' Fala a mais de Triboulet: além de abrir e encerrar, Triboulet tem uma fala a mais no meio da rodada (depois de pelo menos duas falas dos participantes e antes do encerramento), com o papel "bufão da corte, palpite", em 3 a 5 frases. Nela ele pede desculpas por se intrometer; diz com clareza o que acha do pensamento de '+ANF()+', com uma posição firme e sem rodeios, sem ficar só na piada; e, como garçom, anota em voz alta o pedido de um dos participantes escolhido ao acaso: uma bebida ou comida que combine com o que se sabe da vida, da terra e da época desse pensador (por exemplo duas cervejas, uma taça de vinho, pão com azeitonas), sem inventar fatos sobre ele. Essa fala não entra no total de falas dos participantes.':'';
+    return 'Você escreve uma mesa redonda de pensadores para '+ANF()+'.\n\nSobre '+ANF()+':\n'+CTXF(CTX)+'\n\n'+REGRAS+(fichas?'\n\nOrdem de leitura: '+ORDEMF()+'\n\n1) Fichas de quem está à mesa (a base de cada fala: ideias reais, jeito de falar e obras de cada um):\n\n'+fichas:'')+(hist?'\n\n2) Rodadas anteriores de '+ANF()+' nesta mesa (do mais recente ao mais antigo):\n'+hist+'\n\nMemória da mesa: os pensadores lembram dessas conversas. Quando houver ligação com o pensamento novo, retomem o que '+ANF()+' já trouxe, o que cada um já respondeu e o que '+ANF()+' disse nas respostas, e construam a resposta nova sobre isso: aprofundem, mostrem a evolução ou a mudança de posição, sem repetir o que já foi dito. Se um pensamento anterior não tiver nada a ver com o novo, usem dele no máximo as informações sobre '+ANF()+' (quem é, onde vive, o que faz) e foquem só no pensamento novo, abaixo.':'')+'\n\nParticipantes (use exatamente estes nomes no campo quem):\n'+lista+'\n\n3) O pensamento que '+ANF()+' leva à mesa agora, completo e exatamente como foi escrito:\n"'+pens+'"\n\nFidelidade ao pensamento: leia o texto inteiro com atenção e leve em conta cada detalhe que '+ANF()+' escreveu (lugar, país, rede ou instituição, público, idade, época, nomes, condições, sentimentos e cada pergunta feita). Nada pode ser omitido, generalizado ou trocado por algo parecido. A abertura de Triboulet retoma o pensamento por inteiro, com todos os seus termos. Cada participante responde ao que foi escrito, e não a uma versão resumida: retoma pelo menos um detalhe concreto do pensamento e desenvolve o raciocínio com as próprias ideias reais (um conceito dele, por que ele se aplica a esse caso específico, um exemplo ou consequência concreta e uma posição clara). Se houver várias partes ou perguntas, a mesa como um todo responde a todas.\n\nComo cada um responde: antes de falar, cada participante leu as falas dos que falaram antes dele nesta rodada (inclusive a abertura de Triboulet), o pensamento de '+ANF()+' e as rodadas anteriores; ele conversa com essas falas (concorda, rebate ou aprofunda, citando quem falou) em vez de repetir. A fala nasce da ficha dele: usa a ficha D&D (habilidades, golpe especial, aliados e rivais, e os atributos mais altos como pontos fortes), os trabalhos e cargos que exerceu e as obras e publicações dele, sem inventar nada fora disso.\n\nEstrutura: primeiro uma fala de Triboulet (o bufão e garçom leal, brincalhão, rima de vez em quando) abrindo; depois as falas dos participantes. Todo participante tem direito a uma primeira fala completa. '+estrutura+' Por fim, Triboulet encerra com uma única pergunta aberta e curta.'+palpite+' Total de falas dos participantes: '+total+'. '+papeis+'\n\nResponda somente com um array JSON, sem texto fora dele. Cada item: {"quem":"nome exato","papel":"rótulo curto","texto":"a fala"}. Triboulet usa os papéis "bufão da corte, abertura" e "bufão da corte, encerramento".';
+  }
+  /* Triboulet tirado da mesa por vontade própria: cada pensador se recusa a responder e diz por quê */
+  function promptRecusa(pens,sel){
+    var lista=sel.map(function(p){ return '- '+p.nome+': '+(STY[p.id]||p.sobre||''); }).join('\n');
+    var fichas=sel.map(function(p){ return fichaTexto(p.id,p.nome); }).filter(Boolean).join('\n\n');
+    return 'Você escreve uma cena da mesa redonda de pensadores de '+ANF()+'.\n\nSobre '+ANF()+':\n'+CTXF(CTX)+'\n\nRegras fixas: português do Brasil; cada fala num parágrafo corrido, sem listas, de 3 a 5 frases; cada pensador fala segundo suas ideias reais e o seu jeito, sem dizer que é uma simulação ou uma IA; sem crueldade, com humor e firmeza.'+(fichas?'\n\nFichas de quem está à mesa (ideias reais, jeito de falar e obras de cada um):\n\n'+fichas:'')+'\n\nParticipantes (use exatamente estes nomes no campo quem):\n'+lista+'\n\nO que aconteceu: '+ANF()+' tirou o Triboulet da mesa por vontade própria, tocando nele para removê-lo. Triboulet é o bufão e garçom amado da corte, o coringa que serve a mesa e faz a ponte entre todos. Por isso os pensadores se recusam a responder o pensamento que '+ANF()+' trouxe: "'+pens+'"\n\nEscreva uma fala de cada participante, nesta ordem. Cada um diz, na própria voz e a partir das próprias ideias (um conceito dele aplicado a esse gesto), que não vai responder e dá os seus motivos para não aceitar a remoção do amado Triboulet; pode citar o tema do pensamento só para dizer que ele fica esperando, sem responder a ele. Quem fala depois pode concordar ou completar o que os outros disseram. A última fala convida '+ANF()+' a trazer o Triboulet de volta, tocando nele na lista de participantes, para a conversa começar.\n\nResponda somente com um array JSON, sem texto fora dele. Cada item: {"quem":"nome exato","papel":"recusa","texto":"a fala"}.';
   }
   function gerarRodada(){
-    var pens=$pens.value.trim(), ids=elenco.filter(function(p){ return escolhidos[p.id]; });
+    var pens=$pens.value.trim(), tri=!!escolhidos.triboulet, ids=elenco.filter(function(p){ return escolhidos[p.id]&&!p.tri; });
     var resto=pensadores().filter(function(p){ return !escolhidos[p.id]; }), nsort=parseInt($sort.value,10)||0;
     var sel=ids.concat(sortear(resto,nsort));
     if(!pens||!sel.length) return;
@@ -1197,7 +1206,7 @@ var USO={db:null,uid:null,dono:false,local:false,
     function parar(){ ctl.abort(); }
     setEspera('Triboulet está chamando a corte… leva cerca de um minuto.',parar);
     var mapa={}; elenco.forEach(function(p){ mapa[p.nome]=p; });
-    IA.json(montarPrompt(pens,sel)+I18N.instrucao(),{signal:ctl.signal,cache:false,modelTier:'complex',aviso:function(t){ $msg.textContent=t; },onText:function(u){ var n=(u.text.match(/"quem"/g)||[]).length; setEspera('Triboulet está chamando a corte… '+n+' falas escritas.',parar); }}).then(function(arr){
+    IA.json(montarPrompt(pens,sel,tri)+I18N.instrucao(),{signal:ctl.signal,cache:false,modelTier:'complex',aviso:function(t){ $msg.textContent=t; },onText:function(u){ var n=(u.text.match(/"quem"/g)||[]).length; setEspera('Triboulet está chamando a corte… '+n+' falas escritas.',parar); }}).then(function(arr){
       if(!Array.isArray(arr)||!arr.length) throw {code:'invalid_json'};
       var falas=arr.filter(function(x){ return x&&x.texto&&x.quem; }).map(function(x){ var p=mapa[x.quem]; return {quem:String(x.quem),papel:String(x.papel||''),img:p?p.img:'',texto:String(x.texto)}; });
       if(!falas.length) throw {code:'invalid_json'};
@@ -1514,10 +1523,10 @@ var USO={db:null,uid:null,dono:false,local:false,
   var elenco=[], escolhidos={};
   var $pens=document.getElementById('pens'), $chips=document.getElementById('chips'), $env=document.getElementById('enviar'), $msg=document.getElementById('msg'), $sort=document.getElementById('sorteio'), $aud=document.getElementById('com-audio'), $ped=document.getElementById('pedidos');
   var SIMB={m:'♂',f:'♀',tf:'♀⚧',tm:'♂⚧'}, GEN={m:'homem',f:'mulher',tf:'mulher trans',tm:'homem trans'};
-  function nomes(){ return elenco.filter(function(p){ return escolhidos[p.id]; }).map(function(p){ return p.nome; }); }
+  function nomes(){ return elenco.filter(function(p){ return escolhidos[p.id]&&!p.tri; }).map(function(p){ return p.nome; }); }
   function atualizar(){
     document.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed',String(!!escolhidos[c.dataset.id])); });
-    try{ localStorage.setItem('rascunho',JSON.stringify({pens:$pens.value,esc:Object.keys(escolhidos).filter(function(k){ return escolhidos[k]; }),sort:$sort.value})); }catch(e){}
+    try{ localStorage.setItem('rascunho',JSON.stringify({pens:$pens.value,esc:Object.keys(escolhidos).filter(function(k){ return escolhidos[k]; }),tri:!!escolhidos.triboulet,sort:$sort.value})); }catch(e){}
     var tem=$pens.value.trim().length>0, qtd=nomes().length+(parseInt($sort.value,10)||0);
     $env.disabled=!(tem&&qtd>0);
   }
@@ -1529,7 +1538,7 @@ var USO={db:null,uid:null,dono:false,local:false,
       b.appendChild(pin);
       var info=el('span','info'); info.appendChild(el('span','nm',p.nome)); if(p.sobre) info.appendChild(el('span','sb',p.sobre)); b.appendChild(info);
       var sx=el('span','sx',SIMB[p.genero]||''); sx.setAttribute('role','img'); sx.setAttribute('aria-label',GEN[p.genero]||''); b.appendChild(sx);
-      b.addEventListener('click',function(){ escolhidos[p.id]=!escolhidos[p.id]; setModo(modoDaEscolha()); atualizar(); });
+      b.addEventListener('click',function(){ escolhidos[p.id]=!escolhidos[p.id]; if(p.tri) $msg.textContent=escolhidos[p.id]?'O Triboulet voltou à mesa. Ele é o coringa: não conta no número de participantes.':'Você tirou o Triboulet da mesa por vontade própria. Os pensadores vão se recusar a responder e dizer por quê. Toque nele de novo para trazê-lo de volta.'; setModo(modoDaEscolha()); atualizar(); });
       $chips.appendChild(b);
     });
     atualizar();
@@ -1552,7 +1561,7 @@ var USO={db:null,uid:null,dono:false,local:false,
   document.getElementById('a-homens').addEventListener('click',function(){ setModo('homens'); marcar(function(p){ return p.genero==='m'||p.genero==='tm'; }); });
   document.getElementById('a-mulheres').addEventListener('click',function(){ setModo('mulheres'); marcar(function(p){ return p.genero==='f'||p.genero==='tf'; }); });
   document.getElementById('a-todos').addEventListener('click',function(){ setModo('todos'); marcar(function(){ return true; }); });
-  document.getElementById('a-limpar').addEventListener('click',function(){ marcar(function(){ return false; }); escolhidos.triboulet=false; setModo(null); $sort.value='0'; QN=6; pintarQ(); limparRolos(); $msg.textContent='Escolha de participantes limpa.'; atualizar(); });
+  document.getElementById('a-limpar').addEventListener('click',function(){ marcar(function(){ return false; }); escolhidos.triboulet=true; setModo(null); $sort.value='0'; QN=6; pintarQ(); limparRolos(); $msg.textContent='Escolha de participantes limpa. O Triboulet fica: ele é o coringa da mesa.'; atualizar(); });
   /* sorteio caça-níquel: a pessoa escolhe quantos (máscara feliz soma, triste tira) e se vão os mais aptos ou só o aleatório.
      Sempre o mesmo número de homens e de mulheres; se o número for ímpar, um rolo extra sorteia se o último é homem ou mulher. */
   var QN=6, SLOT='aleatorio', GIRANDO=false;
@@ -1612,6 +1621,8 @@ var USO={db:null,uid:null,dono:false,local:false,
     var n=nomes(), s=parseInt($sort.value,10)||0, partes=[];
     if(n.length) partes.push('com '+n.join(', '));
     if(s>0) partes.push('mais '+s+' sorteados');
+    if(!escolhidos.triboulet) partes.push('sem o Triboulet (tirei ele da mesa)');
+    else if((CFG.papeis||[]).indexOf('tri')>=0) partes.push('com falas a mais do Triboulet');
     return 'Para a mesa: '+partes.join(', ')+'. '+(($aud.checked)?'Com áudio. ':'Sem áudio. ')+'Meu pensamento: '+$pens.value.trim();
   }
   document.getElementById('copiar').addEventListener('click',function(){
@@ -1620,10 +1631,10 @@ var USO={db:null,uid:null,dono:false,local:false,
   });
   function enviarPedido(){
     if(!dbRef){ $msg.textContent='O envio direto não está disponível aqui. Use Copiar pedido e cole no chat.'; return; }
-    var ids=elenco.filter(function(p){ return escolhidos[p.id]; }).map(function(p){ return p.id; });
+    var ids=elenco.filter(function(p){ return escolhidos[p.id]&&!p.tri; }).map(function(p){ return p.id; });
     var id='p'+Date.now();
     $env.disabled=true; $msg.textContent='Enviando…';
-    dbRef.collection(PFX+'pedidos').doc(id).set({ texto:$pens.value.trim(), participantes:ids, sorteio:parseInt($sort.value,10)||0, audio:!!$aud.checked, criado:new Date().toISOString(), status:'novo' }).then(function(){
+    dbRef.collection(PFX+'pedidos').doc(id).set({ texto:$pens.value.trim(), participantes:ids, triboulet:!!escolhidos.triboulet, falas_triboulet:(CFG.papeis||[]).indexOf('tri')>=0, sorteio:parseInt($sort.value,10)||0, audio:!!$aud.checked, criado:new Date().toISOString(), status:'novo' }).then(function(){
       $msg.textContent='Enviado! Falta um passo: no chat, diga ao Triboulet "leia o pedido da mesa".'; $pens.value=''; atualizar();
     },function(){ $msg.textContent='Não consegui enviar. Use Copiar pedido e cole no chat.'; atualizar(); });
   }
@@ -1643,7 +1654,7 @@ var USO={db:null,uid:null,dono:false,local:false,
     d.appendChild(el('p','quando','Pedido ('+tipo+') feito em '+fmtHora(x.criado)+(x.respondido_em?' · respondido em '+fmtHora(x.respondido_em):(x.status==='respondido'?' · respondido (hora não registrada)':' · aguardando resposta'))));
     box.appendChild(d); $ped.hidden=false; $ped.appendChild(box);
   }
-  fetch('data/elenco.json').then(function(r){ return r.json(); }).then(function(d){ elenco=(d.elenco||[]).concat([{id:'triboulet',nome:'Triboulet',sobre:'Bufão e garçom da corte: provoca, ri e diz o que ninguém diz.',genero:'m',img:'triboulet',tri:true}]); try{ var rs=JSON.parse(localStorage.getItem('rascunho')||'null'); if(rs){ if(rs.pens&&!$pens.value) $pens.value=rs.pens; (rs.esc||[]).forEach(function(k){ if(elenco.some(function(p){ return p.id===k; })) escolhidos[k]=true; }); if(rs.sort) $sort.value=rs.sort; } }catch(e){} montarChips(); pintarQ(); atualizar(); }).catch(function(){ $chips.appendChild(el('p','vazio','Não consegui carregar a lista de participantes.')); });
+  fetch('data/elenco.json').then(function(r){ return r.json(); }).then(function(d){ elenco=(d.elenco||[]).concat([{id:'triboulet',nome:'Triboulet',sobre:'Bufão e garçom da corte: provoca, ri e diz o que ninguém diz.',genero:'m',img:'triboulet',tri:true}]); escolhidos.triboulet=true; try{ var rs=JSON.parse(localStorage.getItem('rascunho')||'null'); if(rs){ if(rs.pens&&!$pens.value) $pens.value=rs.pens; (rs.esc||[]).forEach(function(k){ if(elenco.some(function(p){ return p.id===k; })) escolhidos[k]=true; }); if(rs.tri===false) escolhidos.triboulet=false; if(rs.sort) $sort.value=rs.sort; } }catch(e){} montarChips(); pintarQ(); atualizar(); }).catch(function(){ $chips.appendChild(el('p','vazio','Não consegui carregar a lista de participantes.')); });
   if(window.claude&&window.claude.use){
     /* primeiro descobre quem vê; só então liga o banco no lugar certo. Convidado sem conta identificada usa a mesa sem guardar nada. */
     Promise.all([window.claude.use('db'),window.claude.use('user')]).then(function(v){
