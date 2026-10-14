@@ -55,8 +55,12 @@ window.SITE_WEB=true;
     function rotulo(){ var l=(document.documentElement.lang||'pt').slice(0,2); return VOLTA[l]||VOLTA.pt; }
     function voltar(cls){ var a=document.createElement('a'); a.href='../index.html'; a.className=cls; a.setAttribute('translate','no'); a.textContent=rotulo(); return a; }
     var v1=voltar('site-voltar'), v2=voltar('site-voltar largo');
-    document.body.insertBefore(v1,document.body.firstChild); document.body.appendChild(v2);
-    new MutationObserver(function(){ v1.textContent=v2.textContent=rotulo(); }).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+    /* o de cima vai para a barra do topo da mesa (igual à do site), curto; o de baixo fica no fim da página */
+    var te=document.getElementById('topo-esq'); if(te){ v1.classList.add('curto'); te.appendChild(v1); } else document.body.insertBefore(v1,document.body.firstChild); document.body.appendChild(v2);
+    var CURTO={pt:'← Voltar',en:'← Back',es:'← Volver'};
+    function curto(){ var l=(document.documentElement.lang||'pt').slice(0,2); return CURTO[l]||CURTO.pt; }
+    if(te) v1.textContent=curto();
+    new MutationObserver(function(){ v2.textContent=rotulo(); v1.textContent=te?curto():rotulo(); }).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
     /* #r-<id>: abre aquela rodada (as rodadas de exemplo, por exemplo) */
     var h=(location.hash.match(/^#r-([A-Za-z0-9._-]+)$/)||[])[1];
     if(h){ var n=0, t=setInterval(function(){ var b=document.querySelector('[aria-controls="p-'+h+'"]'); if(b){ clearInterval(t); if(b.getAttribute('aria-expanded')!=='true') b.click(); b.scrollIntoView({block:'start'}); } else if(++n>40) clearInterval(t); },150); }

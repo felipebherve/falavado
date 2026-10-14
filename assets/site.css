@@ -312,3 +312,31 @@ ol.passos ul li{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
 .btn-fale{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0 0 12px;padding:10px 22px;border-radius:999px;border:2px solid var(--ouro2);color:var(--ouro-claro);font:600 1rem Lexend,sans-serif;text-decoration:none;background:rgba(0,0,0,.25)}
 .btn-fale:hover,.btn-fale:focus-visible{background:var(--ouro2);color:#2a1d00;outline:none}
 .rodape .btn-fale+p{display:block;width:fit-content;margin:0 auto}
+
+/* modo claro (botão ☀/🌙 do topo; a mesma escolha vale na mesa). A barra do topo continua escura, como a da mesa. */
+html[data-estilo="antigo"]{color-scheme:light;
+  --fundo:#efe4cf; --painel:rgba(255,250,240,.96); --painel2:#fbf3e3; --borda:#d8c39c;
+  --ouro:#8a5a00; --ouro2:#c08a1e; --roxo:#6a3596; --texto:#2b2030; --texto2:#4c3f55; --mudo:#6a5d74;
+  --sombra:0 10px 30px rgba(80,55,20,.18)}
+html[data-estilo="antigo"] body::before{filter:blur(6px) brightness(1.35) saturate(.55);opacity:.55}
+html[data-estilo="antigo"] body::after{background:radial-gradient(ellipse at 50% 45%,rgba(239,228,207,.25) 40%,rgba(239,228,207,.85) 100%)}
+html[data-estilo="antigo"] .topo{--borda:#3e2c52;--mudo:#9a8fab;--texto:#f3ecdf}
+html[data-estilo="antigo"] .topo .a-btn .a-ic{color:#ffe08a}
+html[data-estilo="antigo"] .topo .a-btn[aria-pressed="true"] .a-ic,html[data-estilo="antigo"] .topo .a-btn.ativo .a-ic{color:#2a1d00}
+html[data-estilo="antigo"] h1{text-shadow:none}
+@media (hover:hover){html[data-estilo="antigo"] .brilho :is(h1,h2,h3,p,li,blockquote,dt,dd,figcaption,.t):hover{color:#7a4a00;text-shadow:0 0 10px rgba(245,197,66,.55)}}
+html[data-estilo="antigo"] :is(.porque,.etimo span,.atrib,.hab,.chip,.exemplo,code,.cod,.leitor){background:#fbf3e3;color:var(--texto)}
+html[data-estilo="antigo"] :is(.etimo span,code,.cod){color:#7a4a00}
+html[data-estilo="antigo"] .porque .aviso-psi{color:#6b4200;background:rgba(192,138,30,.12)}
+html[data-estilo="antigo"] .btn{background:#fbf3e3;color:var(--texto)}
+html[data-estilo="antigo"] .btn:hover{background:#fff4d8}
+html[data-estilo="antigo"] .btn.ouro{background:linear-gradient(#ffe08a,#e0a92b);color:#2a1d00}
+html[data-estilo="antigo"] .palco-box{background:radial-gradient(ellipse at 50% 60%,rgba(150,100,200,.25),transparent 70%),var(--painel)}
+html[data-estilo="antigo"] form.pedido :is(input,textarea,select){background:#fffaf0;color:var(--texto)}
+html[data-estilo="antigo"] .leitor :is(button,select){background:#fffaf0;color:var(--texto)}
+html[data-estilo="antigo"] .atrib .barra{background:#e3d3b2}
+html[data-estilo="antigo"] .fita-texto{fill:#ffe08a}
+html[data-estilo="antigo"] :is(.sub-porque,.convite,.chave-pix,.classe,.porque .aviso-psi,.porque .lema,.leitor-txt,.leitor .leitor-pausa,.porque .citacao p,.btn-fale,.ouvir){color:#7a4a00}
+html[data-estilo="antigo"] .ouvir{background:#fffaf0}
+html[data-estilo="antigo"] .btn-fale{background:#fffaf0}
+html[data-estilo="antigo"] .ouvir:hover,html[data-estilo="antigo"] .ouvir[aria-pressed="true"]{color:#2a1d00}

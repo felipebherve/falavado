@@ -1,4 +1,4 @@
-/* acessibilidade do falavado: letra para dislexia (OpenDyslexic, licença OFL) e filtros para daltonismo.
+/* acessibilidade do falavado: letra para dislexia (OpenDyslexic, licença OFL), filtros para daltonismo e modo claro ou escuro.
    Vale para o site e para a mesa (mesmo localStorage). Os filtros "daltonizam": puxam a cor que a pessoa
    não distingue para canais que ela vê, em vez de simular a visão dela. */
 (function(){
@@ -20,7 +20,9 @@
     'html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}html[data-dalt="acromat"] a{text-decoration:underline}';
   var st=document.createElement('style'); st.id='acess-css'; st.textContent=css; document.head.appendChild(st);
   var fonte=ler('a11y_fonte')==='1', dalt=TIPOS.indexOf(ler('a11y_dalt'))>0?ler('a11y_dalt'):'nenhum';
-  var h=document.documentElement; h.classList.toggle('dislexia',fonte);
+  /* modo claro ou escuro: a mesma chave da mesa (cfg_estilo: antigo = claro, lovecraft = escuro); sem escolha, o site abre escuro */
+  var estilo=ler('cfg_estilo')==='antigo'?'antigo':'lovecraft';
+  var h=document.documentElement; h.classList.toggle('dislexia',fonte); h.setAttribute('data-estilo',estilo);
   function filtros(){
     if(document.getElementById('dalt-filtros')||!document.body) return;
     var d=document.createElement('div'); d.id='dalt-filtros'; d.setAttribute('aria-hidden','true');
@@ -37,6 +39,8 @@
     fonte:function(){ return fonte; },
     dalt:function(){ return dalt; },
     setFonte:function(v){ fonte=!!v; gravar('a11y_fonte',fonte?'1':'0'); h.classList.toggle('dislexia',fonte); },
-    setDalt:function(v){ dalt=TIPOS.indexOf(v)>=0?v:'nenhum'; gravar('a11y_dalt',dalt); aplicarDalt(); }
+    setDalt:function(v){ dalt=TIPOS.indexOf(v)>=0?v:'nenhum'; gravar('a11y_dalt',dalt); aplicarDalt(); },
+    estilo:function(){ return estilo; },
+    setEstilo:function(v){ estilo=v==='antigo'?'antigo':'lovecraft'; gravar('cfg_estilo',estilo); h.setAttribute('data-estilo',estilo); document.dispatchEvent(new CustomEvent('estilo',{detail:estilo})); }
   };
 })();

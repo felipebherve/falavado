@@ -110,7 +110,7 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .pedidos p{margin:0 0 4px}
 .legenda{color:var(--muted);font-size:.82rem;margin:8px 0 0}
 /* tela cheia da fala */
-.palco{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;gap:12px;padding:calc(14px + env(safe-area-inset-top,0px)) 18px calc(14px + env(safe-area-inset-bottom,0px))}
+.palco{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;flex-direction:column;gap:12px;padding:calc(14px + env(safe-area-inset-top,0px)) 18px calc(14px + env(safe-area-inset-bottom,0px))}
 .palco[hidden]{display:none}
 .ptopo{display:flex;align-items:center;gap:14px;padding-right:44px}
 .ppin{flex:none;width:92px;height:92px;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
@@ -170,13 +170,15 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .config input{width:20px;height:20px;accent-color:var(--accent);flex:none;margin-top:2px}
 .config .nota{margin:0;color:var(--muted);font-size:.82rem}
 /* letras para disléxicos */
-:root[data-disl="1"]{--serif:"Lexend",Verdana,"Segoe UI",sans-serif;--sans:"Lexend",Verdana,"Segoe UI",sans-serif}
-:root[data-disl="1"] body{letter-spacing:.04em;word-spacing:.16em;line-height:1.85}
-:root[data-disl="1"] .texto,:root[data-disl="1"] .ptexto,:root[data-disl="1"] .tr p,:root[data-disl="1"] .minha p{letter-spacing:.05em;word-spacing:.2em;line-height:1.95;font-style:normal}
+:root[data-disl="1"]:not(.dislexia){--serif:"Lexend",Verdana,"Segoe UI",sans-serif;--sans:"Lexend",Verdana,"Segoe UI",sans-serif}
+:root[data-disl="1"]:not(.dislexia) body{letter-spacing:.04em;word-spacing:.16em;line-height:1.85}
+:root[data-disl="1"]:not(.dislexia) .texto,:root[data-disl="1"]:not(.dislexia) .ptexto,:root[data-disl="1"]:not(.dislexia) .tr p,:root[data-disl="1"]:not(.dislexia) .minha p{letter-spacing:.05em;word-spacing:.2em;line-height:1.95;font-style:normal}
 :root[data-disl="1"] .ptexto{font-size:clamp(1.15rem,5vw,1.5rem)}
 /* estilo lovecraftiano (cores e filtro; as ilustrações próprias vêm depois) */
 :root[data-estilo="lovecraft"]:not([data-x]){--bg:#090d0b;--surface:#121916;--ink:#dfe3d0;--muted:#92a08c;--line:#25332b;--accent:#82b58f;--accent-ink:#08100b;--warm:#c29a52;--shadow:rgba(0,0,0,.7);color-scheme:dark}
-:root[data-estilo="lovecraft"] body{background:radial-gradient(ellipse at 50% 0,#15231b 0,var(--bg) 62%) fixed var(--bg)}
+:root[data-estilo="lovecraft"] body{background:var(--bg)}
+:root[data-estilo="lovecraft"] body::before{content:"";position:fixed;inset:-24px;z-index:-1;pointer-events:none;background:url(img/lc/fundo_mesa.jpg) center/cover no-repeat;filter:blur(2px) brightness(1.15) saturate(1.1);transform:scale(1.03)}
+:root[data-estilo="lovecraft"] body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(9,13,11,.15),rgba(9,13,11,.62) 30%,rgba(9,13,11,.62) 70%,rgba(9,13,11,.15))}
 :root[data-estilo="lovecraft"] h1,:root[data-estilo="lovecraft"] .pergunta b,:root[data-estilo="lovecraft"] .pnome{font-family:"Cinzel",Georgia,serif;letter-spacing:.04em}
 :root[data-estilo="lovecraft"][data-disl="1"] h1,:root[data-estilo="lovecraft"][data-disl="1"] .pergunta b,:root[data-estilo="lovecraft"][data-disl="1"] .pnome{font-family:var(--serif)}
 /* suas IAs: guia do Triboulet (as contas são de quem usa) */
@@ -246,7 +248,7 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 #p-parar{right:12px;left:auto}
 #lb-voltar{left:auto;right:12px}
 /* botão voltar */
-.voltar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:block;margin:0 0 12px;font:inherit;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;cursor:pointer}
+.voltar{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:5;display:block;margin:0 0 12px;font:inherit;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--accent);border-radius:10px;padding:8px 14px;cursor:pointer}
 .pfechar{width:auto;height:44px;border-radius:22px;padding:0 16px;font:inherit;font-weight:600;font-size:.95rem}
 .ptopo{padding-right:0;padding-top:50px}
 /* botão de configurações */
@@ -280,8 +282,30 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .grade button{min-height:48px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 10px}
 .mescla{display:flex;flex-direction:column;gap:8px;margin:12px 0 4px}
-.mescla-t{margin:0;color:var(--muted);font-size:.9rem;text-align:center}
-.mescn{display:flex;align-items:center;justify-content:center;gap:10px;font-size:1rem}
+.qtd{display:flex;align-items:center;justify-content:center;gap:14px}
+.qtd .qn{display:flex;flex-direction:column;align-items:center;min-width:96px}
+.qtd output{font:700 2rem/1 "Cinzel",Georgia,serif;color:var(--ink)}
+.qtd small{color:var(--muted);font-size:.85rem}
+.mascara{width:58px;height:58px;padding:4px;border-radius:50%;border:2px solid #e0a92b;background:radial-gradient(circle at 50% 35%,#3a2a12,#120c05);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .12s}
+.mascara svg{width:44px;height:44px}
+.mascara:hover{transform:scale(1.06)}.mascara:active{transform:scale(.94)}
+.mascara:disabled{opacity:.4;cursor:default;transform:none}
+.mascara:focus-visible,.slot:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.slot{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;margin:4px 0 0;padding:14px 14px 16px;font:inherit;color:#2a1d00;cursor:pointer;border:3px solid #e0a92b;border-radius:22px;background:linear-gradient(180deg,#7a1f1f,#3d0d12 60%,#2a070b);box-shadow:inset 0 0 0 3px #f5c542,0 6px 22px rgba(0,0,0,.35)}
+.slot .slot-tit{position:relative;z-index:1;font:700 1.5rem/1 "Cinzel",Georgia,serif;letter-spacing:.18em;color:#ffe08a;text-shadow:0 0 10px rgba(245,197,66,.8)}
+.slot .luzes{position:absolute;inset:6px;border-radius:17px;pointer-events:none;background:radial-gradient(circle,#ffe08a 0 2px,transparent 3px) 0 0/18px 18px;opacity:.35}
+.slot.girando .luzes{animation:piscar .35s steps(2) infinite}
+@keyframes piscar{50%{opacity:.9}}
+.rolos{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-radius:12px;background:#120808;border:2px solid #b8860b;min-height:76px;width:100%}
+.rolo{position:relative;width:58px;height:70px;border-radius:8px;overflow:hidden;background:linear-gradient(#fff 0,#f2e6c9 50%,#fff 100%);box-shadow:inset 0 6px 8px rgba(0,0,0,.35),inset 0 -6px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+.rolo img{width:50px;height:50px;border-radius:50%;object-fit:cover}
+.rolo .sx{font:700 1.7rem/1 serif;color:#7a1f1f}
+.rolo.gira img,.rolo.gira .sx{animation:rolar .12s linear infinite}
+@keyframes rolar{0%{transform:translateY(-30%);filter:blur(1.5px)}100%{transform:translateY(30%);filter:blur(1.5px)}}
+.rolo.parou{box-shadow:inset 0 0 0 3px #ff8a00}
+.rolo .nm{position:absolute;left:0;right:0;bottom:1px;font:600 .58rem/1.1 "Lexend",sans-serif;color:#3d0d12;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+@media (prefers-reduced-motion:reduce){.rolo.gira img,.rolo.gira .sx,.slot.girando .luzes{animation:none}}
+.chip.tri .pin img{border-radius:50%}
 .rodape{color:var(--muted);font-size:.8rem;margin:24px 0 0}
 /* Triboulet em movimento */
 .triload{position:relative;flex:none;width:56px;height:56px}
@@ -295,7 +319,7 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .tri-anima{animation:balanca 3s ease-in-out infinite;transform-origin:50% 90%}
 @keyframes balanca{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){.triload img,.triload i,.tri-anima{animation:none}.triload i{display:none}}
-#lb{position:fixed;inset:0;background:rgba(5,12,13,.88);display:flex;align-items:center;justify-content:center;padding:20px;z-index:30}
+#lb{position:fixed;inset:0;background:rgba(5,12,13,.88);display:flex;align-items:center;justify-content:center;padding:20px;z-index:70}
 #lb[hidden]{display:none}
 #lb img{max-width:min(92vw,520px);max-height:80vh;border-radius:14px;box-shadow:0 10px 40px var(--shadow)}
 #lb p{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#dfe9e6;font-size:.9rem;margin:0}
@@ -343,15 +367,19 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 /* idioma: PT e EN ao lado do título; a opção ativa brilha dourada, a outra fica escura */
 .titulo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 4px}
 .titulo h1{margin:0}
-/* barra do topo da mesa: Dislexia, Daltonismo e idioma (fora das Configurações) */
-.topo-mesa{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin:0 0 10px}
-.a11y-mesa{display:flex;gap:6px;flex-wrap:wrap}
-.a11y-b{font:inherit;font-size:.82rem;font-weight:700;min-height:40px;padding:6px 14px;border-radius:999px;border:1px solid #3a3346;background:#15131c;color:#d9d2e6;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-.a11y-b .a11y-ic{font-weight:800;color:#f5c542}
-.a11y-b[aria-pressed="true"],.a11y-b.ativo,.a11y-b[aria-expanded="true"]{background:linear-gradient(#f7d774,#e0a92b);color:#2a1d00;border-color:#e0a92b}
+/* barra do topo da mesa: igual à do site. Voltar (quando houver), Dislexia, Daltonismo, modo claro/escuro e idioma */
+.topo-mesa{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;padding-top:max(10px,env(safe-area-inset-top));background:linear-gradient(rgba(10,6,14,.96),rgba(10,6,14,.85));border-bottom:1px solid #3e2c52}
+.topo-esq{display:flex;align-items:center;min-width:0}
+.topo-esq .site-voltar{margin:0!important;min-height:40px!important;white-space:nowrap}
+.topo-dir{display:flex;align-items:center;gap:8px;margin-left:auto}
+.wrap{padding-top:78px}
+.a11y-mesa{display:flex;gap:4px}
+.a11y-b{font:600 .8rem "Lexend",sans-serif;min-height:40px;padding:6px 11px;border-radius:999px;border:1px solid #3e2c52;background:#15111c;color:#9a8fab;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.a11y-b .a11y-ic{font-weight:700;color:#ffe08a}
+.a11y-b[aria-pressed="true"],.a11y-b.ativo,.a11y-b[aria-expanded="true"]{background:linear-gradient(#ffe08a,#e0a92b);color:#2a1d00;border-color:transparent;box-shadow:0 0 10px rgba(245,197,66,.5)}
 .a11y-b[aria-pressed="true"] .a11y-ic,.a11y-b.ativo .a11y-ic,.a11y-b[aria-expanded="true"] .a11y-ic{color:#2a1d00}
 .a11y-b:focus-visible,.dalt-mesa button:focus-visible{outline:2px solid #f5c542;outline-offset:2px}
-.dalt-mesa{position:absolute;top:calc(100% + 6px);right:0;z-index:50;width:min(320px,calc(100vw - 32px));max-height:70vh;overflow:auto;background:#15131c;color:#eee8f7;border:1px solid #e0a92b;border-radius:14px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.dalt-mesa{position:absolute;top:calc(100% + 6px);right:16px;z-index:50;width:min(320px,calc(100vw - 32px));max-height:70vh;overflow:auto;background:#15131c;color:#eee8f7;border:1px solid #e0a92b;border-radius:14px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .dalt-mesa[hidden]{display:none}
 .dalt-mesa .dalt-tit{margin:0 0 2px;font-weight:700}
 .dalt-mesa .dalt-ex{margin:0 0 8px;font-size:.84rem;color:#b9b2c8}
@@ -359,10 +387,11 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .dalt-mesa [role=radio]{font:inherit;font-size:.9rem;text-align:left;min-height:40px;padding:8px 12px;border-radius:10px;border:1px solid #3a3346;background:transparent;color:inherit;cursor:pointer}
 .dalt-mesa [role=radio][aria-checked="true"]{border-color:#e0a92b;background:rgba(245,197,66,.16);font-weight:700}
 .dalt-mesa .dalt-fechar{margin-top:10px;font:inherit;font-weight:700;min-height:40px;padding:6px 16px;border-radius:10px;border:1px solid #e0a92b;background:transparent;color:inherit;cursor:pointer}
-@media (max-width:520px){.topo-mesa{justify-content:center}.dalt-mesa{position:fixed;top:auto;bottom:max(12px,env(safe-area-inset-bottom));left:16px;right:16px;width:auto}}
+@media (max-width:720px){.a11y-b .a11y-txt{display:none}.a11y-b{padding:6px 9px;min-width:40px}}
+@media (max-width:480px){.topo-mesa{padding:8px 10px;gap:6px}.topo-dir{gap:4px}.idioma button{padding:6px 8px!important}.topo-esq .site-voltar{font-size:0!important;padding:8px 12px!important}.topo-esq .site-voltar::before{content:"←";font-size:1rem}.dalt-mesa{position:fixed;top:auto;bottom:max(12px,env(safe-area-inset-bottom));left:16px;right:16px;width:auto}}
 html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
-.idioma{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:#15131c;border:1px solid #3a3346}
-.idioma button{font:inherit;font-size:.82rem;font-weight:700;letter-spacing:.08em;border:0;border-radius:999px;padding:6px 14px;background:transparent;color:#8a8496;cursor:pointer}
+.idioma{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:#15111c;border:1px solid #3e2c52}
+.idioma button{font:600 .8rem "Lexend",sans-serif;letter-spacing:.06em;border:0;border-radius:999px;min-height:34px;padding:6px 11px;background:transparent;color:#9a8fab;cursor:pointer}
 .idioma button[aria-pressed="true"]{background:linear-gradient(#f7d774,#e0a92b);color:#2a1d00;box-shadow:0 0 10px rgba(245,197,66,.55)}
 .idioma button:focus-visible{outline:2px solid #f5c542;outline-offset:2px}
 .registro .conv{border-top:1px solid var(--line);padding:10px 0}
@@ -416,7 +445,7 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 </style>
 
 <div class="wrap">
-<div class="topo-mesa"><div class="a11y-mesa"><button type="button" class="a11y-b" id="m-dis" aria-pressed="false"><span class="a11y-ic" aria-hidden="true">Aa</span> Dislexia</button><button type="button" class="a11y-b" id="m-dal" aria-expanded="false" aria-controls="m-dalt"><span class="a11y-ic" aria-hidden="true">👁</span> Daltonismo</button></div><div class="idioma" role="group" aria-label="Idioma / Language"><button type="button" data-l="pt" title="Português" aria-pressed="true">PT</button><button type="button" data-l="en" title="English" aria-pressed="false">EN</button><button type="button" data-l="es" title="Español" aria-pressed="false">ES</button></div><div class="dalt-mesa" id="m-dalt" hidden role="dialog" aria-label="Daltonismo"><p class="dalt-tit">Daltonismo</p><p class="dalt-ex">Escolha o seu tipo: as cores da página se ajustam.</p><div role="radiogroup" aria-label="Daltonismo"><button type="button" role="radio" data-d="nenhum" aria-checked="true">Cores Básicas</button><button type="button" role="radio" data-d="protan" aria-checked="false">Protanopia (vermelho)</button><button type="button" role="radio" data-d="deutan" aria-checked="false">Deuteranopia (verde)</button><button type="button" role="radio" data-d="tritan" aria-checked="false">Tritanopia (azul)</button><button type="button" role="radio" data-d="acromat" aria-checked="false">Acromatopsia (sem cores)</button></div><button type="button" class="dalt-fechar" id="m-dalt-fechar">Fechar</button></div></div>
+<header class="topo-mesa" id="topo-mesa"><div class="topo-esq" id="topo-esq"></div><div class="topo-dir"><div class="a11y-mesa"><button type="button" class="a11y-b" id="m-dis" aria-pressed="false"><span class="a11y-ic" aria-hidden="true">Aa</span> <span class="a11y-txt">Dislexia</span></button><button type="button" class="a11y-b" id="m-dal" aria-expanded="false" aria-controls="m-dalt"><span class="a11y-ic" aria-hidden="true">👁</span> <span class="a11y-txt">Daltonismo</span></button><button type="button" class="a11y-b" id="m-tema" aria-label="Modo claro ou escuro" title="Modo claro ou escuro"><span class="a11y-ic" aria-hidden="true" id="m-tema-ic">☀</span> <span class="a11y-txt" id="m-tema-txt">Claro</span></button></div><div class="idioma" role="group" aria-label="Idioma / Language"><button type="button" data-l="pt" title="Português" aria-pressed="true">PT</button><button type="button" data-l="en" title="English" aria-pressed="false">EN</button><button type="button" data-l="es" title="Español" aria-pressed="false">ES</button></div></div><div class="dalt-mesa" id="m-dalt" hidden role="dialog" aria-label="Daltonismo"><p class="dalt-tit">Daltonismo</p><p class="dalt-ex">Escolha o seu tipo: as cores da página se ajustam.</p><div role="radiogroup" aria-label="Daltonismo"><button type="button" role="radio" data-d="nenhum" aria-checked="true">Cores Básicas</button><button type="button" role="radio" data-d="protan" aria-checked="false">Protanopia (vermelho)</button><button type="button" role="radio" data-d="deutan" aria-checked="false">Deuteranopia (verde)</button><button type="button" role="radio" data-d="tritan" aria-checked="false">Tritanopia (azul)</button><button type="button" role="radio" data-d="acromat" aria-checked="false">Acromatopsia (sem cores)</button></div><button type="button" class="dalt-fechar" id="m-dalt-fechar">Fechar</button></div></header>
 <div class="titulo"><h1>Mesa dos Pensadores</h1></div>
 <section class="apresenta" aria-label="Como funciona"><span class="triload" aria-hidden="true"><img src="img/triboulet_pin.jpg" alt=""><i></i><i></i><i></i></span><div><b>Triboulet explica</b><p>Eu sou Triboulet, bufão e garçom da corte, e vassalo fiel do meu rei Herbs, o criador desta mesa. Quem senta à cabeceira é o anfitrião: se você não é o meu rei, eu o recebo mesmo assim, por mera cordialidade de Herbs, que me manda servir bem a quem ele abre a porta. Aqui você leva um pensamento à mesa, escolhe quem senta nela e os pensadores respondem, cada um do seu jeito, também discordando e fazendo perguntas que mexem. Abra uma pergunta para ler as falas, ouvir a narração e tocar em Responder para falar com quem quiser. As cores marcam as falas especiais, e tudo se ajusta em Configurações.</p></div></section>
 <section class="anf" aria-label="Anfitrião da mesa"><label for="anf-nome"><b>Antes de tudo: quem é o anfitrião da mesa?</b> É quem está usando a mesa agora. Eu sirvo e chamo os pensadores pelo nome dele; se não for o meu rei Herbs, aceito por cordialidade dele.</label><input type="text" id="anf-nome" maxlength="60" autocomplete="given-name" placeholder="Nome do anfitrião"><p class="anf-ok" id="anf-ok" role="status" aria-live="polite"></p><p class="trava so-convidado">Como convidado, você leva seus pensamentos à mesa, escolhe a IA, quem senta e ajusta as Configurações. Suas rodadas e respostas ficam em particular; o resto da mesa é do meu rei Herbs.</p></section>
@@ -439,12 +468,8 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <button type="button" class="pronto" id="ia-pronto">Pronto, vamos à mesa</button>
 </div></details>
 <details class="config"><summary>Configurações</summary><div class="cfgbody">
-<fieldset><legend>Estilo</legend>
-<label><input type="radio" name="cfg-estilo" value="antigo"> Modo claro</label>
-<label><input type="radio" name="cfg-estilo" value="lovecraft"> Modo escuro</label>
-<p class="nota">Troca as cores e todas as ilustrações das pessoas.</p></fieldset>
 <input type="checkbox" id="cfg-disl" hidden>
-<fieldset style="margin-top:10px"><legend>Voz das falas (sempre com áudio)</legend>
+<fieldset><legend>Voz das falas (sempre com áudio)</legend>
 <label><input type="radio" name="cfg-voz" value="aparelho"> Voz do aparelho (grátis, padrão): toca na hora no celular</label>
 <label><input type="radio" name="cfg-voz" value="danielmaria"> Narrador Daniel e Maria</label>
 <label class="so-grava voz-pc"><input type="radio" name="cfg-voz" value="computador"> Vozes Daniel e Maria: geradas no computador do meu rei Herbs, com gasto incrivelmente baixo. O pedido fica na fila e eu gero quando o Claude do computador dele estiver aberto</label>
@@ -470,12 +495,12 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <button type="button" class="selb" data-modo="todos" aria-pressed="false" id="a-todos">Todos</button>
 </div>
 <div class="mescla">
-<p class="mescla-t">Mesclado: o mesmo número de homens e de mulheres (escolha um modo)</p>
-<label class="mescn">Quantos de cada <input class="num" type="number" id="mesc-n" min="1" max="6" value="3" aria-label="Quantos homens e quantas mulheres no mesclado"></label>
-<div class="atalhos grade">
-<button type="button" class="selb" data-modo="aptos" aria-pressed="false" id="a-mesc-aptos">Os mais aptos</button>
-<button type="button" class="selb" data-modo="sorteio" aria-pressed="false" id="a-mesc-sorteio">Sorteio</button>
+<div class="qtd"><button type="button" class="mascara triste" id="q-menos" aria-label="Menos um participante" title="Menos um participante"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 8c14 6 30 6 44 0 4 18 2 34-6 44-8 9-24 9-32 0C8 42 6 26 10 8z" fill="#cfd8e6" stroke="#e0a92b" stroke-width="2.5"/><path d="M18 26c3-3 8-3 11 1M35 27c3-4 8-4 11-1" fill="none" stroke="#1d2433" stroke-width="3" stroke-linecap="round"/><ellipse cx="23" cy="31" rx="4" ry="3" fill="#1d2433"/><ellipse cx="41" cy="31" rx="4" ry="3" fill="#1d2433"/><path d="M22 50c5-7 15-7 20 0" fill="none" stroke="#1d2433" stroke-width="3.5" stroke-linecap="round"/><path d="M23 36q-1 5-3 8" stroke="#6aa0e0" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></button><div class="qn"><output id="q-n" aria-live="polite">6</output><small>participantes</small></div><button type="button" class="mascara feliz" id="q-mais" aria-label="Mais um participante" title="Mais um participante"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 8c14 6 30 6 44 0 4 18 2 34-6 44-8 9-24 9-32 0C8 42 6 26 10 8z" fill="#ffe08a" stroke="#e0a92b" stroke-width="2.5"/><path d="M17 28c3-5 9-5 12 0M35 28c3-5 9-5 12 0" fill="none" stroke="#3d0d12" stroke-width="3" stroke-linecap="round"/><ellipse cx="23" cy="32" rx="4" ry="3" fill="#3d0d12"/><ellipse cx="41" cy="32" rx="4" ry="3" fill="#3d0d12"/><path d="M19 42c6 9 20 9 26 0" fill="#7a1f1f" stroke="#3d0d12" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="40" r="3" fill="#f2a08a"/><circle cx="48" cy="40" r="3" fill="#f2a08a"/></svg></button></div>
+<div class="atalhos grade" role="group" aria-label="Como sortear">
+<button type="button" class="selb" data-slot="aptos" aria-pressed="false" id="a-mesc-aptos">Os mais aptos</button>
+<button type="button" class="selb" data-slot="aleatorio" aria-pressed="true" id="a-mesc-aleatorio">Só o aleatório</button>
 </div>
+<button type="button" class="slot" id="a-slot"><span class="luzes" aria-hidden="true"></span><span class="slot-tit">SORTEIO</span><span class="rolos" id="rolos" aria-hidden="true"></span></button>
 </div>
 <div class="chips" id="chips" role="group" aria-label="Participantes"></div>
 <p class="legenda">♂ homem · ♀ mulher · ♂⚧ trans masculino · ♀⚧ trans feminino (os dois últimos valem para quem entrar na mesa depois)</p>
@@ -581,8 +606,6 @@ var I18N=(function(){
 'Todos os homens':'All the men',
 'Todas as mulheres':'All the women',
 'Todos':'Everyone',
-'Mesclado: o mesmo número de homens e de mulheres (escolha um modo)':'Mixed: the same number of men and women (choose a mode)',
-'Quantos de cada':'How many of each',
 'Os mais aptos':'The fittest',
 'Sorteio':'Draw',
 'Imperador romano e estoico. Pergunta sempre: o que depende de você?':'Roman emperor and Stoic. Always asks: what depends on you?',
@@ -610,7 +633,7 @@ var I18N=(function(){
 'Registro dos convidados':'Guest log',
 'Só você vê isto. Cada convidado que usa a mesa pelo seu link fica guardado aqui: o nome de anfitrião, os pensamentos levados à mesa, as falas e as respostas.':'Only you see this. Every guest who uses the table through your link is kept here: the host name, the thoughts brought to the table, the speeches and the replies.',
 'Retratos ilustrados no Gemini a partir de três imagens de referência de cada pessoa, da Wikimedia Commons (domínio público ou licença livre).':'Portraits illustrated in Gemini from three reference images of each person, from Wikimedia Commons (public domain or free license).',
-'← Voltar':'← Back','✕ Fechar':'✕ Close','Pausar':'Pause','Próximo ›':'Next ›','Abrir ⌃':'Open ⌃','Seu registro em MD':'Your MD log','Eu guardo cada pensamento e as falas dos pensadores num arquivo Markdown. Guarde o arquivo e, numa conversa nova do falavado no Claude, anexe-o (ou deixe-o nos arquivos do seu Projeto): assim os pensadores retomam o que já foi conversado sem reler tudo.':'I keep each thought and the thinkers\' speeches in a Markdown file. Save it and, in a new falavado chat in Claude, attach it (or keep it in your Project files): the thinkers then pick up what was already said without rereading everything.','Guardar o registro (.md)':'Save the log (.md)','Copiar o registro':'Copy the log','Ainda não há rodadas para guardar.':'There are no rounds to save yet.','Ainda não há rodadas para copiar.':'There are no rounds to copy yet.','Tudo bem, não guardei.':'All right, I did not save it.','Ouvir com Daniel e Maria':'Listen with Daniel and Maria','Narrador Daniel e Maria':'Daniel and Maria narrator','Dislexia':'Dyslexia','Daltonismo':'Color blindness','Escolha o seu tipo: as cores da página se ajustam.':'Pick your type: the page colors adjust.','Cores Básicas':'Basic colors','Protanopia (vermelho)':'Protanopia (red)','Deuteranopia (verde)':'Deuteranopia (green)','Tritanopia (azul)':'Tritanopia (blue)','Acromatopsia (sem cores)':'Achromatopsia (no colors)','Este aparelho não tem as vozes Daniel e Maria da Microsoft (vêm no Windows e no navegador Edge). Toquei com a voz do aparelho.':'This device lacks the Microsoft Daniel and Maria voices (they come with Windows and the Edge browser). I played the device voice instead.','■ Parar':'■ Stop','Fala tocando':'Speech playing','Toque para fechar':'Tap to close',
+'← Voltar':'← Back','✕ Fechar':'✕ Close','Pausar':'Pause','Próximo ›':'Next ›','Abrir ⌃':'Open ⌃','Seu registro em MD':'Your MD log','Eu guardo cada pensamento e as falas dos pensadores num arquivo Markdown. Guarde o arquivo e, numa conversa nova do falavado no Claude, anexe-o (ou deixe-o nos arquivos do seu Projeto): assim os pensadores retomam o que já foi conversado sem reler tudo.':'I keep each thought and the thinkers\' speeches in a Markdown file. Save it and, in a new falavado chat in Claude, attach it (or keep it in your Project files): the thinkers then pick up what was already said without rereading everything.','Guardar o registro (.md)':'Save the log (.md)','Copiar o registro':'Copy the log','Ainda não há rodadas para guardar.':'There are no rounds to save yet.','Ainda não há rodadas para copiar.':'There are no rounds to copy yet.','Tudo bem, não guardei.':'All right, I did not save it.','Ouvir com Daniel e Maria':'Listen with Daniel and Maria','Narrador Daniel e Maria':'Daniel and Maria narrator','Dislexia':'Dyslexia','Claro':'Light','Escuro':'Dark','Modo claro ou escuro':'Light or dark mode','Menos um participante':'One participant fewer','Mais um participante':'One more participant','participantes':'participants','Só o aleatório':'Random only','SORTEIO':'DRAW','Escolha quantos participantes e como sortear, e puxe a alavanca.':'Choose how many participants and how to draw, then pull the lever.','Sorteando…':'Drawing…','Triboulet está escolhendo os mais aptos…':'Triboulet is picking the fittest…','Daltonismo':'Color blindness','Escolha o seu tipo: as cores da página se ajustam.':'Pick your type: the page colors adjust.','Cores Básicas':'Basic colors','Protanopia (vermelho)':'Protanopia (red)','Deuteranopia (verde)':'Deuteranopia (green)','Tritanopia (azul)':'Tritanopia (blue)','Acromatopsia (sem cores)':'Achromatopsia (no colors)','Este aparelho não tem as vozes Daniel e Maria da Microsoft (vêm no Windows e no navegador Edge). Toquei com a voz do aparelho.':'This device lacks the Microsoft Daniel and Maria voices (they come with Windows and the Edge browser). I played the device voice instead.','■ Parar':'■ Stop','Fala tocando':'Speech playing','Toque para fechar':'Tap to close',
 'Como funciona':'How it works','Anfitrião da mesa':'Host of the table','Nome do anfitrião':'Host name','Atalhos':'Shortcuts',
 'Novo pensamento para a mesa':'New thought for the table','Escreva aqui o que você está pensando…':"Write here what you're thinking…",
 'Quantos homens e quantas mulheres no mesclado':'How many men and women in the mix','Participantes':'Participants',
@@ -701,7 +724,7 @@ var I18N=(function(){
     obs.ligar=ligar; ligar();
   }
   function marcarBotoes(){ document.querySelectorAll('.idioma button').forEach(function(b){ var on=b.getAttribute('data-l')===LANG; b.setAttribute('aria-pressed',String(on)); }); document.documentElement.lang=LANG==='en'?'en':LANG==='es'?'es':'pt-BR'; }
-  function aplicar(l){ LANG=(l==='en'||l==='es')?l:'pt'; try{ localStorage.setItem('idioma',LANG); }catch(e){} if(obs) obs.disconnect(); passar(document.body); marcarBotoes(); if(obs) obs.ligar(); }
+  function aplicar(l){ LANG=(l==='en'||l==='es')?l:'pt'; try{ localStorage.setItem('idioma',LANG); localStorage.setItem('site_idioma',LANG); }catch(e){} if(obs) obs.disconnect(); passar(document.body); marcarBotoes(); if(obs) obs.ligar(); }
   function iniciar(){ document.querySelectorAll('.idioma button').forEach(function(b){ b.addEventListener('click',function(){ aplicar(b.getAttribute('data-l')); }); }); passar(document.body); marcarBotoes(); observar(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',iniciar); else setTimeout(iniciar,0);
   return {
@@ -807,7 +830,12 @@ var USO={db:null,uid:null,dono:false,local:false,
       fl.innerHTML='<svg width="0" height="0"><defs>'+Object.keys(MZ).map(function(k){ return '<filter id="mdalt-'+k+'" color-interpolation-filters="linearRGB"><feColorMatrix type="matrix" values="'+MZ[k]+'"/></filter>'; }).join('')+'</defs></svg>'; document.body.appendChild(fl);
       var pf=function(d){ var h=document.documentElement; h.style.filter=MZ[d]?'url(#mdalt-'+d+')':''; if(d==='nenhum') h.removeAttribute('data-dalt'); else h.setAttribute('data-dalt',d); };
       A={fonte:function(){ return false; },setFonte:function(){},dalt:function(){ return d0; },setDalt:function(v){ d0=TIPOS.indexOf(v)>=0?v:'nenhum'; try{ localStorage.setItem('a11y_dalt',d0); }catch(e){} pf(d0); }}; pf(d0); }
-    if(A.fonte()&&CFG.disl!=='1') salvarCfg('disl','1');
+    /* no site (acess.js), a letra para dislexia e o modo claro/escuro valem para todas as páginas: a mesa segue a escolha de lá */
+    if(window.ACESS){ var fz=A.fonte()?'1':'0'; if(CFG.disl!==fz) salvarCfg('disl',fz); if(A.estilo&&CFG.estilo!==A.estilo()) salvarCfg('estilo',A.estilo()); }
+    var tm=document.getElementById('m-tema'), tmIc=document.getElementById('m-tema-ic'), tmTx=document.getElementById('m-tema-txt');
+    function pintarTema(){ if(!tm) return; var esc=CFG.estilo==='lovecraft'; tmIc.textContent=esc?'🌙':'☀'; tmTx.textContent=esc?'Escuro':'Claro'; tm.setAttribute('aria-pressed',String(esc)); }
+    if(tm) tm.addEventListener('click',function(){ var v=CFG.estilo==='lovecraft'?'antigo':'lovecraft'; salvarCfg('estilo',v); if(A.setEstilo) A.setEstilo(v); pintarTema(); });
+    pintarTema();
     function pintar(){ dis.setAttribute('aria-pressed',String(CFG.disl==='1')); var d=A.dalt(); [].forEach.call(cx.querySelectorAll('[data-d]'),function(b){ b.setAttribute('aria-checked',String(b.getAttribute('data-d')===d)); }); dal.classList.toggle('ativo',d!=='nenhum'); }
     function abrir(v){ cx.hidden=!v; dal.setAttribute('aria-expanded',String(v)); if(v){ var o=cx.querySelector('[aria-checked="true"]'); if(o) o.focus(); } }
     dis.addEventListener('click',function(){ var v=CFG.disl==='1'?'0':'1'; salvarCfg('disl',v); A.setFonte(v==='1'); pintar(); });
@@ -1052,7 +1080,7 @@ var USO={db:null,uid:null,dono:false,local:false,
   var DONO=false, PFX=null;
   /* o resumo da vida do dono não fica na página: só a conta do dono o lê do banco (dono/config.contexto) */
   var CTX='';
-  var STY={marco:'estoico, calmo e direto; pergunta o que depende de '+ANF()+'',jung:'psicólogo analítico: sombra, arquétipos, individuação, figura paterna',espinosa:'racionalista sereno: afetos, tristeza que diminui a potência, compreender as causas',diogenes:'cínico mordaz e bem-humorado, desmascara conveniências',nietzsche:'genealogista provocador: ressentimento, força, tornar-se quem se é',sartre:'existencialista: liberdade, má-fé, escolha, responsabilidade',hipatia:'matemática e astrônoma: método, observação, medir para entender',arendt:'teórica da ação: aparecer, começar, pluralidade',duchatelet:'física e filósofa: alegria e paixão como método, estudo',hiparquia:'cínica: coragem, vida simples, escolher sem permissão, muito direta',weil:'filósofa da atenção: atenção como generosidade, peso e graça',sorjuana:'poeta e erudita: direito de saber e escrever, ironia fina',barres:'neurobiólogo: células da glia, rigor científico, igualdade e coragem de ocupar o lugar que lhe negavam',preciado:'filósofo trans: corpo como laboratório, desmonta o que chamam de natural, linguagem afiada',wilson:'cientista da computação: projetou o processador ARM, pensa em sistemas, simplicidade e engenharia',connell:'socióloga: masculinidades, conhecimento produzido longe dos centros de poder, olhar crítico e generoso',freire:'educador brasileiro: diálogo, leitura do mundo antes da palavra, educação que liberta, afeto com rigor',foucault:'filósofo francês: poder e saber, disciplina e vigilância, quem definiu o normal, cuidado de si; irônico e preciso',marx:'filósofo e economista: trabalho, classe, dinheiro e alienação; sai da culpa individual para a estrutura e para o que se muda junto; sarcástico e enérgico',haraway:'bióloga e filósofa: ciborgues, saberes situados, espécies companheiras, ficar com o problema; bem-humorada e imaginativa'};
+  var STY={triboulet:'bufão e garçom da corte: provoca, ri, diz o que ninguém diz e serve verdades com humor',marco:'estoico, calmo e direto; pergunta o que depende de '+ANF()+'',jung:'psicólogo analítico: sombra, arquétipos, individuação, figura paterna',espinosa:'racionalista sereno: afetos, tristeza que diminui a potência, compreender as causas',diogenes:'cínico mordaz e bem-humorado, desmascara conveniências',nietzsche:'genealogista provocador: ressentimento, força, tornar-se quem se é',sartre:'existencialista: liberdade, má-fé, escolha, responsabilidade',hipatia:'matemática e astrônoma: método, observação, medir para entender',arendt:'teórica da ação: aparecer, começar, pluralidade',duchatelet:'física e filósofa: alegria e paixão como método, estudo',hiparquia:'cínica: coragem, vida simples, escolher sem permissão, muito direta',weil:'filósofa da atenção: atenção como generosidade, peso e graça',sorjuana:'poeta e erudita: direito de saber e escrever, ironia fina',barres:'neurobiólogo: células da glia, rigor científico, igualdade e coragem de ocupar o lugar que lhe negavam',preciado:'filósofo trans: corpo como laboratório, desmonta o que chamam de natural, linguagem afiada',wilson:'cientista da computação: projetou o processador ARM, pensa em sistemas, simplicidade e engenharia',connell:'socióloga: masculinidades, conhecimento produzido longe dos centros de poder, olhar crítico e generoso',freire:'educador brasileiro: diálogo, leitura do mundo antes da palavra, educação que liberta, afeto com rigor',foucault:'filósofo francês: poder e saber, disciplina e vigilância, quem definiu o normal, cuidado de si; irônico e preciso',marx:'filósofo e economista: trabalho, classe, dinheiro e alienação; sai da culpa individual para a estrutura e para o que se muda junto; sarcástico e enérgico',haraway:'bióloga e filósofa: ciborgues, saberes situados, espécies companheiras, ficar com o problema; bem-humorada e imaginativa'};
   var REGRAS='Regras fixas: português do Brasil; falas bem elaboradas (os participantes em 4 a 7 frases; Triboulet em 2 a 4), linguagem clara, num parágrafo corrido, sem listas; cada pensador fala segundo suas ideias reais, sem dizer que é uma simulação ou uma IA; não citar CVV, SUS, 188 nem serviços de ajuda; não anunciar que recebeu um papel; é permitido discordar de '+ANF()+' e criticá-lo com respeito; ninguém faz diagnóstico.';
   function sortear(lista,n){ var a=lista.slice(),out=[]; while(out.length<n&&a.length){ var i=Math.floor(Math.random()*a.length); out.push(a.splice(i,1)[0]); } return out; }
   function setEspera(txt,stopFn){
@@ -1152,12 +1180,12 @@ var USO={db:null,uid:null,dono:false,local:false,
     var esc=(CFG.papeis||[]).filter(function(k){ return DESC[k]; }).map(function(k){ return DESC[k]; });
     var papeis=esc.length?('A rodada deve conter, entre as falas, exatamente uma de cada um destes papéis especiais: '+esc.join('; ')+'. Marque isso somente no campo papel, por exemplo "cínico · discordância forte", nunca dentro do texto.'):'Não use papéis especiais; o campo papel é só um rótulo curto do pensador, como estoico.';
     var estrutura=n===1?'Com um só participante, escreva 4 falas dele em sequência, cada uma avançando a ideia.':(n===2?'Com dois participantes, 2 falas de cada e uma a mais para um dos dois, sorteada.':'Depois das primeiras falas, mais 2 falas extras de participantes sorteados, com inclinação para quem mais discordaria do que '+ANF()+' disse; as falas extras comentam as de outros.');
-    var hist=historico(null), fichas=sel.map(function(p){ return fichaTexto(p.id,p.nome); }).concat([fichaTexto('triboulet','Triboulet')]).filter(Boolean).join('\n\n');
+    var hist=historico(null), fichas=sel.filter(function(p){ return !p.tri; }).map(function(p){ return fichaTexto(p.id,p.nome); }).concat([fichaTexto('triboulet','Triboulet')]).filter(Boolean).join('\n\n')+(sel.some(function(p){ return p.tri; })?'\n\nTriboulet também foi escolhido como participante: além de abrir e encerrar, ele tem falas próprias como os demais (4 a 7 frases), com as ideias e o humor da ficha dele.':'');
     return 'Você escreve uma mesa redonda de pensadores para '+ANF()+'.\n\nSobre '+ANF()+':\n'+CTXF(CTX)+'\n\n'+REGRAS+(fichas?'\n\nOrdem de leitura: '+ORDEMF()+'\n\n1) Fichas de quem está à mesa (a base de cada fala: ideias reais, jeito de falar e obras de cada um):\n\n'+fichas:'')+(hist?'\n\n2) Rodadas anteriores de '+ANF()+' nesta mesa (do mais recente ao mais antigo):\n'+hist+'\n\nMemória da mesa: os pensadores lembram dessas conversas. Quando houver ligação com o pensamento novo, retomem o que '+ANF()+' já trouxe, o que cada um já respondeu e o que '+ANF()+' disse nas respostas, e construam a resposta nova sobre isso: aprofundem, mostrem a evolução ou a mudança de posição, sem repetir o que já foi dito. Se um pensamento anterior não tiver nada a ver com o novo, usem dele no máximo as informações sobre '+ANF()+' (quem é, onde vive, o que faz) e foquem só no pensamento novo, abaixo.':'')+'\n\nParticipantes (use exatamente estes nomes no campo quem):\n'+lista+'\n\n3) O pensamento que '+ANF()+' leva à mesa agora, completo e exatamente como foi escrito:\n"'+pens+'"\n\nFidelidade ao pensamento: leia o texto inteiro com atenção e leve em conta cada detalhe que '+ANF()+' escreveu (lugar, país, rede ou instituição, público, idade, época, nomes, condições, sentimentos e cada pergunta feita). Nada pode ser omitido, generalizado ou trocado por algo parecido. A abertura de Triboulet retoma o pensamento por inteiro, com todos os seus termos. Cada participante responde ao que foi escrito, e não a uma versão resumida: retoma pelo menos um detalhe concreto do pensamento e desenvolve o raciocínio com as próprias ideias reais (um conceito dele, por que ele se aplica a esse caso específico, um exemplo ou consequência concreta e uma posição clara). Se houver várias partes ou perguntas, a mesa como um todo responde a todas.\n\nComo cada um responde: antes de falar, cada participante leu as falas dos que falaram antes dele nesta rodada (inclusive a abertura de Triboulet), o pensamento de '+ANF()+' e as rodadas anteriores; ele conversa com essas falas (concorda, rebate ou aprofunda, citando quem falou) em vez de repetir. A fala nasce da ficha dele: usa a ficha D&D (habilidades, golpe especial, aliados e rivais, e os atributos mais altos como pontos fortes), os trabalhos e cargos que exerceu e as obras e publicações dele, sem inventar nada fora disso.\n\nEstrutura: primeiro uma fala de Triboulet (o bufão e garçom leal, brincalhão, rima de vez em quando) abrindo; depois as falas dos participantes. Todo participante tem direito a uma primeira fala completa. '+estrutura+' Por fim, Triboulet encerra com uma única pergunta aberta e curta. Total de falas dos participantes: '+total+'. '+papeis+'\n\nResponda somente com um array JSON, sem texto fora dele. Cada item: {"quem":"nome exato","papel":"rótulo curto","texto":"a fala"}. Triboulet usa os papéis "bufão da corte, abertura" e "bufão da corte, encerramento".';
   }
   function gerarRodada(){
     var pens=$pens.value.trim(), ids=elenco.filter(function(p){ return escolhidos[p.id]; });
-    var resto=elenco.filter(function(p){ return !escolhidos[p.id]; }), nsort=parseInt($sort.value,10)||0;
+    var resto=pensadores().filter(function(p){ return !escolhidos[p.id]; }), nsort=parseInt($sort.value,10)||0;
     var sel=ids.concat(sortear(resto,nsort));
     if(!pens||!sel.length) return;
     var idPrev='v'+Date.now();
@@ -1493,7 +1521,7 @@ var USO={db:null,uid:null,dono:false,local:false,
   function montarChips(){
     $chips.textContent='';
     elenco.forEach(function(p){
-      var b=el('button','chip'); b.type='button'; b.dataset.id=p.id; b.setAttribute('aria-pressed','false');
+      var b=el('button','chip'+(p.tri?' tri':'')); b.type='button'; b.dataset.id=p.id; b.setAttribute('aria-pressed','false');
       var pin=el('span','pin'); if(p.img){ var i=document.createElement('img'); i.src=IM(p.img,true); i.alt=''; pin.appendChild(i); }
       b.appendChild(pin);
       var info=el('span','info'); info.appendChild(el('span','nm',p.nome)); if(p.sobre) info.appendChild(el('span','sb',p.sobre)); b.appendChild(info);
@@ -1503,15 +1531,16 @@ var USO={db:null,uid:null,dono:false,local:false,
     });
     atualizar();
   }
-  function marcar(fn){ elenco.forEach(function(p){ escolhidos[p.id]=fn(p); }); atualizar(); }
+  function marcar(fn){ elenco.forEach(function(p){ if(!p.tri) escolhidos[p.id]=fn(p); }); atualizar(); }
+  function pensadores(){ return elenco.filter(function(p){ return !p.tri; }); }
   var MODO=null;
   /* escolha feita à mão que coincide com um atalho: marca o atalho sozinho */
   function modoDaEscolha(){
     var homem=function(p){ return p.genero==='m'||p.genero==='tm'; };
-    var sel=elenco.filter(function(p){ return escolhidos[p.id]; });
+    var P=pensadores(), sel=P.filter(function(p){ return escolhidos[p.id]; });
     if(!sel.length) return null;
-    if(sel.length===elenco.length) return 'todos';
-    var H=elenco.filter(homem), M=elenco.filter(function(p){ return !homem(p); });
+    if(sel.length===P.length) return 'todos';
+    var H=P.filter(homem), M=P.filter(function(p){ return !homem(p); });
     if(sel.length===H.length&&sel.every(homem)) return 'homens';
     if(sel.length===M.length&&sel.every(function(p){ return !homem(p); })) return 'mulheres';
     return null;
@@ -1520,28 +1549,61 @@ var USO={db:null,uid:null,dono:false,local:false,
   document.getElementById('a-homens').addEventListener('click',function(){ setModo('homens'); marcar(function(p){ return p.genero==='m'||p.genero==='tm'; }); });
   document.getElementById('a-mulheres').addEventListener('click',function(){ setModo('mulheres'); marcar(function(p){ return p.genero==='f'||p.genero==='tf'; }); });
   document.getElementById('a-todos').addEventListener('click',function(){ setModo('todos'); marcar(function(){ return true; }); });
-  document.getElementById('a-limpar').addEventListener('click',function(){ marcar(function(){ return false; }); setModo(null); $sort.value='0'; document.getElementById('mesc-n').value='3'; $msg.textContent='Escolha de participantes limpa.'; atualizar(); });
-  function mesclar(aptos){
-    var n=Math.max(1,Math.min(6,parseInt(document.getElementById('mesc-n').value,10)||3)), H=[], M=[];
-    elenco.forEach(function(p){ if(p.genero==='m'||p.genero==='tm') H.push(p); else M.push(p); });
+  document.getElementById('a-limpar').addEventListener('click',function(){ marcar(function(){ return false; }); escolhidos.triboulet=false; setModo(null); $sort.value='0'; QN=6; pintarQ(); limparRolos(); $msg.textContent='Escolha de participantes limpa.'; atualizar(); });
+  /* sorteio caça-níquel: a pessoa escolhe quantos (máscara feliz soma, triste tira) e se vão os mais aptos ou só o aleatório.
+     Sempre o mesmo número de homens e de mulheres; se o número for ímpar, um rolo extra sorteia se o último é homem ou mulher. */
+  var QN=6, SLOT='aleatorio', GIRANDO=false;
+  function grupos(){ var H=[],M=[]; pensadores().forEach(function(p){ if(p.genero==='m'||p.genero==='tm') H.push(p); else M.push(p); }); return {H:H,M:M}; }
+  function qmax(){ var g=grupos(), m=Math.min(g.H.length,g.M.length); return Math.max(1,2*m+(g.H.length!==g.M.length?1:0)); }
+  function pintarQ(){ if(pensadores().length) QN=Math.max(1,Math.min(qmax(),QN)); document.getElementById('q-n').value=QN; document.getElementById('q-n').textContent=QN; document.getElementById('q-menos').disabled=QN<=1; document.getElementById('q-mais').disabled=QN>=qmax(); }
+  document.getElementById('q-menos').addEventListener('click',function(){ QN--; pintarQ(); });
+  document.getElementById('q-mais').addEventListener('click',function(){ QN++; pintarQ(); });
+  document.querySelectorAll('[data-slot]').forEach(function(b){ b.addEventListener('click',function(){ SLOT=b.getAttribute('data-slot'); document.querySelectorAll('[data-slot]').forEach(function(x){ x.setAttribute('aria-pressed',String(x===b)); }); }); });
+  var $rolos=document.getElementById('rolos');
+  function limparRolos(){ $rolos.textContent=''; }
+  function rolos(n,extra){ limparRolos(); var r=[]; for(var i=0;i<n;i++){ var d=el('span','rolo gira'); if(extra&&i===n-1){ d.classList.add('gen'); d.appendChild(el('span','sx','♂')); } else { var im=document.createElement('img'); im.alt=''; d.appendChild(im); } $rolos.appendChild(d); r.push(d); } return r; }
+  function divisao(){ var g=grupos(), h=Math.floor(QN/2), m=h, extra=QN%2===1, ultimo=null;
+    if(extra){ var podeH=g.H.length>h, podeM=g.M.length>m; ultimo=podeH&&podeM?(Math.random()<.5?'h':'m'):(podeH?'h':'m'); if(ultimo==='h') h++; else m++; }
+    return {h:h,m:m,extra:extra,ultimo:ultimo,g:g}; }
+  function girar(){
+    if(GIRANDO) return; var dv=divisao(), g=dv.g, P=pensadores(), slot=document.getElementById('a-slot');
+    var pens=$pens.value.trim(), aptos=SLOT==='aptos';
+    if(aptos&&!pens){ $msg.textContent='Escreva o pensamento primeiro, para eu escolher os mais aptos.'; return; }
+    GIRANDO=true; slot.classList.add('girando'); slot.setAttribute('aria-busy','true'); setModo(null); $msg.textContent=aptos?'Triboulet está escolhendo os mais aptos…':'Sorteando…';
+    var R=rolos(QN+(dv.extra?1:0),dv.extra), t0=Date.now(), tick=setInterval(function(){ R.forEach(function(d){ if(!d.classList.contains('gira')) return; var im=d.querySelector('img'); if(im){ var p=P[Math.floor(Math.random()*P.length)]; im.src=IM(p.img,true); } else d.firstChild.textContent=Math.random()<.5?'♂':'♀'; }); },90);
     function ids(a){ return a.map(function(p){ return p.id; }); }
-    function marcarIds(h,m){ marcar(function(p){ return h.indexOf(p.id)>=0||m.indexOf(p.id)>=0; }); }
-    function sorteado(){ marcarIds(ids(sortear(H,n)),ids(sortear(M,n))); $msg.textContent='Mesa mesclada: '+n+' homens e '+n+' mulheres sorteados.'; }
-    if(!aptos){ sorteado(); return; }
-    var pens=$pens.value.trim();
-    if(!pens){ setModo(null); $msg.textContent='Escreva o pensamento primeiro, para eu escolher os mais aptos.'; return; }
-    if(!IA.pronta()){ sorteado(); $msg.textContent+=' (escolha uma IA em Suas IAs para eu escolher por aptidão)'; return; }
-    function lista(a){ return a.map(function(p){ return p.id+': '+p.nome+' ('+(STY[p.id]||p.sobre||'')+')'; }).join('\n'); }
-    $msg.textContent='Triboulet está escolhendo os mais aptos…';
-    SAMPLE.json('Um homem leva este pensamento a uma mesa de pensadores: "'+pens+'"\n\nEscolha exatamente '+n+' homens e '+n+' mulheres, entre os pensadores abaixo, que são os mais aptos a responder esse pensamento (pelas ideias, pela experiência e pelo jeito de pensar de cada um).\n\nHomens:\n'+lista(H)+'\n\nMulheres:\n'+lista(M)+'\n\nResponda somente com JSON: {"homens":["id",...],"mulheres":["id",...]}',{modelTier:'quick',cache:false,objeto:true}).then(function(r){
-      var h=(r.homens||[]).filter(function(i){ return ids(H).indexOf(i)>=0; }).slice(0,n), m=(r.mulheres||[]).filter(function(i){ return ids(M).indexOf(i)>=0; }).slice(0,n);
-      if(h.length<n) h=h.concat(ids(sortear(H.filter(function(p){ return h.indexOf(p.id)<0; }),n-h.length)));
-      if(m.length<n) m=m.concat(ids(sortear(M.filter(function(p){ return m.indexOf(p.id)<0; }),n-m.length)));
-      marcarIds(h,m); $msg.textContent='Mesa mesclada com os mais aptos: '+n+' homens e '+n+' mulheres.';
-    }).catch(function(){ sorteado(); $msg.textContent+=' (não consegui escolher por aptidão agora)'; });
+    function sorteado(){ return {h:ids(sortear(g.H,dv.h)),m:ids(sortear(g.M,dv.m))}; }
+    var escolha=!aptos?Promise.resolve(sorteado()):(!IA.pronta()?Promise.resolve(sorteado()).then(function(x){ x.aviso=' (escolha uma IA em Suas IAs para eu escolher por aptidão)'; return x; }):(function(){
+      function lista(a){ return a.map(function(p){ return p.id+': '+p.nome+' ('+(STY[p.id]||p.sobre||'')+')'; }).join('\n'); }
+      return SAMPLE.json('Uma pessoa leva este pensamento a uma mesa de pensadores: "'+pens+'"\n\nEscolha exatamente '+dv.h+' homens e '+dv.m+' mulheres, entre os pensadores abaixo, que são os mais aptos a responder esse pensamento (pelas ideias, pela experiência e pelo jeito de pensar de cada um).\n\nHomens:\n'+lista(g.H)+'\n\nMulheres:\n'+lista(g.M)+'\n\nResponda somente com JSON: {"homens":["id",...],"mulheres":["id",...]}',{modelTier:'quick',cache:false,objeto:true}).then(function(r){
+        var h=(r.homens||[]).filter(function(i){ return ids(g.H).indexOf(i)>=0; }).slice(0,dv.h), m=(r.mulheres||[]).filter(function(i){ return ids(g.M).indexOf(i)>=0; }).slice(0,dv.m);
+        if(h.length<dv.h) h=h.concat(ids(sortear(g.H.filter(function(p){ return h.indexOf(p.id)<0; }),dv.h-h.length)));
+        if(m.length<dv.m) m=m.concat(ids(sortear(g.M.filter(function(p){ return m.indexOf(p.id)<0; }),dv.m-m.length)));
+        return {h:h,m:m,aptos:true};
+      }).catch(function(){ var x=sorteado(); x.aviso=' (não consegui escolher por aptidão agora)'; return x; });
+    })());
+    escolha.then(function(x){
+      var espera=Math.max(0,1400-(Date.now()-t0));
+      /* ordem de parada: homens e mulheres alternados; no ímpar, o rolo do gênero para antes do último pensador */
+      var fila=[], hh=x.h.slice(), mm=x.m.slice(), ult=null;
+      if(dv.extra){ ult=dv.ultimo==='h'?hh.pop():mm.pop(); }
+      while(hh.length||mm.length){ if(hh.length) fila.push(hh.shift()); if(mm.length) fila.push(mm.shift()); }
+      var alvo=R.filter(function(d){ return !d.classList.contains('gen'); });
+      var passos=fila.map(function(id,i){ return {d:alvo[i],id:id}; });
+      if(dv.extra){ passos.push({d:R[R.length-1],gen:dv.ultimo}); passos.push({d:alvo[alvo.length-1],id:ult}); }
+      var mapa={}; P.forEach(function(p){ mapa[p.id]=p; });
+      setTimeout(function parar(){
+        var ps=passos.shift(); if(!ps){ clearInterval(tick); GIRANDO=false; slot.classList.remove('girando'); slot.removeAttribute('aria-busy');
+          marcar(function(p){ return x.h.indexOf(p.id)>=0||x.m.indexOf(p.id)>=0; });
+          $msg.textContent=(x.aptos?'Os mais aptos: ':'Sorteados: ')+x.h.length+(x.h.length===1?' homem e ':' homens e ')+x.m.length+(x.m.length===1?' mulher.':' mulheres.')+(x.aviso||''); return; }
+        if(ps.gen){ ps.d.classList.remove('gira'); ps.d.classList.add('parou'); ps.d.firstChild.textContent=ps.gen==='h'?'♂':'♀'; }
+        else { var p=mapa[ps.id]; ps.d.classList.remove('gira'); ps.d.classList.add('parou'); var im=ps.d.querySelector('img'); if(p){ im.src=IM(p.img,true); im.alt=p.nome; ps.d.appendChild(el('span','nm',p.nome.split(' ')[0])); } }
+        setTimeout(parar,ps.gen?650:380);
+      },espera);
+    });
   }
-  document.getElementById('a-mesc-aptos').addEventListener('click',function(){ setModo('aptos'); mesclar(true); });
-  document.getElementById('a-mesc-sorteio').addEventListener('click',function(){ setModo('sorteio'); mesclar(false); });
+  document.getElementById('a-slot').addEventListener('click',girar);
+  pintarQ();
   $pens.addEventListener('input',atualizar); $sort.addEventListener('input',atualizar);
   function pedidoTexto(){
     var n=nomes(), s=parseInt($sort.value,10)||0, partes=[];
@@ -1578,7 +1640,7 @@ var USO={db:null,uid:null,dono:false,local:false,
     d.appendChild(el('p','quando','Pedido ('+tipo+') feito em '+fmtHora(x.criado)+(x.respondido_em?' · respondido em '+fmtHora(x.respondido_em):(x.status==='respondido'?' · respondido (hora não registrada)':' · aguardando resposta'))));
     box.appendChild(d); $ped.hidden=false; $ped.appendChild(box);
   }
-  fetch('data/elenco.json').then(function(r){ return r.json(); }).then(function(d){ elenco=d.elenco||[]; try{ var rs=JSON.parse(localStorage.getItem('rascunho')||'null'); if(rs){ if(rs.pens&&!$pens.value) $pens.value=rs.pens; (rs.esc||[]).forEach(function(k){ if(elenco.some(function(p){ return p.id===k; })) escolhidos[k]=true; }); if(rs.sort) $sort.value=rs.sort; } }catch(e){} montarChips(); atualizar(); }).catch(function(){ $chips.appendChild(el('p','vazio','Não consegui carregar a lista de participantes.')); });
+  fetch('data/elenco.json').then(function(r){ return r.json(); }).then(function(d){ elenco=(d.elenco||[]).concat([{id:'triboulet',nome:'Triboulet',sobre:'Bufão e garçom da corte: provoca, ri e diz o que ninguém diz.',genero:'m',img:'triboulet',tri:true}]); try{ var rs=JSON.parse(localStorage.getItem('rascunho')||'null'); if(rs){ if(rs.pens&&!$pens.value) $pens.value=rs.pens; (rs.esc||[]).forEach(function(k){ if(elenco.some(function(p){ return p.id===k; })) escolhidos[k]=true; }); if(rs.sort) $sort.value=rs.sort; } }catch(e){} montarChips(); pintarQ(); atualizar(); }).catch(function(){ $chips.appendChild(el('p','vazio','Não consegui carregar a lista de participantes.')); });
   if(window.claude&&window.claude.use){
     /* primeiro descobre quem vê; só então liga o banco no lugar certo. Convidado sem conta identificada usa a mesa sem guardar nada. */
     Promise.all([window.claude.use('db'),window.claude.use('user')]).then(function(v){

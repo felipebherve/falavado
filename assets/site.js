@@ -6,7 +6,7 @@ var EMAIL='felipebherve@gmail.com';
 var T={
 pt:{
  lang_aria:'Idioma', marca:'falavado', back:'← Voltar à página principal',
- a_dis:'Dislexia', a_dis_t:'Letra para dislexia (OpenDyslexic)', a_dal:'Daltonismo', a_dal_t:'Cores para daltonismo', a_dal_h:'Escolha o seu tipo de daltonismo', d_nenhum:'Cores Básicas', d_nenhum_s:'Sem ajuste', d_protan:'Protanopia', d_protan_s:'Dificuldade com o vermelho', d_deutan:'Deuteranopia', d_deutan_s:'Dificuldade com o verde', d_tritan:'Tritanopia', d_tritan_s:'Dificuldade com o azul e o amarelo', d_acromat:'Acromatopsia', d_acromat_s:'Não vê cores: mais contraste', a_fechar:'Fechar',
+ a_claro:'Claro',a_escuro:'Escuro',a_tema_t:'Modo claro ou escuro',a_dis:'Dislexia', a_dis_t:'Letra para dislexia (OpenDyslexic)', a_dal:'Daltonismo', a_dal_t:'Cores para daltonismo', a_dal_h:'Escolha o seu tipo de daltonismo', d_nenhum:'Cores Básicas', d_nenhum_s:'Sem ajuste', d_protan:'Protanopia', d_protan_s:'Dificuldade com o vermelho', d_deutan:'Deuteranopia', d_deutan_s:'Dificuldade com o verde', d_tritan:'Tritanopia', d_tritan_s:'Dificuldade com o azul e o amarelo', d_acromat:'Acromatopsia', d_acromat_s:'Não vê cores: mais contraste', a_fechar:'Fechar',
  l_prev:'Voltar uma frase', l_next:'Avançar uma frase',
  l_play:'Ouvir o texto', l_pause:'Pausar', l_cont:'Continuar', l_stop:'Parar', l_vel:'Velocidade', l_close:'Fechar', l_no:'Este navegador não tem leitura em voz alta.', l_reading:'Lendo o texto', l_aria:'Leitura em voz alta',
  foot:'Criado por Felipe Bruno Hervé · USO GRATUITO E VENDA PROIBIDA', fale:'Fale comigo por e-mail', fale_corpo:'Olá, Herbs!\n\nEncontrei o falavado e gostei da Mesa dos Pensadores. Gostaria de conversar mais com você sobre ele.\n\nUm abraço,\n',
@@ -85,7 +85,7 @@ pt:{
 },
 en:{
  lang_aria:'Language', marca:'falavado', back:'← Back to the main page',
- a_dis:'Dyslexia', a_dis_t:'Dyslexia-friendly font (OpenDyslexic)', a_dal:'Color blindness', a_dal_t:'Colors for color blindness', a_dal_h:'Choose your type of color blindness', d_nenhum:'Basic colors', d_nenhum_s:'No adjustment', d_protan:'Protanopia', d_protan_s:'Trouble with red', d_deutan:'Deuteranopia', d_deutan_s:'Trouble with green', d_tritan:'Tritanopia', d_tritan_s:'Trouble with blue and yellow', d_acromat:'Achromatopsia', d_acromat_s:'No color vision: more contrast', a_fechar:'Close',
+ a_claro:'Light',a_escuro:'Dark',a_tema_t:'Light or dark mode',a_dis:'Dyslexia', a_dis_t:'Dyslexia-friendly font (OpenDyslexic)', a_dal:'Color blindness', a_dal_t:'Colors for color blindness', a_dal_h:'Choose your type of color blindness', d_nenhum:'Basic colors', d_nenhum_s:'No adjustment', d_protan:'Protanopia', d_protan_s:'Trouble with red', d_deutan:'Deuteranopia', d_deutan_s:'Trouble with green', d_tritan:'Tritanopia', d_tritan_s:'Trouble with blue and yellow', d_acromat:'Achromatopsia', d_acromat_s:'No color vision: more contrast', a_fechar:'Close',
  l_prev:'Back one sentence', l_next:'Forward one sentence',
  l_play:'Listen to the text', l_pause:'Pause', l_cont:'Resume', l_stop:'Stop', l_vel:'Speed', l_close:'Close', l_no:'This browser cannot read aloud.', l_reading:'Reading the text', l_aria:'Read aloud',
  foot:'Created by Felipe Bruno Hervé · FREE TO USE, NOT FOR SALE', fale:'Contact me by email', fale_corpo:'Hi, Herbs!\n\nI found falavado and liked the Thinkers\' Table. I would like to talk more with you about it.\n\nBest,\n',
@@ -159,7 +159,7 @@ en:{
 },
 es:{
  lang_aria:'Idioma', marca:'falavado', back:'← Volver a la página principal',
- a_dis:'Dislexia', a_dis_t:'Letra para dislexia (OpenDyslexic)', a_dal:'Daltonismo', a_dal_t:'Colores para daltonismo', a_dal_h:'Elige tu tipo de daltonismo', d_nenhum:'Colores básicos', d_nenhum_s:'Sin ajuste', d_protan:'Protanopía', d_protan_s:'Dificultad con el rojo', d_deutan:'Deuteranopía', d_deutan_s:'Dificultad con el verde', d_tritan:'Tritanopía', d_tritan_s:'Dificultad con el azul y el amarillo', d_acromat:'Acromatopsia', d_acromat_s:'No ve colores: más contraste', a_fechar:'Cerrar',
+ a_claro:'Claro',a_escuro:'Oscuro',a_tema_t:'Modo claro u oscuro',a_dis:'Dislexia', a_dis_t:'Letra para dislexia (OpenDyslexic)', a_dal:'Daltonismo', a_dal_t:'Colores para daltonismo', a_dal_h:'Elige tu tipo de daltonismo', d_nenhum:'Colores básicos', d_nenhum_s:'Sin ajuste', d_protan:'Protanopía', d_protan_s:'Dificultad con el rojo', d_deutan:'Deuteranopía', d_deutan_s:'Dificultad con el verde', d_tritan:'Tritanopía', d_tritan_s:'Dificultad con el azul y el amarillo', d_acromat:'Acromatopsia', d_acromat_s:'No ve colores: más contraste', a_fechar:'Cerrar',
  l_prev:'Volver una frase', l_next:'Avanzar una frase',
  l_play:'Escuchar el texto', l_pause:'Pausar', l_cont:'Continuar', l_stop:'Detener', l_vel:'Velocidad', l_close:'Cerrar', l_no:'Este navegador no puede leer en voz alta.', l_reading:'Leyendo el texto', l_aria:'Lectura en voz alta',
  foot:'Creado por Felipe Bruno Hervé · USO GRATUITO, VENTA PROHIBIDA', fale:'Escríbeme por correo', fale_corpo:'¡Hola, Herbs!\n\nEncontré falavado y me gustó la Mesa de los Pensadores. Me gustaría hablar más contigo sobre él.\n\nUn abrazo,\n',
@@ -269,7 +269,8 @@ function topo(){
       '<button type="button" class="a-btn" id="a-dal" aria-haspopup="true" aria-expanded="false" aria-controls="dalt-caixa" data-ta="title:a_dal_t;aria-label:a_dal_t"><span class="a-ic" aria-hidden="true">👁</span><span class="a-txt" data-t="a_dal"></span></button>'+
       '<div class="dalt-caixa" id="dalt-caixa" role="radiogroup" data-ta="aria-label:a_dal_h" hidden><p class="dalt-tit" data-t="a_dal_h"></p>'+
       (window.ACESS?ACESS.tipos:[]).map(function(k){ return '<button type="button" role="radio" class="dalt-op" data-d="'+k+'"><i class="amostra '+k+'" aria-hidden="true"></i><span><b data-t="d_'+k+'"></b><small data-t="d_'+k+'_s"></small></span></button>'; }).join('')+
-      '<button type="button" class="dalt-fechar" data-t="a_fechar"></button></div></div>'+
+      '<button type="button" class="dalt-fechar" data-t="a_fechar"></button></div>'+
+      '<button type="button" class="a-btn" id="a-tema" data-ta="title:a_tema_t;aria-label:a_tema_t"><span class="a-ic" aria-hidden="true" id="a-tema-ic">🌙</span><span class="a-txt" id="a-tema-txt"></span></button></div>'+
     '<div class="idiomas" role="group" data-ta="aria-label:lang_aria"><button type="button" data-l="pt" title="Português">PT</button><button type="button" data-l="en" title="English">EN</button><button type="button" data-l="es" title="Español">ES</button></div></div>';
   document.body.insertBefore(b,document.body.firstChild);
   b.querySelectorAll('.idiomas button').forEach(function(x){ x.addEventListener('click',function(){ escolher(x.dataset.l); }); });
@@ -290,6 +291,11 @@ function acessibilidade(b){
   }
   function abrir(v){ cx.hidden=!v; dal.setAttribute('aria-expanded',String(v)); if(v){ var o=cx.querySelector('[aria-checked="true"]')||cx.querySelector('.dalt-op'); o.focus(); } }
   dis.addEventListener('click',function(){ ACESS.setFonte(!ACESS.fonte()); marcar(); });
+  /* modo claro ou escuro: vale para o site e para a mesa (a mesma escolha guardada no navegador) */
+  var tm=b.querySelector('#a-tema');
+  function tema(){ var esc=ACESS.estilo()==='lovecraft'; b.querySelector('#a-tema-ic').textContent=esc?'🌙':'☀'; b.querySelector('#a-tema-txt').textContent=t(esc?'a_escuro':'a_claro'); tm.setAttribute('aria-pressed',String(esc)); }
+  tm.addEventListener('click',function(){ ACESS.setEstilo(ACESS.estilo()==='lovecraft'?'antigo':'lovecraft'); tema(); });
+  document.addEventListener('idioma',tema); tema();
   dal.addEventListener('click',function(e){ e.stopPropagation(); abrir(cx.hidden); });
   cx.addEventListener('click',function(e){ e.stopPropagation(); });
   cx.querySelectorAll('.dalt-op').forEach(function(o){ o.addEventListener('click',function(){ ACESS.setDalt(o.dataset.d); marcar(); }); });
