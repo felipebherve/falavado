@@ -13,14 +13,14 @@
 <body class="brilho">
 <main class="wrap">
   <section class="painel"><h1 data-t="pens_title"></h1><p data-t="pens_intro"></p><p class="nota" data-t="content_pt"></p>
+    <div class="estilos" role="group"><button type="button" data-e="" aria-pressed="false" data-t="st_light"></button><button type="button" data-e="lc/" aria-pressed="true" data-t="st_dark"></button></div>
     <div class="grade" id="grade"></div></section>
 </main>
 <script src="assets/site.js"></script>
 <script>
 (function(){
-  /* os retratos seguem o modo claro ou escuro do topo (o mesmo da mesa) */
-  function estAtual(){ return window.ACESS&&ACESS.estilo()==='lovecraft'?'lc/':''; }
-  var est=estAtual();
+  /* botão só das fotos: troca os retratos entre o estilo claro e o escuro (padrão: escuro); a página não muda */
+  var est='lc/'; try{ if(localStorage.getItem('fotos_estilo')==='claro') est=''; }catch(e){}
   var EL=null, DND=null, g=document.getElementById('grade');
   function pintar(){
     if(!EL||!DND) return; g.textContent='';
@@ -31,7 +31,9 @@
       f.appendChild(b); f.appendChild(s); a.appendChild(i); a.appendChild(f); g.appendChild(a);
     });
   }
-  document.addEventListener('estilo',function(){ est=estAtual(); pintar(); });
+  function marcarBt(){ document.querySelectorAll('.estilos button').forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.e===est)); }); }
+  document.querySelectorAll('.estilos button').forEach(function(b){ b.addEventListener('click',function(){ est=b.dataset.e; try{ localStorage.setItem('fotos_estilo',est?'escuro':'claro'); }catch(e){} marcarBt(); pintar(); }); });
+  marcarBt();
   Promise.all([fetch('mesa/data/elenco.json').then(function(r){ return r.json(); }),fetch('mesa/data/dnd.json').then(function(r){ return r.json(); })]).then(function(v){
     EL=v[0].elenco.concat([{id:'triboulet',nome:'Triboulet',img:'triboulet'}]); DND=v[1].fichas; pintar(); });
 })();
