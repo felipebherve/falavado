@@ -211,6 +211,20 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .ia .chave input:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
 .ia .chave a{color:var(--accent);font-size:.88rem;font-weight:600}
 .ia .chave .lin{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ia .aprenda,.cc button{font:inherit;font-size:.9rem;font-weight:600;border-radius:10px;padding:7px 14px;cursor:pointer;border:1px solid var(--accent);background:transparent;color:var(--ink)}
+.ia .aprenda{align-self:flex-start;margin-left:30px;border-color:var(--warm)}
+.manual-guia{margin:0 0 0 30px;padding:10px 12px 10px 30px;border:1px dashed var(--warm);border-radius:10px;font-size:.92rem;display:flex;flex-direction:column;gap:6px}
+.cc{position:fixed;inset:0;z-index:80;background:rgba(5,8,10,.84);display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:max(16px,env(safe-area-inset-top)) 16px 16px}
+.cc[hidden]{display:none}
+.cc-caixa{width:100%;max-width:640px;margin:auto 0;background:var(--surface);color:var(--ink);border:2px solid var(--warm);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.cc-caixa h3{margin:0;font-size:1.15rem}
+.cc-caixa p{margin:0}
+.cc-caixa a{color:var(--accent);font-weight:600}
+.cc-caixa textarea{font:inherit;font-size:.9rem;width:100%;min-width:0;box-sizing:border-box;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical}
+.cc-caixa textarea:focus-visible,.cc button:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.cc .lin{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cc button.forte{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cc .cc-msg{color:var(--warm);font-size:.9rem;min-height:1em}
 .ia .chave button{font:inherit;font-size:.85rem;font-weight:600;border-radius:10px;padding:5px 12px;cursor:pointer;border:1px solid var(--accent);background:transparent;color:var(--ink)}
 .ia .chave .ok{color:var(--muted);font-size:.85rem}
 .principal{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
@@ -465,6 +479,17 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <div class="chave" hidden><label for="key-xai">Sua chave da xAI</label><input type="password" id="key-xai" autocomplete="off" spellcheck="false" placeholder="xai-…"><div class="lin"><a href="https://console.x.ai/" target="_blank" rel="noopener">Criar a chave na xAI</a><button type="button" data-apagar="xai">Apagar chave</button><span class="ok"></span></div></div></div>
 <div class="ia" data-ia="deepseek"><label><input type="checkbox" id="ia-deepseek" value="deepseek"> <span>DeepSeek<small>Usa a sua chave de API da DeepSeek.</small></span></label>
 <div class="chave" hidden><label for="key-deepseek">Sua chave da DeepSeek</label><input type="password" id="key-deepseek" autocomplete="off" spellcheck="false" placeholder="sk-…"><div class="lin"><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">Criar a chave na DeepSeek</a><button type="button" data-apagar="deepseek">Apagar chave</button><span class="ok"></span></div></div></div>
+<div class="ia" data-ia="manual"><label><input type="checkbox" id="ia-manual" value="manual"> <span>Usando sem vincular IA<small>Sem chave e sem conta nova: eu preparo o pedido, você cola na IA que já usa (ChatGPT, Gemini, Claude, Copilot…), copia a resposta e cola de volta aqui. Funciona com o plano gratuito dela.</small></span></label>
+<button type="button" class="aprenda" id="manual-aprenda" aria-expanded="false" aria-controls="manual-guia">📖 Aprenda a usar aqui</button>
+<ol class="manual-guia" id="manual-guia" hidden>
+<li>Marque <b>Usando sem vincular IA</b> e toque em Pronto.</li>
+<li>Escreva o seu pensamento, escolha quem senta à mesa e toque em <b>Enviar</b>.</li>
+<li>Na janela que abre, toque em <b>📋 Copiar o pedido</b>.</li>
+<li>Abra a sua IA (ChatGPT, Gemini, Claude, Copilot…) numa conversa nova, cole o pedido e envie.</li>
+<li>Quando ela terminar, copie a resposta inteira (no botão de copiar embaixo da resposta).</li>
+<li>Volte aqui, cole no campo <b>Cole aqui a resposta da sua IA</b> e toque em <b>▶ Pôr na mesa</b>.</li>
+<li>A rodada aparece logo abaixo, com as fotos e as falas. Toque no play para ouvir com a voz do aparelho.</li>
+</ol></div>
 <p class="passo">As chaves ficam guardadas só neste navegador e vão direto para a IA escolhida. Ninguém mais as vê, nem eu.</p>
 <fieldset class="principal" id="ia-principal" hidden><legend>Quem escreve as rodadas</legend><div id="ia-principal-op"></div><p class="passo">Se a escolhida não responder, eu tento a próxima marcada e aviso qual respondeu.</p></fieldset>
 <p class="passo" id="ia-aviso">Esta página mora dentro do Claude, e daqui o Claude sempre responde. As outras IAs podem ser barradas por essa proteção; se isso acontecer, eu chamo a próxima marcada (deixe o Claude marcado como reserva).</p>
@@ -515,6 +540,17 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <span id="msg" class="aviso" role="status" aria-live="polite"></span>
 </div>
 <div class="envio-ja" id="envio-ja-box" hidden><p>Para o meu rei Herbs receber esta rodada, toque aqui. Eu monto o registro e abro um e-mail para ele: é só enviar.</p><button type="button" class="enviar" id="envio-ja">Mandar esta rodada ao Herbs</button></div>
+<div class="cc" id="cc" hidden role="dialog" aria-modal="true" aria-labelledby="cc-t"><div class="cc-caixa">
+<h3 id="cc-t">Usando sem vincular IA</h3>
+<p><b>1.</b> Copie o pedido. Ele já leva as fichas dos pensadores, o seu pensamento e o jeito de responder.</p>
+<div class="lin"><button type="button" class="forte" id="cc-copiar">📋 Copiar o pedido</button><span id="cc-copiado" role="status" aria-live="polite"></span></div>
+<textarea id="cc-pedido" readonly rows="3" aria-label="O pedido para a sua IA"></textarea>
+<p><b>2.</b> Abra a sua IA numa conversa nova, cole o pedido e envie: <a href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT</a> · <a href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini</a> · <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude</a> · <a href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot</a></p>
+<p><b>3.</b> Quando ela terminar, copie a resposta inteira e cole aqui:</p>
+<textarea id="cc-resp" rows="6" placeholder="Cole aqui a resposta da sua IA" aria-label="Cole aqui a resposta da sua IA"></textarea>
+<p class="cc-msg" id="cc-msg" role="status" aria-live="polite"></p>
+<div class="lin"><button type="button" class="forte" id="cc-montar">▶ Pôr na mesa</button><button type="button" id="cc-cancelar">Cancelar</button></div>
+</div></div>
 <div class="espera" id="espera" hidden><span class="triload" aria-hidden="true"><img src="img/triboulet_pin.jpg" alt=""><i></i><i></i><i></i></span><span id="espera-txt"></span></div>
 <div class="pedidos" id="pedidos" hidden></div>
 </section>
@@ -602,7 +638,7 @@ var I18N=(function(){
 'pergunta para doer':'question that hurts',
 'indagação filosófica':'philosophical inquiry',
 'ponto de vista de fora':'outside point of view',
-'resposta bônus':'bonus answer',"falas a mais do Triboulet: ele pede desculpas por se intrometer, diz com clareza o que acha do pensamento e anota o pedido de alguém da mesa":"extra lines from Triboulet: he apologizes for butting in, says clearly what he thinks of the thought and takes someone's order at the table","O Triboulet voltou à mesa. Ele é o coringa: não conta no número de participantes.":"Triboulet is back at the table. He is the joker: he does not count toward the number of participants.","Você tirou o Triboulet da mesa por vontade própria. Os pensadores vão se recusar a responder e dizer por quê. Toque nele de novo para trazê-lo de volta.":"You removed Triboulet from the table of your own free will. The thinkers will refuse to answer and say why. Tap him again to bring him back.","Escolha de participantes limpa. O Triboulet fica: ele é o coringa da mesa.":"Participant choice cleared. Triboulet stays: he is the joker of the table.",
+'resposta bônus':'bonus answer',"Usando sem vincular IA":"Using without linking an AI","Sem chave e sem conta nova: eu preparo o pedido, você cola na IA que já usa (ChatGPT, Gemini, Claude, Copilot…), copia a resposta e cola de volta aqui. Funciona com o plano gratuito dela.":"No key and no new account: I prepare the request, you paste it into the AI you already use (ChatGPT, Gemini, Claude, Copilot…), copy the answer and paste it back here. It works with its free plan.","📖 Aprenda a usar aqui":"📖 Learn how to use it here","Marque":"Check","e toque em Pronto.":"and tap Ready.","Escreva o seu pensamento, escolha quem senta à mesa e toque em":"Write your thought, choose who sits at the table and tap","Na janela que abre, toque em":"In the window that opens, tap","Abra a sua IA (ChatGPT, Gemini, Claude, Copilot…) numa conversa nova, cole o pedido e envie.":"Open your AI (ChatGPT, Gemini, Claude, Copilot…) in a new chat, paste the request and send it.","Quando ela terminar, copie a resposta inteira (no botão de copiar embaixo da resposta).":"When it finishes, copy the whole answer (with the copy button under the answer).","Volte aqui, cole no campo":"Come back here, paste it into the field","Cole aqui a resposta da sua IA":"Paste your AI's answer here","e toque em":"and tap","A rodada aparece logo abaixo, com as fotos e as falas. Toque no play para ouvir com a voz do aparelho.":"The round appears right below, with the pictures and the speeches. Tap play to hear it with the device voice.","Copie o pedido. Ele já leva as fichas dos pensadores, o seu pensamento e o jeito de responder.":"Copy the request. It already carries the thinkers' profiles, your thought and how to answer.","📋 Copiar o pedido":"📋 Copy the request","Abra a sua IA numa conversa nova, cole o pedido e envie:":"Open your AI in a new chat, paste the request and send it:","Quando ela terminar, copie a resposta inteira e cole aqui:":"When it finishes, copy the whole answer and paste it here:","▶ Pôr na mesa":"▶ Put it on the table","▶ Pôr a resposta na mesa":"▶ Put the answer on the table","Cancelar":"Cancel","O pedido para a sua IA":"The request for your AI","Pedido copiado.":"Request copied.","Pedido copiado. Agora cole na sua IA.":"Request copied. Now paste it into your AI.","Selecionei o pedido: copie com Ctrl+C (ou segure e toque em Copiar).":"I selected the request: copy it with Ctrl+C (or press and hold, then Copy).","Cole aqui a resposta da sua IA primeiro.":"Paste your AI's answer here first.","Não achei a resposta no formato da mesa. Copie a resposta inteira da IA, do primeiro [ ao último ], e cole de novo.":"I could not find the answer in the table's format. Copy the AI's whole answer, from the first [ to the last ], and paste it again.","falas a mais do Triboulet: ele pede desculpas por se intrometer, diz com clareza o que acha do pensamento e anota o pedido de alguém da mesa":"extra lines from Triboulet: he apologizes for butting in, says clearly what he thinks of the thought and takes someone's order at the table","O Triboulet voltou à mesa. Ele é o coringa: não conta no número de participantes.":"Triboulet is back at the table. He is the joker: he does not count toward the number of participants.","Você tirou o Triboulet da mesa por vontade própria. Os pensadores vão se recusar a responder e dizer por quê. Toque nele de novo para trazê-lo de volta.":"You removed Triboulet from the table of your own free will. The thinkers will refuse to answer and say why. Tap him again to bring him back.","Escolha de participantes limpa. O Triboulet fica: ele é o coringa da mesa.":"Participant choice cleared. Triboulet stays: he is the joker of the table.",
 'Leve um pensamento à mesa':'Bring a thought to the table',
 'Seu pensamento':'Your thought',
 'Quem participa':'Who takes part',
@@ -688,6 +724,12 @@ var I18N=(function(){
     [/^Velocidade (.+)$/,'Speed $1'],[/^Voz do Gemini: (.+)$/,'Gemini voice: $1'],[/^Voz desta fala: (.+)$/,'Voice for this speech: $1'],
     [/^Mesa mesclada: (\d+) homens e (\d+) mulheres sorteados\.$/,'Mixed table: $1 men and $2 women drawn.'],[/^Mesa mesclada com os mais aptos: (\d+) homens e (\d+) mulheres\.$/,'Mixed table with the fittest: $1 men and $2 women.'],
     [/^A chave do (.+) foi recusada\. Confira em Suas IAs\.$/,'The $1 key was refused. Check it in Your AIs.'],
+    [/^(.+?) (Toque em Enviar de novo|Tente de novo)\.$/,function(m,a,b){ var x=tr(a); return (x!=null?x:a)+(b==='Tente de novo'?' Try again.':' Tap Send again.'); }],
+    [/^O modelo (.+) do (.+) não está disponível agora\.$/,'The $1 model from $2 is not available right now.'],
+    [/^O (.+?) devolveu o erro (\d+)(.*)\.$/,'$1 returned error $2$3.'],
+    [/^O (.+?) não devolveu texto(.*)\.$/,'$1 returned no text$2.'],
+    [/^O (.+?) não respondeu daqui: a conexão caiu ou foi barrada pela rede\.$/,"$1 didn't answer from here: the connection dropped or was blocked by the network."],
+    [/^O (.+?) não respondeu daqui \(esta página roda dentro do Claude, que barra outras IAs\)\. Use o site do falavado ou deixe o Claude marcado como reserva\.$/,"$1 didn't answer from here (this page runs inside Claude, which blocks other AIs). Use the falavado website or keep Claude checked as a backup."],
     [/^Comando copiado \((\d+) convidados?\)\. Cole no PowerShell e aperte Enter\.$/,'Command copied ($1 guests). Paste it in PowerShell and press Enter.'],
     [/^Você tem (\d+) coisas novas que o Herbs ainda não recebeu\.$/,"You have $1 new things Herbs hasn't received yet."],[/^Avisar (.+) por e-mail$/,'Notify $1 by email'],[/^E-mail de (.+?)( \(para o aviso\))?$/,function(m,a,b){ return a+"'s email"+(b?' (for the notice)':''); }],
     [/^Ver as falas \((\d+)\)$/,'See the lines ($1)'],[/^Seu nome nesta mesa: (.+)\. Fica guardado para quando você voltar\.$/,'Your name at this table: $1. It is kept for when you come back.'],[/^(.+) Ainda há mais: depois de publicar, toque de novo para mandar o resto\.$/,function(m,a){ return (tr(a)||a)+' There is more: after posting, tap again to send the rest.'; }],[/^Abrir a mesa de (.+)$/,'Open $1\'s table'],[/^(\d+) na fila$/,'$1 in queue'],[/^(\d+) avisos a mandar$/,'$1 notices to send'],[/^(\d+) rodadas?$/,function(m,n){ return n+(n==='1'?' round':' rounds'); }],[/^· último registro em (.+)$/,'· last log on $1'],[/^Aviso enviado para (.+)\.$/,'Notice sent to $1.'],[/^Guarde o e-mail de (.+) acima primeiro\.$/,"Save $1's email above first."],
@@ -1219,14 +1261,14 @@ var USO={db:null,uid:null,dono:false,local:false,
       
     }).catch(function(e){
       ctlGer=null; setEspera(null); atualizar();
-      var c=e&&e.code; $msg.textContent=c==='cancelled'?'Parado.':c==='rate_limited'?'Muitos pedidos ou limite de uso atingido. Tente de novo mais tarde.':c==='not_granted'?'Sem permissão para usar o Claude nesta página.':c==='sem_ia'?'Escolha uma IA em Suas IAs, no topo da página.':c==='chave'?(e.message||'A chave foi recusada. Confira em Suas IAs.'):c==='invalid_json'?'A resposta veio quebrada. Toque em Enviar de novo.':'Não deu certo agora. Toque em Enviar de novo.';
+      var c=e&&e.code; $msg.textContent=c==='cancelled'?'Parado.':c==='rate_limited'?'Muitos pedidos ou limite de uso atingido. Tente de novo mais tarde.':c==='not_granted'?'Sem permissão para usar o Claude nesta página.':c==='sem_ia'?'Escolha uma IA em Suas IAs, no topo da página.':c==='chave'?(e.message||'A chave foi recusada. Confira em Suas IAs.'):c==='invalid_json'?'A resposta veio quebrada. Toque em Enviar de novo.':(e&&e.message?e.message+' Toque em Enviar de novo.':'Não deu certo agora. Toque em Enviar de novo.');
     });
   }
 
   /* ---------- suas IAs: cada pessoa usa a própria conta ---------- */
   var IA=(function(){
-    var NOMES={claude:'Claude',openai:'ChatGPT',gemini:'Gemini',xai:'Grok',deepseek:'DeepSeek'};
-    var ORDEM=['claude','openai','gemini','xai','deepseek'];
+    var NOMES={claude:'Claude',openai:'ChatGPT',gemini:'Gemini',xai:'Grok',deepseek:'DeepSeek',manual:'a sua IA (copiar e colar)'};
+    var ORDEM=['claude','openai','gemini','xai','deepseek','manual'];
     var MODELO={openai:'gpt-4o-mini',gemini:'gemini-2.5-flash',xai:'grok-3-mini',deepseek:'deepseek-chat'};
     var URL={openai:'https://api.openai.com/v1/chat/completions',xai:'https://api.x.ai/v1/chat/completions',deepseek:'https://api.deepseek.com/chat/completions'};
     var S={on:[],principal:'',chave:{}};
@@ -1234,9 +1276,9 @@ var USO={db:null,uid:null,dono:false,local:false,
     function gravar(k,v){ try{ if(v==null||v==='') localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){} }
     var salvo=ler('ia_on'); S.on=salvo?salvo.split(',').filter(function(x){ return NOMES[x]; }):[];
     S.principal=ler('ia_principal')||'';
-    ORDEM.forEach(function(k){ if(k!=='claude') S.chave[k]=ler('ia_key_'+k)||''; });
+    ORDEM.forEach(function(k){ if(k!=='claude'&&k!=='manual') S.chave[k]=ler('ia_key_'+k)||''; });
     var $c=document.getElementById('contas');
-    function usavel(k){ return k==='claude'?!!SAMPLE:!!S.chave[k]; }
+    function usavel(k){ return k==='manual'?true:k==='claude'?!!SAMPLE:!!S.chave[k]; }
     function fila(){ var a=S.on.filter(usavel); var p=a.indexOf(S.principal); if(p>0){ a.splice(p,1); a.unshift(S.principal); } return a; }
     function estado(){
       ORDEM.forEach(function(k){ var box=$c.querySelector('[data-ia="'+k+'"]'), cb=document.getElementById('ia-'+k), on=S.on.indexOf(k)>=0; cb.checked=on; box.dataset.on=on?'1':'0';
@@ -1250,14 +1292,14 @@ var USO={db:null,uid:null,dono:false,local:false,
     }
     ORDEM.forEach(function(k){
       document.getElementById('ia-'+k).addEventListener('change',function(e){ S.on=ORDEM.filter(function(x){ return x===k?e.target.checked:S.on.indexOf(x)>=0; }); gravar('ia_on',S.on.join(',')||'-'); estado(); });
-      if(k==='claude') return;
+      if(k==='claude'||k==='manual') return;
       var inp=document.getElementById('key-'+k);
       inp.addEventListener('input',function(){ S.chave[k]=inp.value.trim(); gravar('ia_key_'+k,S.chave[k]); estado(); });
     });
     $c.querySelectorAll('[data-apagar]').forEach(function(b){ b.addEventListener('click',function(){ var k=b.dataset.apagar; S.chave[k]=''; gravar('ia_key_'+k,''); document.getElementById('key-'+k).value=''; estado(); }); });
     document.getElementById('ia-pronto').addEventListener('click',function(){ var an=document.getElementById('anf-nome'); if(!an.value.trim()||(!REI&&nomeProtegido(an.value))){ document.getElementById('ia-estado').textContent='Diga quem é o anfitrião'; an.scrollIntoView({block:'center'}); an.focus(); return; } gravar('anfitriao',an.value.trim()); if(!REI&&CONV){ gravar('anf_fixo','1'); travarNome(); } USO.log('entrada',{ias:S.on.join(', ')}); if(!S.on.length){ document.getElementById('ia-estado').textContent='Marque pelo menos uma'; return; } gravar('ia_on',S.on.join(',')); $c.open=false; var p=document.getElementById('pens'); if(p) p.focus(); });
     /* primeira visita: o Triboulet abre o guia e já deixa o Claude marcado */
-    if(salvo===null){ S.on=[window.SITE_WEB?'gemini':'claude']; $c.open=true; }
+    if(salvo===null){ S.on=window.SITE_WEB?['gemini','manual']:['claude']; $c.open=true; }
     /* __SEGREDO__: hash da frase secreta do rei, só na mesa principal do dono (ver dev/DEV.md); na mesa pública fica vazio e só a conta dona vale */
     var SEGREDO='__SEGREDO__'; if(SEGREDO.indexOf('__')===0) SEGREDO='';
     function sha(t){ try{ return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)).then(function(b){ return Array.prototype.map.call(new Uint8Array(b),function(x){ return ('0'+x.toString(16)).slice(-2); }).join(''); }); }catch(e){ return Promise.resolve(''); } }
@@ -1292,19 +1334,57 @@ var USO={db:null,uid:null,dono:false,local:false,
       if(a<0||b<a) throw {code:'invalid_json'};
       try{ return JSON.parse(t.slice(a,b+1)); }catch(e){ throw {code:'invalid_json'}; }
     }
-    function chamar(k,prompt,o){
+    /* sem vincular IA: a pessoa copia o pedido, roda na IA dela e cola a resposta; a página monta a rodada com ela */
+    var $cc=document.getElementById('cc'), $ccPed=document.getElementById('cc-pedido'), $ccResp=document.getElementById('cc-resp'), $ccMsg=document.getElementById('cc-msg'), $ccOk=document.getElementById('cc-copiado'), $ccMontar=document.getElementById('cc-montar'), ccAtual=null;
+    function ccFechar(){ $cc.hidden=true; document.body.style.overflow=''; var a=ccAtual; ccAtual=null; return a; }
+    function manual(prompt,o,json){
+      if(ccAtual){ var velho=ccFechar(); velho.nao({code:'cancelled'}); }
+      return new Promise(function(sim,nao){
+        ccAtual={sim:sim,nao:nao,json:json};
+        $ccPed.value=prompt; $ccResp.value=''; $ccMsg.textContent=''; $ccOk.textContent='';
+        $ccMontar.textContent=json?'▶ Pôr na mesa':'▶ Pôr a resposta na mesa';
+        $cc.hidden=false; document.body.style.overflow='hidden';
+        try{ document.getElementById('cc-copiar').focus(); }catch(e){}
+        if(o.signal) o.signal.addEventListener('abort',function(){ if(ccAtual&&ccAtual.nao===nao){ ccFechar(); nao({code:'cancelled'}); } });
+      });
+    }
+    document.getElementById('cc-copiar').addEventListener('click',function(){
+      var t=$ccPed.value;
+      function manualmente(){ $ccPed.focus(); $ccPed.select(); try{ if(document.execCommand('copy')){ $ccOk.textContent='Pedido copiado.'; return; } }catch(e){} $ccOk.textContent='Selecionei o pedido: copie com Ctrl+C (ou segure e toque em Copiar).'; }
+      try{ navigator.clipboard.writeText(t).then(function(){ $ccOk.textContent='Pedido copiado. Agora cole na sua IA.'; },manualmente); }catch(e){ manualmente(); }
+    });
+    $ccMontar.addEventListener('click',function(){
+      if(!ccAtual) return; var t=$ccResp.value.trim();
+      if(!t){ $ccMsg.textContent='Cole aqui a resposta da sua IA primeiro.'; $ccResp.focus(); return; }
+      if(ccAtual.json){ try{ extrairJSON(t); }catch(e){ $ccMsg.textContent='Não achei a resposta no formato da mesa. Copie a resposta inteira da IA, do primeiro [ ao último ], e cole de novo.'; return; } }
+      ccFechar().sim(t);
+    });
+    function ccCancelar(){ if(ccAtual) ccFechar().nao({code:'cancelled'}); }
+    document.getElementById('cc-cancelar').addEventListener('click',ccCancelar);
+    $cc.addEventListener('keydown',function(e){ if(e.key==='Escape') ccCancelar(); });
+    (function(){ var b=document.getElementById('manual-aprenda'), g=document.getElementById('manual-guia');
+      b.addEventListener('click',function(){ g.hidden=!g.hidden; b.setAttribute('aria-expanded',String(!g.hidden)); }); })();
+    function chamar(k,prompt,o,json){
+      if(k==='manual') return manual(prompt,o,json);
       if(k==='claude'){ var so={}; ['signal','cache','modelTier','onText'].forEach(function(n){ if(o[n]!==undefined) so[n]=o[n]; }); return SAMPLE(prompt,so).then(function(r){ return r.text; }); }
       var req;
       if(k==='gemini') req=fetch('https://generativelanguage.googleapis.com/v1beta/models/'+MODELO.gemini+':generateContent',{method:'POST',signal:o.signal,headers:{'Content-Type':'application/json','x-goog-api-key':S.chave.gemini},body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}]})});
       else req=fetch(URL[k],{method:'POST',signal:o.signal,headers:{'Content-Type':'application/json','Authorization':'Bearer '+S.chave[k]},body:JSON.stringify({model:MODELO[k],messages:[{role:'user',content:prompt}]})});
       return req.then(function(r){
-        if(r.status===401||r.status===403) throw {code:'chave',message:'A chave do '+NOMES[k]+' foi recusada. Confira em Suas IAs.'};
         if(r.status===429) throw {code:'rate_limited'};
-        if(!r.ok) throw {code:'falhou'};
-        return r.json();
-      },function(e){ if(e&&e.name==='AbortError') throw {code:'cancelled'}; throw {code:'barrada'}; }).then(function(d){
+        if(r.ok) return r.json();
+        /* lê o motivo que a IA devolveu, para dizer à pessoa o que houve em vez de um erro genérico */
+        return r.text().then(function(b){ return b; },function(){ return ''; }).then(function(b){
+          var m=''; try{ var j=JSON.parse(b); m=String(((j.error||{}).message)||j.message||''); }catch(x){}
+          /* o Gemini recusa chave errada com 400 (API_KEY_INVALID), não com 401/403 */
+          if(r.status===401||r.status===403||/API_KEY_INVALID|API key/i.test(b)) throw {code:'chave',message:'A chave do '+NOMES[k]+' foi recusada. Confira em Suas IAs.'};
+          if(r.status===404) throw {code:'falhou',message:'O modelo '+MODELO[k]+' do '+NOMES[k]+' não está disponível agora.'};
+          throw {code:'falhou',message:'O '+NOMES[k]+' devolveu o erro '+r.status+(m?' ('+m.slice(0,160)+')':'')+'.'};
+        });
+      },function(e){ if(e&&e.name==='AbortError') throw {code:'cancelled'}; throw {code:'barrada',message:'O '+NOMES[k]+' não respondeu daqui'+(window.SITE_WEB?': a conexão caiu ou foi barrada pela rede.':' (esta página roda dentro do Claude, que barra outras IAs). Use o site do falavado ou deixe o Claude marcado como reserva.')}; }).then(function(d){
         var t=k==='gemini'?(((d.candidates||[])[0]||{}).content||{parts:[]}).parts.map(function(p){ return p.text||''; }).join(''):(((d.choices||[])[0]||{}).message||{}).content;
-        if(!t) throw {code:'falhou'}; return t;
+        if(!t){ var bl=k==='gemini'&&(((d.promptFeedback||{}).blockReason)||(((d.candidates||[])[0]||{}).finishReason)); throw {code:'falhou',message:'O '+NOMES[k]+' não devolveu texto'+(bl?' (motivo: '+bl+')':'')+'.'}; }
+        return t;
       });
     }
     function rodar(prompt,o,json){
@@ -1312,12 +1392,12 @@ var USO={db:null,uid:null,dono:false,local:false,
       var falhas=[];
       function tenta(i){
         var k=f[i];
-        return chamar(k,prompt,o).then(function(t){
+        return chamar(k,prompt,o,json).then(function(t){
           if(falhas.length&&o.aviso) o.aviso(falhas.join(' ')+' Quem respondeu foi o '+NOMES[k]+'.');
           return json?extrairJSON(t,o.objeto):{text:t};
         }).catch(function(e){
           var c=e&&e.code; if(c==='cancelled'||i>=f.length-1) throw e;
-          falhas.push(c==='barrada'?'O '+NOMES[k]+' não respondeu daqui (esta página roda dentro do Claude, que pode barrar outras IAs).':c==='chave'?e.message:'O '+NOMES[k]+' não respondeu agora.');
+          falhas.push(e&&e.message?e.message:'O '+NOMES[k]+' não respondeu agora.');
           return tenta(i+1);
         });
       }
@@ -1454,7 +1534,7 @@ var USO={db:null,uid:null,dono:false,local:false,
         RESPOSTAS.push(item); pintarRespostas(); form.remove(); rb.hidden=false;
         if(dbRef) dbRef.collection(PFX+'respostas').doc(item.id).set(item).catch(function(){});
         USO.log('resposta',{rodada:r.id,quem:f.quem,pergunta:txt,texto:item.texto});
-      }).catch(function(e){ ok.disabled=false; st.textContent=(e&&e.code==='rate_limited')?'Limite de uso atingido. Tente mais tarde.':'Não deu certo agora. Tente de novo.'; });
+      }).catch(function(e){ ok.disabled=false; st.textContent=(e&&e.code==='rate_limited')?'Limite de uso atingido. Tente mais tarde.':(e&&e.message?e.message+' Tente de novo.':'Não deu certo agora. Tente de novo.'); });
     });
   }
   function pintarRespostas(){

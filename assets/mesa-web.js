@@ -49,7 +49,7 @@ window.SITE_WEB=true;
       ch.querySelector('#apagar-claude-web').addEventListener('click',function(){ inp.value=''; gravar('ia_key_claude_web',''); est(); });
       if(cb) cb.addEventListener('change',est);
     }
-    var av=document.getElementById('ia-aviso'); if(av) av.textContent='Aqui no site, cada IA usa a chave que você colou, e a conta é sua. Para começar de graça, use o Gemini. Se a escolhida não responder, eu chamo a próxima marcada.';
+    var av=document.getElementById('ia-aviso'); if(av) av.textContent='Aqui no site, cada IA usa a chave que você colou, e a conta é sua. Sem chave nenhuma, use Usando sem vincular IA: você copia o pedido e cola na IA que já usa. Se a escolhida não responder, eu chamo a próxima marcada.';
     /* voltar ao site, no topo e no fim */
     var VOLTA={pt:'← Voltar à página principal',en:'← Back to the main page',es:'← Volver a la página principal'};
     function rotulo(){ var l=(document.documentElement.lang||'pt').slice(0,2); return VOLTA[l]||VOLTA.pt; }
