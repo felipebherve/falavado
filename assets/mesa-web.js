@@ -66,7 +66,7 @@ window.SITE_WEB=true;
     if(h){ var n=0, t=setInterval(function(){ var b=document.querySelector('[aria-controls="p-'+h+'"]'); if(b){ clearInterval(t); if(b.getAttribute('aria-expanded')!=='true') b.click(); b.scrollIntoView({block:'start'}); } else if(++n>40) clearInterval(t); },150); }
   });
 
-  /* Seu progresso (em Configurações): a pessoa salva tudo num MD, guarda no chat da IA dela e carrega de volta.
+  /* Seu progresso (balão próprio, logo depois de Suas IAs): a pessoa salva tudo num MD, guarda no chat da IA dela e carrega de volta.
      O site não escreve no chat de ninguém: ele baixa e copia o arquivo, e lê o arquivo que a pessoa traz.
      Formato "falavado-registro 1", o mesmo da mesa dentro do Claude: parte legível + bloco falavado-dados com tudo exato.
      O áudio não vai no arquivo: a narração é refeita do texto, na voz escolhida. Chaves das IAs nunca entram no arquivo. */
@@ -78,7 +78,7 @@ window.SITE_WEB=true;
       salvo:function(n){ return 'Pronto: '+n+(n===1?' rodada salva':' rodadas salvas')+'. Baixei o arquivo e copiei o texto. Agora guarde no chat da sua IA.'; },
       nada:'Ainda não há rodadas para salvar.',
       ok:function(n,m,nm){ return 'Carregado: '+n+(n===1?' rodada':' rodadas')+' e '+m+(m===1?' resposta':' respostas')+(nm?'. Bem-vindo de volta, '+nm+'!':'.'); },
-      ruim:'Não achei um registro da Mesa dos Pensadores nesse texto.',novas:function(n){ return n===1?'Você tem 1 rodada nova ainda sem salvar.':'Você tem '+n+' rodadas novas ainda sem salvar.'; },
+      ruim:'Não achei um registro da Mesa dos Pensadores nesse texto.',est:function(n){ return n===1?'1 rodada sem salvar':n+' rodadas sem salvar'; },novas:function(n){ return n===1?'Você tem 1 rodada nova ainda sem salvar.':'Você tem '+n+' rodadas novas ainda sem salvar.'; },
       chave:' Cole a chave da sua IA de novo em Suas IAs.'},
     en:{tit:'Your progress',nota:'Everything you did here stays only in this browser. Save your MD and keep it in your AI\'s chat so you lose nothing.',
       salvar:'Save my MD',cp:'Copy',cpok:'Copied!',carregar:'Load my MD',info:'Info',abrir:'Open my AI\'s chat',
@@ -87,7 +87,7 @@ window.SITE_WEB=true;
       salvo:function(n){ return 'Done: '+n+(n===1?' round saved':' rounds saved')+'. The file was downloaded and the text copied. Now keep it in your AI\'s chat.'; },
       nada:'There are no rounds to save yet.',
       ok:function(n,m,nm){ return 'Loaded: '+n+(n===1?' round':' rounds')+' and '+m+(m===1?' answer':' answers')+(nm?'. Welcome back, '+nm+'!':'.'); },
-      ruim:'I could not find a Thinkers\' Table record in this text.',novas:function(n){ return n===1?'You have 1 new round not saved yet.':'You have '+n+' new rounds not saved yet.'; },
+      ruim:'I could not find a Thinkers\' Table record in this text.',est:function(n){ return n===1?'1 round not saved':n+' rounds not saved'; },novas:function(n){ return n===1?'You have 1 new round not saved yet.':'You have '+n+' new rounds not saved yet.'; },
       chave:' Paste your AI key again in Your AIs.'},
     es:{tit:'Tu progreso',nota:'Todo lo que hiciste aquí queda solo en este navegador. Guarda tu MD en el chat de tu IA para no perder nada.',
       salvar:'Guardar mi MD',cp:'Copiar',cpok:'¡Copiado!',carregar:'Cargar mi MD',info:'Info',abrir:'Abrir el chat de mi IA',
@@ -96,7 +96,7 @@ window.SITE_WEB=true;
       salvo:function(n){ return 'Listo: '+n+(n===1?' ronda guardada':' rondas guardadas')+'. Descargué el archivo y copié el texto. Ahora guárdalo en el chat de tu IA.'; },
       nada:'Todavía no hay rondas para guardar.',
       ok:function(n,m,nm){ return 'Cargado: '+n+(n===1?' ronda':' rondas')+' y '+m+(m===1?' respuesta':' respuestas')+(nm?'. ¡Bienvenido de nuevo, '+nm+'!':'.'); },
-      ruim:'No encontré un registro de la Mesa de los Pensadores en este texto.',novas:function(n){ return n===1?'Tienes 1 ronda nueva sin guardar.':'Tienes '+n+' rondas nuevas sin guardar.'; },
+      ruim:'No encontré un registro de la Mesa de los Pensadores en este texto.',est:function(n){ return n===1?'1 ronda sin guardar':n+' rondas sin guardar'; },novas:function(n){ return n===1?'Tienes 1 ronda nueva sin guardar.':'Tienes '+n+' rondas nuevas sin guardar.'; },
       chave:' Pega la clave de tu IA otra vez en Tus IAs.'}
   };
   var CHATS={claude:'https://claude.ai/new',openai:'https://chatgpt.com/',gemini:'https://gemini.google.com/app',xai:'https://grok.com/',deepseek:'https://chat.deepseek.com/'};
@@ -178,14 +178,17 @@ window.SITE_WEB=true;
     var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown;charset=utf-8'})); a.download='falavado-'+nm+'-'+new Date().toISOString().slice(0,10)+'.md';
     document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },1000); }
   document.addEventListener('DOMContentLoaded',function(){
-    var cb=document.querySelector('.config .cfgbody'); if(!cb) return;
+    var ias=document.getElementById('contas'); if(!ias) return;
+    var bal=document.createElement('details'); bal.className='contas progresso-bal'; bal.id='progresso'; bal.setAttribute('translate','no');
+    bal.innerHTML='<summary><span class="pg-ico" aria-hidden="true">💾</span><span class="pg-sum"></span><span class="estado pg-est"></span></summary><div class="corpo"></div>';
+    ias.insertAdjacentElement('afterend',bal); var cb=bal.querySelector('.corpo'), est=bal.querySelector('.pg-est');
     var fs=document.createElement('fieldset'); fs.className='progresso'; fs.setAttribute('translate','no');
     fs.innerHTML='<legend></legend><p class="nota pg-nota"></p><div class="pg-bts"><button type="button" class="pg-b forte" data-pg="salvar"></button><span class="pg-par"><button type="button" class="pg-b" data-pg="carregar"></button><button type="button" class="pg-b info" data-pg="info" aria-expanded="false" aria-controls="pg-info"></button></span></div>'+
       '<a class="pg-chat" target="_blank" rel="noopener" hidden></a><p class="pg-st" role="status" aria-live="polite"></p><input type="file" accept=".md,.txt,text/markdown,text/plain" hidden>'+
       '<div class="pg-info" id="pg-info" hidden><div class="pg-txt"></div><label class="pg-cl"></label><textarea rows="4" spellcheck="false"></textarea><button type="button" class="pg-b" data-pg="colar"></button></div>';
     cb.appendChild(fs);
     var st=fs.querySelector('.pg-st'), inf=fs.querySelector('.pg-info'), file=fs.querySelector('input[type=file]'), ta=fs.querySelector('textarea'), chat=fs.querySelector('.pg-chat'), ib=fs.querySelector('[data-pg=info]');
-    function textos(){ var P=pg(); fs.querySelector('legend').textContent=P.tit; fs.querySelector('.pg-nota').textContent=P.nota;
+    function textos(){ var P=pg(); fs.querySelector('legend').textContent=P.tit; bal.querySelector('.pg-sum').textContent=P.tit; fs.querySelector('.pg-nota').textContent=P.nota;
       ['salvar','carregar','info'].forEach(function(k){ fs.querySelector('[data-pg='+k+']').textContent=P[k]; }); fs.querySelector('[data-pg=colar]').textContent=P.colarbt;
       fs.querySelector('.pg-cl').textContent=P.colar; fs.querySelector('.pg-txt').innerHTML=P.infotxt; frases(P); chat.textContent=P.abrir+' ↗'; pendentes(); }
     /* cada frase que a pessoa digita no chat da IA ganha um botão de copiar */
@@ -193,7 +196,7 @@ window.SITE_WEB=true;
       b.addEventListener('click',function(){ var ok=function(){ b.textContent=P.cpok; setTimeout(function(){ b.textContent=P.cp; },1600); }; try{ navigator.clipboard.writeText(i.textContent.trim()).then(ok,function(){}); }catch(e){} });
       i.insertAdjacentElement('afterend',b); }); }
     function linkChat(){ var on=(ler('ia_principal')||ler('ia_on').split(',')[0]||'').trim(); var u=CHATS[on]; chat.hidden=!u; if(u) chat.href=u; }
-    function pendentes(){ var n=dados().rods.length-(parseInt(ler('progresso_salvo'),10)||0); if(n>0&&!/^(Pronto|Done|Listo|Carregado|Loaded|Cargado)/.test(st.textContent)) st.textContent=pg().novas(n); else if(n<=0&&/rodada|round|ronda/.test(st.textContent)&&/sem salvar|not saved|sin guardar/.test(st.textContent)) st.textContent=''; }
+    function pendentes(){ var n=dados().rods.length-(parseInt(ler('progresso_salvo'),10)||0); est.textContent=n>0?pg().est(n):''; if(n>0&&!/^(Pronto|Done|Listo|Carregado|Loaded|Cargado)/.test(st.textContent)) st.textContent=pg().novas(n); else if(n<=0&&/rodada|round|ronda/.test(st.textContent)&&/sem salvar|not saved|sin guardar/.test(st.textContent)) st.textContent=''; }
     fs.querySelector('[data-pg=salvar]').addEventListener('click',function(){ var R=montarMD(), P=pg(); if(!R.n&&!Object.keys(configs()).length){ st.textContent=P.nada; return; }
       baixar(R.md); try{ navigator.clipboard.writeText(R.md).catch(function(){}); }catch(e){} gravar('progresso_salvo',String(R.n)); linkChat(); st.textContent=P.salvo(R.n); });
     fs.querySelector('[data-pg=carregar]').addEventListener('click',function(){ file.value=''; file.click(); });
@@ -228,7 +231,7 @@ window.SITE_WEB=true;
   });
   var st=document.createElement('style');
   st.textContent='.so-convidado{display:none!important}#regmd{display:none!important}.chave-web{margin:8px 0 0 30px}.chave-web label{display:block;font-size:.85rem;margin-bottom:4px}.chave-web input{width:100%;max-width:420px;font:inherit;padding:8px 10px;border-radius:10px;border:1px solid #888}.chave-web .lin{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px;font-size:.85rem}'+
-    '.progresso{margin-top:14px!important;padding-top:12px!important;border-top:1px solid var(--line)!important}.progresso .pg-bts{display:flex;flex-wrap:wrap;gap:8px}.progresso .pg-b{font:inherit;font-weight:700;font-size:.92rem;min-height:44px;padding:8px 16px;border-radius:10px;border:1px solid var(--accent);background:transparent;color:var(--ink);cursor:pointer}.progresso .pg-b.forte{background:var(--accent);color:var(--accent-ink)}.progresso .pg-b.info{min-width:64px}.progresso .pg-par{display:flex;gap:8px;flex-wrap:nowrap}.progresso .pg-chat{align-self:flex-start;font-weight:600;color:var(--accent)}.progresso .pg-st{margin:0;font-size:.88rem;color:var(--ink)}.progresso .pg-st:empty{display:none}.progresso .pg-info{border-left:3px solid var(--accent);background:var(--bg);border-radius:0 10px 10px 0;padding:10px 12px;display:flex;flex-direction:column;gap:8px;font-size:.9rem}.progresso .pg-info[hidden]{display:none}.progresso .pg-info ol{margin:0 0 4px;padding-left:20px}.progresso .pg-info p{margin:0}.progresso textarea{width:100%;box-sizing:border-box;font:12px ui-monospace,monospace;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px}.progresso .pg-b[data-pg=colar]{align-self:flex-start}.progresso .pg-cp{display:inline-flex;align-items:center;vertical-align:middle;margin:2px 0 2px 8px;min-height:32px;padding:3px 12px;font:inherit;font-size:.8rem;font-weight:700;font-style:normal;border-radius:999px;border:1px solid var(--accent);background:transparent;color:var(--ink);cursor:pointer}'+
+    '.progresso{margin:0!important;padding:0!important;border:0!important}.progresso>legend{display:none}.progresso-bal>summary .pg-ico{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:1.6rem;border-radius:50%;background:var(--bg)}.progresso-bal .corpo{padding-top:0}.progresso-bal .pg-nota{margin:0 0 10px;color:var(--muted);font-size:.88rem}.progresso .pg-bts{display:flex;flex-wrap:wrap;gap:8px}.progresso .pg-b{font:inherit;font-weight:700;font-size:.92rem;min-height:44px;padding:8px 16px;border-radius:10px;border:1px solid var(--accent);background:transparent;color:var(--ink);cursor:pointer}.progresso .pg-b.forte{background:var(--accent);color:var(--accent-ink)}.progresso .pg-b.info{min-width:64px}.progresso .pg-par{display:flex;gap:8px;flex-wrap:nowrap}.progresso .pg-chat{align-self:flex-start;font-weight:600;color:var(--accent)}.progresso .pg-st{margin:0;font-size:.88rem;color:var(--ink)}.progresso .pg-st:empty{display:none}.progresso .pg-info{border-left:3px solid var(--accent);background:var(--bg);border-radius:0 10px 10px 0;padding:10px 12px;display:flex;flex-direction:column;gap:8px;font-size:.9rem}.progresso .pg-info[hidden]{display:none}.progresso .pg-info ol{margin:0 0 4px;padding-left:20px}.progresso .pg-info p{margin:0}.progresso textarea{width:100%;box-sizing:border-box;font:12px ui-monospace,monospace;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px}.progresso .pg-b[data-pg=colar]{align-self:flex-start}.progresso .pg-cp{display:inline-flex;align-items:center;vertical-align:middle;margin:2px 0 2px 8px;min-height:32px;padding:3px 12px;font:inherit;font-size:.8rem;font-weight:700;font-style:normal;border-radius:999px;border:1px solid var(--accent);background:transparent;color:var(--ink);cursor:pointer}'+
     '.tk-info{align-self:flex-start;margin:-2px 0 4px 28px;font:inherit;font-size:.85rem;font-weight:700;color:var(--accent);background:none;border:0;padding:6px 0;min-height:32px;text-decoration:underline;cursor:pointer}.tk-caixa{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.45)}.tk-caixa[hidden]{display:none}.tk-in{max-width:440px;width:100%;max-height:85vh;overflow:auto;background:var(--surface);color:var(--ink);border:2px solid var(--accent);border-radius:14px;padding:16px 18px;box-shadow:0 10px 40px rgba(0,0,0,.4)}.tk-in h3{margin:0 0 8px;font-size:1.05rem}.tk-in p{margin:0 0 8px;font-size:.92rem;line-height:1.5}.tk-f{font:inherit;font-weight:700;min-height:44px;padding:8px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}'+
     '.site-voltar{display:inline-flex;align-items:center;min-height:44px;margin:max(12px,env(safe-area-inset-top)) 16px 0;font:600 .9rem Lexend,sans-serif;color:#2a1d00;background:linear-gradient(#ffe08a,#e0a92b);border-radius:999px;padding:8px 14px;text-decoration:none}.site-voltar.largo{display:flex;justify-content:center;margin:24px auto 32px;max-width:720px;width:calc(100% - 32px);border-radius:14px;padding:14px}';
   document.head.appendChild(st);
