@@ -20,9 +20,9 @@
     'html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}html[data-dalt="acromat"] a{text-decoration:underline}';
   var st=document.createElement('style'); st.id='acess-css'; st.textContent=css; document.head.appendChild(st);
   var fonte=ler('a11y_fonte')==='1', dalt=TIPOS.indexOf(ler('a11y_dalt'))>0?ler('a11y_dalt'):'nenhum';
-  /* modo claro ou escuro: a mesma chave da mesa (cfg_estilo: antigo = claro, lovecraft = escuro); sem escolha, o site abre escuro */
+  /* modo claro ou escuro: só a mesa tem o botão (cfg_estilo: antigo = claro, lovecraft = escuro); as páginas do site ficam sempre escuras e só leem a escolha (os retratos de Os pensadores a seguem) */
   var estilo=ler('cfg_estilo')==='antigo'?'antigo':'lovecraft';
-  var h=document.documentElement; h.classList.toggle('dislexia',fonte); h.setAttribute('data-estilo',estilo);
+  var h=document.documentElement; h.classList.toggle('dislexia',fonte);
   function filtros(){
     if(document.getElementById('dalt-filtros')||!document.body) return;
     var d=document.createElement('div'); d.id='dalt-filtros'; d.setAttribute('aria-hidden','true');

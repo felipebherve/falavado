@@ -179,6 +179,9 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 :root[data-estilo="lovecraft"] body{background:var(--bg)}
 :root[data-estilo="lovecraft"] body::before{content:"";position:fixed;inset:-24px;z-index:-1;pointer-events:none;background:url(img/lc/fundo_mesa.jpg) center/cover no-repeat;filter:blur(2px) brightness(1.15) saturate(1.1);transform:scale(1.03)}
 :root[data-estilo="lovecraft"] body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(9,13,11,.15),rgba(9,13,11,.62) 30%,rgba(9,13,11,.62) 70%,rgba(9,13,11,.15))}
+/* modo claro: a mesma imagem do corredor, clareada para o creme (img/fundo_mesa.jpg), com o centro mais apagado para o texto */
+:root:not([data-estilo="lovecraft"]) body::before{content:"";position:fixed;inset:-24px;z-index:-1;pointer-events:none;background:url(img/fundo_mesa.jpg) center/cover no-repeat;filter:blur(2px);transform:scale(1.03)}
+:root:not([data-estilo="lovecraft"]) body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(233,239,236,.1),rgba(233,239,236,.66) 30%,rgba(233,239,236,.66) 70%,rgba(233,239,236,.1))}
 :root[data-estilo="lovecraft"] h1,:root[data-estilo="lovecraft"] .pergunta b,:root[data-estilo="lovecraft"] .pnome{font-family:"Cinzel",Georgia,serif;letter-spacing:.04em}
 :root[data-estilo="lovecraft"][data-disl="1"] h1,:root[data-estilo="lovecraft"][data-disl="1"] .pergunta b,:root[data-estilo="lovecraft"][data-disl="1"] .pnome{font-family:var(--serif)}
 /* suas IAs: guia do Triboulet (as contas são de quem usa) */
@@ -799,7 +802,7 @@ var USO={db:null,uid:null,dono:false,local:false,
   function fmtTaxa(t){ return String(t).replace('.',',')+'×'; }
 
   /* ---------- configurações (lembradas neste aparelho) ---------- */
-  var CFG={estilo:'antigo',disl:'0',voz:'aparelho',papeis:['disc','dor','ind','fora'],audio:'1'};
+  var CFG={estilo:'lovecraft',disl:'0',voz:'aparelho',papeis:['disc','dor','ind','fora'],audio:'1'};
   ['estilo','disl','voz'].forEach(function(k){ if(typeof CFG0[k]==='string') CFG[k]=CFG0[k]; }); if(Array.isArray(CFG0.papeis)) CFG.papeis=CFG0.papeis.slice();
   /* na mesa do dono, cada mudança nas Configurações vai para dono/config.cfg: é dali que as mesas dos convidados copiam o padrão */
   var guardarCfgDono=function(){};

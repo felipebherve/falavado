@@ -270,7 +270,6 @@ function topo(){
       '<div class="dalt-caixa" id="dalt-caixa" role="radiogroup" data-ta="aria-label:a_dal_h" hidden><p class="dalt-tit" data-t="a_dal_h"></p>'+
       (window.ACESS?ACESS.tipos:[]).map(function(k){ return '<button type="button" role="radio" class="dalt-op" data-d="'+k+'"><i class="amostra '+k+'" aria-hidden="true"></i><span><b data-t="d_'+k+'"></b><small data-t="d_'+k+'_s"></small></span></button>'; }).join('')+
       '<button type="button" class="dalt-fechar" data-t="a_fechar"></button></div>'+
-      '<button type="button" class="a-btn" id="a-tema" data-ta="title:a_tema_t;aria-label:a_tema_t"><span class="a-ic" aria-hidden="true" id="a-tema-ic">🌙</span><span class="a-txt" id="a-tema-txt"></span></button></div>'+
     '<div class="idiomas" role="group" data-ta="aria-label:lang_aria"><button type="button" data-l="pt" title="Português">PT</button><button type="button" data-l="en" title="English">EN</button><button type="button" data-l="es" title="Español">ES</button></div></div>';
   document.body.insertBefore(b,document.body.firstChild);
   b.querySelectorAll('.idiomas button').forEach(function(x){ x.addEventListener('click',function(){ escolher(x.dataset.l); }); });
@@ -291,11 +290,6 @@ function acessibilidade(b){
   }
   function abrir(v){ cx.hidden=!v; dal.setAttribute('aria-expanded',String(v)); if(v){ var o=cx.querySelector('[aria-checked="true"]')||cx.querySelector('.dalt-op'); o.focus(); } }
   dis.addEventListener('click',function(){ ACESS.setFonte(!ACESS.fonte()); marcar(); });
-  /* modo claro ou escuro: vale para o site e para a mesa (a mesma escolha guardada no navegador) */
-  var tm=b.querySelector('#a-tema');
-  function tema(){ var esc=ACESS.estilo()==='lovecraft'; b.querySelector('#a-tema-ic').textContent=esc?'🌙':'☀'; b.querySelector('#a-tema-txt').textContent=t(esc?'a_escuro':'a_claro'); tm.setAttribute('aria-pressed',String(esc)); }
-  tm.addEventListener('click',function(){ ACESS.setEstilo(ACESS.estilo()==='lovecraft'?'antigo':'lovecraft'); tema(); });
-  document.addEventListener('idioma',tema); tema();
   dal.addEventListener('click',function(e){ e.stopPropagation(); abrir(cx.hidden); });
   cx.addEventListener('click',function(e){ e.stopPropagation(); });
   cx.querySelectorAll('.dalt-op').forEach(function(o){ o.addEventListener('click',function(){ ACESS.setDalt(o.dataset.d); marcar(); }); });
