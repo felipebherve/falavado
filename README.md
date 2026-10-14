@@ -2,6 +2,8 @@
 
 **A mesa dos pensadores, servida pelo bufão Triboulet.**
 
+### 🌐 Site: [https://felipebherve.github.io/falavado/](https://felipebherve.github.io/falavado/)
+
 <!-- nav -->
 🌐 **Português** · [English](README.en.md) · [Español](README.es.md)
 
