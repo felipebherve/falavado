@@ -49,6 +49,10 @@ h1{font-family:var(--serif);font-weight:600;font-size:1.9rem;line-height:1.15;ma
 /* pergunta aberta: o balão desce junto com a rolagem, até o fim da própria rodada (a próxima conversa é o limite), e um toque nele fecha */
 .pergunta[aria-expanded="true"]{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:6;scroll-margin-top:calc(72px + env(safe-area-inset-top,0px))}
 .pergunta[aria-expanded="true"]+.painel .voltar{position:static}
+/* enquanto desce junto, o balão encolhe para uma linha só, com "…" no fim, para não tapar a leitura no celular */
+.pergunta.preso{padding-top:9px;padding-bottom:9px}
+.pergunta.preso b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1rem}
+.pergunta.preso small{display:none}
 .painel{margin:6px 0 0 14px;padding:10px 0 4px 16px;border-left:3px solid var(--line)}
 .minha{margin:0 0 26px;padding:2px 0 0;border:0;background:none}
 .minha h3{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 4px;font-weight:600}
@@ -1142,6 +1146,11 @@ var USO={db:null,uid:null,dono:false,local:false,
     sec.appendChild(b); sec.appendChild(p); return sec;
   }
 
+  /* marca o balão aberto que está descendo junto (a rodada já passou do topo) para ele ficar com uma linha só */
+  var presoRaf=0;
+  function marcarPresos(){ presoRaf=0; var lim=70; document.querySelectorAll('.rod').forEach(function(sec){ var b=sec.firstChild; if(!b||!b.classList) return; var ab=b.getAttribute('aria-expanded')==='true', r=sec.getBoundingClientRect(); b.classList.toggle('preso',ab&&r.top<lim-4&&r.bottom>lim+b.offsetHeight); }); }
+  window.addEventListener('scroll',function(){ if(!presoRaf) presoRaf=requestAnimationFrame(marcarPresos); },{passive:true});
+  document.addEventListener('click',function(){ setTimeout(marcarPresos,0); });
   lb.addEventListener('click',function(){ lb.hidden=true; im.removeAttribute('src'); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ lb.hidden=true; $pal.hidden=true; P.fechado=true; atualizarMini(); } });
 
