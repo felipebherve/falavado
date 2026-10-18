@@ -139,7 +139,8 @@ details .intro{color:var(--muted);font-size:.9rem;margin:0 0 8px}
 .ppapel{color:var(--muted);font-size:.9rem;margin:2px 0 0}
 .ptexto{flex:1;min-height:0;overflow:auto;font-family:var(--serif);font-size:clamp(1.25rem,5.4vw,1.7rem);line-height:1.55;padding:6px 2px;overflow-wrap:anywhere}
 .pvoz{margin:0;color:var(--muted);font-size:.82rem}
-.pctl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.pctl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:480px){.pctl{grid-template-columns:1fr 1fr;gap:8px}.pctl button{min-height:46px}}
 .pctl button{font:inherit;font-weight:600;font-size:1rem;min-height:52px;color:var(--ink);background:var(--surface);border:1.5px solid var(--accent);border-radius:14px;padding:6px 8px;cursor:pointer}
 .pfechar{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.3rem;cursor:pointer}
 /* janelinha minimizada */
@@ -622,7 +623,7 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <div class="ptopo"><div class="ppin" id="p-pin" aria-hidden="true"></div><div><p class="pnome" id="p-nome"></p><p class="ppapel" id="p-papel"></p></div></div>
 <div class="ptexto" id="p-texto" tabindex="0"></div>
 <p class="pvoz" id="p-voz"></p>
-<div class="pctl"><button type="button" id="p-pausa">Pausar</button><button type="button" id="p-vel">Velocidade 1×</button><button type="button" id="p-prox">Próximo ›</button></div>
+<div class="pctl"><button type="button" id="p-pausa">Pausar</button><button type="button" id="p-vel">Velocidade 1×</button><button type="button" id="p-ant">‹ Anterior</button><button type="button" id="p-prox">Próximo ›</button></div>
 </div>
 
 <div class="mini" id="mini" hidden role="region" aria-label="Fala tocando"><div class="minidentro"><button type="button" class="miniabrir" id="mini-abrir" aria-label="Voltar para a fala em tela cheia"><span class="minipin" id="m-pin" aria-hidden="true"></span><span class="mininome" id="m-nome"></span><span class="minibar">Abrir ⌃</span></button><button type="button" class="miniparar" id="mini-parar" aria-label="Parar a leitura">■ Parar</button></div></div>
@@ -725,7 +726,7 @@ var I18N=(function(){
 'Registro dos convidados':'Guest log',
 'Só você vê isto. Cada convidado que usa a mesa pelo seu link fica guardado aqui: o nome de anfitrião, os pensamentos levados à mesa, as falas e as respostas.':'Only you see this. Every guest who uses the table through your link is kept here: the host name, the thoughts brought to the table, the speeches and the replies.',
 'Retratos ilustrados no Gemini a partir de três imagens de referência de cada pessoa, da Wikimedia Commons (domínio público ou licença livre).':'Portraits illustrated in Gemini from three reference images of each person, from Wikimedia Commons (public domain or free license).',
-'← Voltar':'← Back','✕ Fechar':'✕ Close','Pausar':'Pause','Próximo ›':'Next ›','Abrir ⌃':'Open ⌃','Seu registro em MD':'Your MD log','Eu guardo cada pensamento e as falas dos pensadores num arquivo Markdown. Guarde o arquivo e, numa conversa nova do falavado no Claude, anexe-o (ou deixe-o nos arquivos do seu Projeto): assim os pensadores retomam o que já foi conversado sem reler tudo.':'I keep each thought and the thinkers\' speeches in a Markdown file. Save it and, in a new falavado chat in Claude, attach it (or keep it in your Project files): the thinkers then pick up what was already said without rereading everything.','Guardar o registro (.md)':'Save the log (.md)','Copiar o registro':'Copy the log','Ainda não há rodadas para guardar.':'There are no rounds to save yet.','Ainda não há rodadas para copiar.':'There are no rounds to copy yet.','Tudo bem, não guardei.':'All right, I did not save it.','Ouvir com narrador':'Listen with the narrator','Narrador Daniel e Maria':'Daniel and Maria narrator','Dislexia':'Dyslexia','Claro':'Light','Escuro':'Dark','Modo claro ou escuro':'Light or dark mode','Menos um participante':'One participant fewer','Mais um participante':'One more participant','participantes':'participants','Só o aleatório':'Random only','SORTEIO':'DRAW','Escolha quantos participantes e como sortear, e puxe a alavanca.':'Choose how many participants and how to draw, then pull the lever.','Sorteando…':'Drawing…','Triboulet está escolhendo os mais aptos…':'Triboulet is picking the fittest…','Daltonismo':'Color blindness','Escolha o seu tipo: as cores da página se ajustam.':'Pick your type: the page colors adjust.','Cores Básicas':'Basic colors','Protanopia (vermelho)':'Protanopia (red)','Deuteranopia (verde)':'Deuteranopia (green)','Tritanopia (azul)':'Tritanopia (blue)','Acromatopsia (sem cores)':'Achromatopsia (no colors)','Este aparelho não tem as vozes Daniel e Maria da Microsoft (vêm no Windows e no navegador Edge). Toquei com a voz do aparelho.':'This device lacks the Microsoft Daniel and Maria voices (they come with Windows and the Edge browser). I played the device voice instead.','■ Parar':'■ Stop','Fala tocando':'Speech playing','Toque para fechar':'Tap to close',
+'← Voltar':'← Back','✕ Fechar':'✕ Close','Pausar':'Pause','Próximo ›':'Next ›','‹ Anterior':'‹ Previous','Abrir ⌃':'Open ⌃','Seu registro em MD':'Your MD log','Eu guardo cada pensamento e as falas dos pensadores num arquivo Markdown. Guarde o arquivo e, numa conversa nova do falavado no Claude, anexe-o (ou deixe-o nos arquivos do seu Projeto): assim os pensadores retomam o que já foi conversado sem reler tudo.':'I keep each thought and the thinkers\' speeches in a Markdown file. Save it and, in a new falavado chat in Claude, attach it (or keep it in your Project files): the thinkers then pick up what was already said without rereading everything.','Guardar o registro (.md)':'Save the log (.md)','Copiar o registro':'Copy the log','Ainda não há rodadas para guardar.':'There are no rounds to save yet.','Ainda não há rodadas para copiar.':'There are no rounds to copy yet.','Tudo bem, não guardei.':'All right, I did not save it.','Ouvir com narrador':'Listen with the narrator','Narrador Daniel e Maria':'Daniel and Maria narrator','Dislexia':'Dyslexia','Claro':'Light','Escuro':'Dark','Modo claro ou escuro':'Light or dark mode','Menos um participante':'One participant fewer','Mais um participante':'One more participant','participantes':'participants','Só o aleatório':'Random only','SORTEIO':'DRAW','Escolha quantos participantes e como sortear, e puxe a alavanca.':'Choose how many participants and how to draw, then pull the lever.','Sorteando…':'Drawing…','Triboulet está escolhendo os mais aptos…':'Triboulet is picking the fittest…','Daltonismo':'Color blindness','Escolha o seu tipo: as cores da página se ajustam.':'Pick your type: the page colors adjust.','Cores Básicas':'Basic colors','Protanopia (vermelho)':'Protanopia (red)','Deuteranopia (verde)':'Deuteranopia (green)','Tritanopia (azul)':'Tritanopia (blue)','Acromatopsia (sem cores)':'Achromatopsia (no colors)','Este aparelho não tem as vozes Daniel e Maria da Microsoft (vêm no Windows e no navegador Edge). Toquei com a voz do aparelho.':'This device lacks the Microsoft Daniel and Maria voices (they come with Windows and the Edge browser). I played the device voice instead.','■ Parar':'■ Stop','Fala tocando':'Speech playing','Toque para fechar':'Tap to close',
 'Como funciona':'How it works','Anfitrião da mesa':'Host of the table','Nome do anfitrião':'Host name','Atalhos':'Shortcuts',
 'Novo pensamento para a mesa':'New thought for the table','Escreva aqui o que você está pensando…':"Write here what you're thinking…",
 'Quantos homens e quantas mulheres no mesclado':'How many men and women in the mix','Participantes':'Participants',
@@ -1003,7 +1004,7 @@ var USO={db:null,uid:null,dono:false,local:false,
   function iniciarTick(){ if(rafId) cancelAnimationFrame(rafId); rafId=requestAnimationFrame(tick); }
 
   /* ---------- tela cheia e controles de reprodução ---------- */
-  var $pal=document.getElementById('palco'), $ppin=document.getElementById('p-pin'), $pn=document.getElementById('p-nome'), $pp=document.getElementById('p-papel'), $pt=document.getElementById('p-texto'), $pv=document.getElementById('p-voz'), $bp=document.getElementById('p-pausa'), $bv=document.getElementById('p-vel'), $bx=document.getElementById('p-prox'), $auto=document.getElementById('tela-auto'), $mini=document.getElementById('mini'), $mpin=document.getElementById('m-pin'), $mn=document.getElementById('m-nome');
+  var $pal=document.getElementById('palco'), $ppin=document.getElementById('p-pin'), $pn=document.getElementById('p-nome'), $pp=document.getElementById('p-papel'), $pt=document.getElementById('p-texto'), $pv=document.getElementById('p-voz'), $bp=document.getElementById('p-pausa'), $bv=document.getElementById('p-vel'), $bx=document.getElementById('p-prox'), $ba=document.getElementById('p-ant'), $auto=document.getElementById('tela-auto'), $mini=document.getElementById('mini'), $mpin=document.getElementById('m-pin'), $mn=document.getElementById('m-nome');
   var TAXAS=[1,1.25,1.5,1.75,2,0.75];
   var P={r:null,cards:[],modo:null,i:-1,aud:null,taxa:1,fechado:false};
   $auto.checked=true;
@@ -1043,7 +1044,7 @@ var USO={db:null,uid:null,dono:false,local:false,
     if(P.modo==='aparelho'){ P.aud.proximaFala(); return; }
     if(P.modo==='narracao'){
       var m=P.r.narracao_marcas||[], t=P.aud.currentTime;
-      for(var k=0;k<m.length;k++){ if(m[k]>t+0.3){ P.aud.currentTime=m[k]; return; } }
+      for(var k=0;k<m.length;k++){ if(m[k]>t+0.3){ P.aud.currentTime=m[k]; mostrar(k); return; } }
       P.aud.pause(); fim(); return;
     }
     for(var j=P.i+1;j<P.r.falas.length;j++){
@@ -1054,6 +1055,21 @@ var USO={db:null,uid:null,dono:false,local:false,
   $bp.addEventListener('click',function(){ if(!P.aud) return; if(P.aud.paused){ var pr=P.aud.play(); if(pr&&pr.catch) pr.catch(function(){}); } else P.aud.pause(); atualizarBotoes(); });
   $bv.addEventListener('click',function(){ var k=TAXAS.indexOf(P.taxa); P.taxa=TAXAS[(k+1)%TAXAS.length]; if(P.aud) P.aud.playbackRate=P.taxa; atualizarBotoes(); });
   $bx.addEventListener('click',proxima);
+  /* Anterior: volta para a fala de antes (na primeira, recomeça a mesma) */
+  function anterior(){
+    if(!P.aud||!P.r) return;
+    if(P.modo==='aparelho'){ P.aud.anteriorFala(); return; }
+    if(P.modo==='narracao'){
+      var m=P.r.narracao_marcas||[], t=P.aud.currentTime, i=0;
+      for(var k=0;k<m.length;k++){ if(t>=m[k]-0.05) i=k; }
+      P.aud.currentTime=m.length?m[Math.max(0,i-1)]:0; mostrar(Math.max(0,i-1)); return;
+    }
+    for(var j=P.i-1;j>=0;j--){
+      if(P.r.falas[j].audio){ var a=P.cards[j].querySelector('audio'); if(a){ P.aud.pause(); a.currentTime=0; a.playbackRate=P.taxa; var pr=a.play(); if(pr&&pr.catch) pr.catch(function(){}); return; } }
+    }
+    P.aud.currentTime=0;
+  }
+  $ba.addEventListener('click',anterior);
   function pararTudo(){ if(LEIT){ LEIT.parar(); } else if(P.aud){ try{ P.aud.pause(); }catch(e){} } fim(); }
   document.getElementById('p-parar').addEventListener('click',pararTudo);
   /* botão flutuante: depois de Voltar, a fala continua; Abrir volta à tela cheia e Parar encerra a leitura */
@@ -1677,7 +1693,8 @@ var USO={db:null,uid:null,dono:false,local:false,
     var A={paused:false,playbackRate:1,
       play:function(){ if(A.paused){ A.paused=false; falar(L.i); atualizarBotoes(); } return Promise.resolve(); },
       pause:function(){ A.paused=true; L.g++; ss.cancel(); atualizarBotoes(); },
-      proximaFala:function(){ L.g++; ss.cancel(); if(L.i+1>=r.falas.length) terminar(); else falar(L.i+1); }};
+      proximaFala:function(){ L.g++; ss.cancel(); if(L.i+1>=r.falas.length) terminar(); else falar(L.i+1); },
+      anteriorFala:function(){ L.g++; ss.cancel(); A.paused=false; falar(Math.max(0,L.i-1)); }};
     function terminar(){ L.g++; try{ ss.cancel(); }catch(e){} btn.textContent=ROTOUVIR(); if(P.aud===A) fim(); if(LEIT===L) LEIT=null; }
     L.parar=terminar;
     function falar(i){
