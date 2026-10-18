@@ -1832,9 +1832,9 @@ var USO={db:null,uid:null,dono:false,local:false,
   }
   document.getElementById('a-slot').addEventListener('click',girar);
   /* botão abaixo do sorteio: recolhe e mostra a lista de pensadores (fica guardado neste navegador) */
-  var $pt=document.getElementById('pens-toggle');
-  function recolher(sim){ $chips.classList.toggle('recolhido',sim); $pt.setAttribute('aria-expanded',String(!sim)); try{ localStorage.setItem('pens_recolhidos',sim?'1':'0'); }catch(e){} }
-  $pt.addEventListener('click',function(){ recolher(!$chips.classList.contains('recolhido')); });
+  var $ptg=document.getElementById('pens-toggle');
+  function recolher(sim){ $chips.classList.toggle('recolhido',sim); $ptg.setAttribute('aria-expanded',String(!sim)); try{ localStorage.setItem('pens_recolhidos',sim?'1':'0'); }catch(e){} }
+  $ptg.addEventListener('click',function(){ recolher(!$chips.classList.contains('recolhido')); });
   (function(){ var v=null; try{ v=localStorage.getItem('pens_recolhidos'); }catch(e){} recolher(v!=='0'); })();
   /* a tela do sorteio mostra quem está à mesa (escolhido à mão ou sorteado), parado como nos rolos */
   function mostrarEscolhidos(){ if(GIRANDO||!$rolos) return; var sel=elenco.filter(function(p){ return escolhidos[p.id]&&!p.tri; });
