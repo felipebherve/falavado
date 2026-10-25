@@ -43,8 +43,10 @@ h1{font-family:var(--serif);font-weight:600;font-size:1.9rem;line-height:1.15;ma
 .pergunta.preso .num-rod{min-width:28px;height:28px;font-size:.9rem}
 .pergunta b{display:block;font-family:var(--serif);font-weight:600;font-size:1.08rem;line-height:1.3;text-wrap:balance}
 .pergunta small{display:block;color:var(--muted);font-size:.85rem;margin-top:2px}
-.pergunta .seta{flex:none;width:10px;height:10px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .18s}
-.pergunta[aria-expanded="true"] .seta{transform:rotate(-135deg)}
+.pergunta .seta{flex:none;position:relative;width:32px;height:32px;border:2px solid var(--accent);border-radius:50%;transition:transform .18s}
+.pergunta .seta::before{content:"";position:absolute;left:50%;top:44%;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:translate(-50%,-50%) rotate(45deg)}
+.pergunta[aria-expanded="true"] .seta{transform:rotate(180deg)}
+.pergunta[aria-expanded="true"] .seta::before{border-color:#f5c542}
 .pergunta[aria-expanded="true"]{border:2px solid #f5c542;box-shadow:0 0 0 2px rgba(245,197,66,.35),0 0 18px 4px rgba(245,197,66,.45)}
 .pergunta[aria-expanded="true"] .seta{border-color:#f5c542}
 .pergunta[aria-expanded="true"]+.painel{border-left-color:#f5c542}
@@ -262,8 +264,21 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .config label.bloq{opacity:.62;cursor:not-allowed}
 .config .bloqnota{margin:-2px 0 0 28px;padding:8px 10px;border-left:3px solid var(--warm);background:var(--bg);border-radius:0 10px 10px 0;font-size:.86rem;color:var(--ink)}
 /* voz: aparelho (grátis) ou Gemini */
-.ouvir{display:none}
-:root[data-voz="aparelho"] .ouvir,:root[data-voz="danielmaria"] .ouvir,.ouvir.sempre{display:inline-block}
+/* os dois jeitos de ouvir ficam sempre; o padrão das Configurações fica em dourado */
+.ouvir-par{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.ouvir-par .ouvir{margin:0}
+:root:not([data-voz="danielmaria"]) .ouvir[data-modo="aparelho"],:root[data-voz="danielmaria"] .ouvir[data-modo="danielmaria"]{border:2px solid #f5c542;box-shadow:0 0 10px rgba(245,197,66,.35)}
+.ouvir-fala{display:inline-block;margin:2px 8px 8px 0;font:inherit;font-size:.86rem;font-weight:600;color:var(--ink);background:transparent;border:1px solid var(--accent);border-radius:999px;padding:5px 12px;cursor:pointer}
+.ouvir-fala:focus-visible,.mic:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* microfone: dita o pensamento */
+.balao{position:relative}
+.balao textarea{padding-right:60px}
+.mic{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;border:2px solid var(--accent);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.mic svg{width:22px;height:22px}
+.mic.ouvindo{background:#c0392b;border-color:#ffb3a8;color:#fff;animation:micpulsa 1.2s ease-in-out infinite}
+@keyframes micpulsa{0%,100%{box-shadow:0 0 0 0 rgba(192,57,43,.55)}50%{box-shadow:0 0 0 9px rgba(192,57,43,0)}}
+@media (prefers-reduced-motion:reduce){.mic.ouvindo{animation:none}}
+.mic-aviso{margin:6px 2px 0;font-size:.86rem;color:var(--muted)}
 .pedeaudio{display:none}
 :root[data-voz="gemini"] .pedeaudio{display:block}
 .fila{margin:0 0 12px;color:var(--muted);font-size:.9rem}
@@ -298,7 +313,14 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .config>summary{list-style:none;cursor:pointer;text-align:center;font-family:var(--sans);font-weight:700;font-size:1.3rem;padding:18px 20px;border-radius:14px;background:#ff8a00;color:#111;border:2px solid #111;box-shadow:0 0 0 2px #ff8a00;letter-spacing:.03em}
 .config>summary::-webkit-details-marker{display:none}
 .config[open]>summary{text-align:left;border-bottom-left-radius:0;border-bottom-right-radius:0}
-.config[open]>summary::before{content:"▾ "}
+/* seta redonda nos balões que abrem: mostra que dá para tocar e estender */
+.config>summary,.contas>summary{position:relative}
+.config>summary{padding-right:58px;padding-left:58px}
+.config>summary::after,.contas>summary::after{content:"▾";display:inline-flex;align-items:center;justify-content:center;flex:none;width:32px;height:32px;border:2px solid currentColor;border-radius:50%;font-size:1.15rem;line-height:1;transition:transform .18s}
+.config>summary::after{position:absolute;right:14px;top:50%;margin-top:-18px}
+.contas>summary::after{margin-left:auto;color:var(--accent)}
+.config[open]>summary::after,.contas[open]>summary::after{transform:rotate(180deg)}
+@media (prefers-reduced-motion:reduce){.config>summary::after,.contas>summary::after,.pergunta .seta{transition:none}}
 .cfgbody{border:2px solid #ff8a00;border-top:0;margin:0 -2px;background:var(--surface);padding:14px;border-radius:0 0 14px 14px;box-shadow:0 2px 0 0 #ff8a00}
 .config .papel{padding:8px 12px;border-radius:10px;border:1px solid var(--tom);border-left-width:6px;font-weight:600;text-shadow:0 0 3px var(--bg),0 0 6px var(--bg),0 1px 2px var(--bg),0 -1px 2px var(--bg)}
 .config .papel input{accent-color:var(--tom)}
@@ -543,7 +565,8 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 <fieldset id="cfg-enxuto-box"><legend>Gasto de tokens</legend>
 <label><input type="checkbox" id="cfg-enxuto"> Resumo enxuto: a cada rodada nova, eu guardo um resumo bem curto do que foi dito, e as próximas rodadas leem só esses resumos em vez de reler tudo. Gasta muito menos tokens.</label></fieldset>
 <fieldset><legend>Voz das falas (sempre com áudio)</legend>
-<label><input type="radio" name="cfg-voz" value="aparelho"> Voz do aparelho (grátis, padrão): toca na hora no celular</label>
+<p class="nota">Em cada rodada ficam sempre os dois botões, Ouvir com a voz do aparelho e Ouvir com narrador, e cada fala tem o seu botão de ouvir. Aqui você escolhe o padrão: ele fica em dourado e é a voz do botão de cada fala.</p>
+<label><input type="radio" name="cfg-voz" value="aparelho"> Voz do aparelho (grátis, padrão): o leitor natural do celular ou do computador, toca na hora</label>
 <label><input type="radio" name="cfg-voz" value="danielmaria"> Narrador Daniel e Maria (gratuito, funciona apenas nos navegadores do Windows: Edge, Chrome, Firefox e Opera)</label>
 <label class="so-grava voz-pc"><input type="radio" name="cfg-voz" value="computador"> Vozes Daniel e Maria: geradas no computador do meu rei Herbs, com gasto incrivelmente baixo. O pedido fica na fila e eu gero quando o Claude do computador dele estiver aberto</label>
 <label class="bloq"><input type="radio" name="cfg-voz" value="gemini" disabled aria-describedby="gem-bloq"> 🔒 Vozes do Gemini (bloqueadas por enquanto)</label>
@@ -560,7 +583,7 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 
 <section class="novo" aria-label="Novo pensamento para a mesa">
 <h2>Leve um pensamento à mesa</h2>
-<div class="balao"><label for="pens" style="position:absolute;left:-9999px">Seu pensamento</label><textarea id="pens" maxlength="2000" placeholder="Escreva aqui o que você está pensando…"></textarea></div>
+<div class="balao"><label for="pens" style="position:absolute;left:-9999px">Seu pensamento</label><textarea id="pens" maxlength="2000" placeholder="Escreva aqui o que você está pensando…"></textarea><button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Falar o pensamento" title="Falar o pensamento"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v4"/><path d="M8 22h8"/></svg></button></div><p class="mic-aviso" id="mic-aviso" hidden aria-live="polite"></p>
 <h3>Quem participa</h3>
 <button type="button" class="limpar-grande" id="a-limpar">Limpar toda a escolha de participantes</button>
 <div class="atalhos grade trio">
@@ -735,7 +758,7 @@ var I18N=(function(){
 'Fechar a leitura e voltar ao site':'Close the reading and go back to the site','Voltar para a fala em tela cheia':'Back to the full-screen speech','Retrato ampliado':'Enlarged portrait',
 'Falta o anfitrião':'Host missing','Claude indisponível aqui':'Claude unavailable here','Escolha a sua':'Choose yours','Falta a chave':'Key missing','Diga quem é o anfitrião':'Say who the host is','Marque pelo menos uma':'Check at least one',
 'Majestade! Reconheci a senha do meu rei. A mesa é sua, Herbs.':'Majesty! I recognized my king\'s password. The table is yours, Herbs.',
-'Ouvir com a voz do aparelho':'Listen with the device voice','Parar a leitura':'Stop the reading','Recolher esta rodada':'Collapse this round','← Voltar às rodadas':'← Back to the rounds',
+'Ouvir com a voz do aparelho':'Listen with the device voice','🔊 Ouvir esta fala':'🔊 Listen to this speech','Falar o pensamento':'Speak your thought','Parar de ditar':'Stop dictating','Estou ouvindo. Fale o seu pensamento; toque de novo no microfone para parar.':'I am listening. Say your thought; tap the microphone again to stop.','Este navegador não tem ditado por voz. Use o microfone do teclado do celular: ele também escreve o que você fala.':'This browser has no voice dictation. Use the microphone on your phone keyboard: it also writes what you say.','O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.':'The microphone is not allowed here. Allow the microphone for this page in the browser, or use the microphone on your phone keyboard.','Não ouvi nada. Toque no microfone e fale de novo.':'I heard nothing. Tap the microphone and speak again.','Em cada rodada ficam sempre os dois botões, Ouvir com a voz do aparelho e Ouvir com narrador, e cada fala tem o seu botão de ouvir. Aqui você escolhe o padrão: ele fica em dourado e é a voz do botão de cada fala.':'Every round always has both buttons, Listen with the device voice and Listen with the narrator, and every speech has its own listen button. Here you pick the default: it is shown in gold and is the voice of each speech button.','Voz do aparelho (grátis, padrão): o leitor natural do celular ou do computador, toca na hora':'Device voice (free, default): the built-in reader of your phone or computer, plays right away','Parar a leitura':'Stop the reading','Recolher esta rodada':'Collapse this round','← Voltar às rodadas':'← Back to the rounds',
 'Pedir as vozes do Gemini desta rodada':'Request the Gemini voices for this round','As vozes do Gemini têm limite diário gratuito. A narração automática fica sempre disponível.':'Gemini voices have a free daily limit. The automatic narration is always available.',
 'As falas que já têm voz do Gemini, uma depois da outra.':'The speeches that already have a Gemini voice, one after the other.',
 'Áudio do Gemini ainda não gerado para esta fala.':'Gemini audio not generated yet for this speech.','Copiar texto do estilo':'Copy style text','Selecionado, copie manualmente':'Selected, copy it manually',
@@ -1024,7 +1047,7 @@ var USO={db:null,uid:null,dono:false,local:false,
   }
   function rotuloVoz(i){
     var f=P.r.falas[i];
-    if(P.modo==='aparelho') return 'Voz desta fala: '+(CFG.voz==='danielmaria'&&L_DM?'narrador Daniel e Maria':'voz do aparelho')+(P.vozNome?' ('+P.vozNome+')':'')+', no jeito de falar de cada um. Grátis.';
+    if(P.modo==='aparelho') return 'Voz desta fala: '+(L_DM?'narrador Daniel e Maria':'voz do aparelho')+(P.vozNome?' ('+P.vozNome+')':'')+', no jeito de falar de cada um. Grátis.';
     if(P.modo==='narracao'){ var v=(P.r.narracao_vozes||[])[i]; return 'Voz desta fala: '+(v?'Microsoft '+v+' (voz do Windows, no computador)':'voz do Windows')+'. Não é o Gemini.'; }
     return 'Voz desta fala: '+(f.voz_gemini||'Gemini')+'.';
   }
@@ -1102,6 +1125,8 @@ var USO={db:null,uid:null,dono:false,local:false,
     } else { var c=el('div','chapeu'); c.innerHTML=CHAPEU; art.appendChild(c); }
     var q=el('p','quem',f.quem+' '); q.appendChild(el('small',null,f.papel||'')); art.appendChild(q);
     art.appendChild(el('p','texto',f.texto));
+    /* ouvir só esta fala, na voz padrão das Configurações */
+    if('speechSynthesis' in window){ var uf=el('button','ouvir-fala','🔊 Ouvir esta fala'); uf.type='button'; uf.dataset.rot='🔊 Ouvir esta fala'; var rf=null; uf.addEventListener('click',function(){ if(!rf) rf={id:r.id+'_f'+k,idioma:r.idioma,falas:[f]}; lerRodada(rf,[art],uf); }); art.appendChild(uf); }
     if(f.audio){ var p=el('div','player'); p.appendChild(audio(f.audio)); art.appendChild(p); art.appendChild(el('p','vozinfo','Voz: '+(f.voz_gemini||'Gemini'))); }
     else if(CFG.voz==='gemini') art.appendChild(el('p','sem','Áudio do Gemini ainda não gerado para esta fala.'));
     var fio=el('div','fio'); fio.dataset.rid=r.id; fio.dataset.k=String(k); art.appendChild(fio);
@@ -1157,7 +1182,8 @@ var USO={db:null,uid:null,dono:false,local:false,
       else nbb.addEventListener('click',pedirAudio(r,nbm,'narracao'));
       npe.appendChild(nbb); npe.appendChild(nbm); d.appendChild(npe);
     }
-    if((r.falas||[]).length&&('speechSynthesis' in window)){ var ob=el('button','ouvir'+(r.narracao?'':' sempre'),ROTOUVIR()); ob.type='button'; ob.addEventListener('click',function(){ lerRodada(r,cards,ob); }); d.appendChild(ob); }
+    /* os dois jeitos de ouvir ficam sempre: voz do aparelho e narrador (Daniel e Maria); o padrão das Configurações fica em dourado */
+    if((r.falas||[]).length&&('speechSynthesis' in window)){ var op=el('div','ouvir-par'); [['aparelho','Ouvir com a voz do aparelho'],['danielmaria','Ouvir com narrador']].forEach(function(m){ var ob=el('button','ouvir',m[1]); ob.type='button'; ob.dataset.modo=m[0]; ob.dataset.rot=m[1]; ob.addEventListener('click',function(){ lerRodada(r,cards,ob,m[0]); }); op.appendChild(ob); }); d.appendChild(op); }
     if(r.pergunta){ var m=el('blockquote','minha'); m.appendChild(el('h3',null,'Sua mensagem à mesa')); m.appendChild(el('p',null,r.pergunta)); d.appendChild(m); }
     if(r.vivo){ var fl=el('p','fila',''); fl.dataset.rid=r.id; d.appendChild(fl); }
     var pa=el('div','pedeaudio so-dono'); var pb=el('button',null,'Pedir as vozes do Gemini desta rodada'); pb.type='button'; var pm=el('span',null,'As vozes do Gemini têm limite diário gratuito. A narração automática fica sempre disponível.'); pb.addEventListener('click',pedirAudio(r,pm)); pa.appendChild(pb); pa.appendChild(pm); d.appendChild(pa);
@@ -1680,22 +1706,23 @@ var USO={db:null,uid:null,dono:false,local:false,
   }
   var JEITO={'Marco Aurélio':[0.90,-1],'Jung':[0.95,0],'Espinosa':[0.92,1],'Diógenes':[1.06,2],'Nietzsche':[1.08,-2],'Sartre':[1.02,1],'Triboulet':[1.12,3],'Hipátia de Alexandria':[0.95,0],'Hannah Arendt':[0.92,-2],'Émilie du Châtelet':[1.06,2],'Hipárquia de Maroneia':[1.08,1],'Simone Weil':[0.90,-1],'Sor Juana Inés de la Cruz':[0.97,1],'Ben Barres':[0.97,-1],'Paul B. Preciado':[1.0,0],'Sophie Wilson':[1.0,1],'Raewyn Connell':[0.95,0],'Paulo Freire':[0.94,0],'Michel Foucault':[1.04,1],'Karl Marx':[0.98,-2],'Donna Haraway':[1.02,0]};
   var LEIT=null, L_DM=false;
-  function lerRodada(r,cards,btn){
+  function lerRodada(r,cards,btn,modo){
     var ss=window.speechSynthesis; if(!ss) return;
-    if(LEIT){ var mesma=LEIT.r===r; LEIT.parar(); if(mesma) return; }
+    modo=modo||(CFG.voz==='danielmaria'?'danielmaria':'aparelho');
+    if(LEIT){ var mesma=LEIT.r===r&&LEIT.btn===btn; LEIT.parar(); if(mesma) return; }
     ss.cancel();
     var en=r.idioma==='en', todas=ss.getVoices().filter(function(v){ return (en?/^en/i:r.idioma==='es'?/^es/i:/^pt/i).test(v.lang); });
     var fem=todas.filter(function(v){ return /maria|francisca|luciana|female|feminina|helena|vitoria|zira|samantha|susan|hazel|aria|jenny|karen|moira|tessa|libby|sonia/i.test(v.name); }), mas=todas.filter(function(v){ return fem.indexOf(v)<0; });
     var gen={}; elenco.forEach(function(p){ gen[p.nome]=p.genero; });
-    function dm(){ L_DM=false; if(CFG.voz!=='danielmaria') return; var d=todas.filter(function(v){ return /daniel/i.test(v.name); }), m=todas.filter(function(v){ return /maria/i.test(v.name); }); if(d.length) mas=d; if(m.length) fem=m; L_DM=!!(d.length&&m.length); }
+    function dm(){ L_DM=false; if(modo!=='danielmaria') return; var d=todas.filter(function(v){ return /daniel/i.test(v.name); }), m=todas.filter(function(v){ return /maria/i.test(v.name); }); if(d.length) mas=d; if(m.length) fem=m; L_DM=!!(d.length&&m.length); }
     dm();
-    var L={r:r,i:0,g:0,ini:false}; LEIT=L;
+    var L={r:r,btn:btn,i:0,g:0,ini:false}; LEIT=L;
     var A={paused:false,playbackRate:1,
       play:function(){ if(A.paused){ A.paused=false; falar(L.i); atualizarBotoes(); } return Promise.resolve(); },
       pause:function(){ A.paused=true; L.g++; ss.cancel(); atualizarBotoes(); },
       proximaFala:function(){ L.g++; ss.cancel(); if(L.i+1>=r.falas.length) terminar(); else falar(L.i+1); },
       anteriorFala:function(){ L.g++; ss.cancel(); A.paused=false; falar(Math.max(0,L.i-1)); }};
-    function terminar(){ L.g++; try{ ss.cancel(); }catch(e){} btn.textContent=ROTOUVIR(); if(P.aud===A) fim(); if(LEIT===L) LEIT=null; }
+    function terminar(){ L.g++; try{ ss.cancel(); }catch(e){} btn.textContent=btn.dataset.rot||ROTOUVIR(); if(P.aud===A) fim(); if(LEIT===L) LEIT=null; }
     L.parar=terminar;
     function falar(i){
       L.i=i; var f=r.falas[i], meu=++L.g;
@@ -1711,7 +1738,7 @@ var USO={db:null,uid:null,dono:false,local:false,
       ss.speak(u); atualizarMini(); iniciarTick();
     }
     btn.textContent='Parar a leitura';
-    function comecar(){ if(LEIT!==L) return; var v=ss.getVoices(); if(v.length&&!todas.length){ todas=v.filter(function(x){ return (en?/^en/i:r.idioma==='es'?/^es/i:/^pt/i).test(x.lang); }); fem=todas.filter(function(x){ return /maria|francisca|luciana|female|feminina|helena|vitoria|zira|samantha|susan|hazel|aria|jenny|karen|moira|tessa|libby|sonia/i.test(x.name); }); mas=todas.filter(function(x){ return fem.indexOf(x)<0; }); } dm(); if(CFG.voz==='danielmaria'&&!L_DM){ var avd=el('p','aviso','Este aparelho não tem as vozes Daniel e Maria da Microsoft (vêm no Windows e no navegador Edge). Toquei com a voz do aparelho.'); btn.insertAdjacentElement('afterend',avd); setTimeout(function(){ avd.remove(); },9000); } try{ ss.resume(); }catch(e){} falar(0); }
+    function comecar(){ if(LEIT!==L) return; var v=ss.getVoices(); if(v.length&&!todas.length){ todas=v.filter(function(x){ return (en?/^en/i:r.idioma==='es'?/^es/i:/^pt/i).test(x.lang); }); fem=todas.filter(function(x){ return /maria|francisca|luciana|female|feminina|helena|vitoria|zira|samantha|susan|hazel|aria|jenny|karen|moira|tessa|libby|sonia/i.test(x.name); }); mas=todas.filter(function(x){ return fem.indexOf(x)<0; }); } dm(); if(modo==='danielmaria'&&!L_DM){ var avd=el('p','aviso','Este aparelho não tem as vozes Daniel e Maria da Microsoft (vêm no Windows e no navegador Edge). Toquei com a voz do aparelho.'); btn.insertAdjacentElement('afterend',avd); setTimeout(function(){ avd.remove(); },9000); } try{ ss.resume(); }catch(e){} falar(0); }
     if(todas.length) setTimeout(comecar,80);
     else { var foi=false, ir=function(){ if(foi) return; foi=true; comecar(); }; try{ ss.addEventListener('voiceschanged',ir,{once:true}); }catch(e){} setTimeout(ir,900); }
   }
@@ -1858,6 +1885,25 @@ var USO={db:null,uid:null,dono:false,local:false,
     limparRolos(); if(!sel.length){ $rolos.appendChild(el('span','vazio-rolo','Ninguém à mesa ainda: puxe a alavanca ou mostre os pensadores e escolha à mão.')); return; }
     sel.forEach(function(p){ var d=el('span','rolo parou'), im=document.createElement('img'); im.src=IM(p.img,true); im.alt=p.nome; d.appendChild(im); d.appendChild(el('span','nm',p.nome.split(' ')[0])); $rolos.appendChild(d); }); }
   pintarQ();
+  /* microfone: a pessoa fala e o pensamento vai sendo escrito (ditado do navegador) */
+  (function(){
+    var b=document.getElementById('mic'), av=document.getElementById('mic-aviso'), SR=window.SpeechRecognition||window.webkitSpeechRecognition, rec=null, base='', ligado=false;
+    if(!b) return;
+    function aviso(t){ av.textContent=t; av.hidden=!t; }
+    function marcar(on){ ligado=on; b.setAttribute('aria-pressed',String(on)); b.classList.toggle('ouvindo',on); b.setAttribute('aria-label',on?'Parar de ditar':'Falar o pensamento'); b.title=on?'Parar de ditar':'Falar o pensamento'; }
+    function inicio(){ base=$pens.value; if(base&&!/\s$/.test(base)) base+=' '; }
+    b.addEventListener('click',function(){
+      if(ligado){ marcar(false); try{ rec.stop(); }catch(e){} aviso(''); return; }
+      if(!SR){ aviso('Este navegador não tem ditado por voz. Use o microfone do teclado do celular: ele também escreve o que você fala.'); return; }
+      rec=new SR(); rec.lang=(window.I18N&&I18N.local)?I18N.local():'pt-BR'; rec.continuous=true; rec.interimResults=true;
+      rec.onresult=function(e){ var t=''; for(var i=0;i<e.results.length;i++) t+=e.results[i][0].transcript; $pens.value=(base+t).slice(0,2000); $pens.dispatchEvent(new Event('input')); };
+      rec.onerror=function(e){ var er=e&&e.error; if(er==='not-allowed'||er==='service-not-allowed') aviso('O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.'); else if(er==='no-speech') aviso('Não ouvi nada. Toque no microfone e fale de novo.'); else if(er&&er!=='aborted') aviso('O ditado parou ('+er+'). Toque no microfone para continuar.'); marcar(false); };
+      /* o navegador encerra o ditado depois de uma pausa; enquanto o botão estiver ligado, eu volto a ouvir */
+      rec.onend=function(){ if(!ligado) return; inicio(); try{ rec.start(); }catch(e){ marcar(false); } };
+      inicio();
+      try{ rec.start(); marcar(true); aviso('Estou ouvindo. Fale o seu pensamento; toque de novo no microfone para parar.'); }catch(e){ aviso('O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.'); }
+    });
+  })();
   $pens.addEventListener('input',atualizar); $sort.addEventListener('input',function(){ if(MAN&&qtdMesa()>LIMC){ $sort.value=String(Math.max(0,LIMC-nomes().length)); triAviso(AV_MEMBROS); } atualizar(); });
   function pedidoTexto(){
     var n=nomes(), s=parseInt($sort.value,10)||0, partes=[];
@@ -1910,7 +1956,7 @@ var USO={db:null,uid:null,dono:false,local:false,
         /* mesa principal: quem não é o dono só olha; cada convidado usa a própria mesa */
         if(!CONV){ document.documentElement.setAttribute('data-papel','visitante'); var vs=document.querySelector('.visita'); if(vs) vs.innerHTML=DEV?'<b>Esta é a mesa principal do meu rei Herbs.</b> Você pode olhar; só ele muda o que há aqui. A sua mesa é a do link que ele mandou para você.':'<b>Esta mesa é de quem a criou.</b> Você pode olhar; só a dona ou o dono da mesa muda o que há aqui. Para ter a sua, use a skill falavado na sua conta do Claude.'; if(window.visitante) window.visitante(); return null; }
         /* convidado: as vozes Daniel e Maria (computador do dono) já vêm marcadas, a não ser que ele tenha escolhido a voz do aparelho */
-        var vg=null; try{ vg=localStorage.getItem('cfg_voz'); }catch(e){} CFG.voz=vg==='aparelho'?'aparelho':vg==='danielmaria'?'danielmaria':vg==='computador'?'computador':(CFG0.voz==='aparelho'?'aparelho':'computador'); aplicarCfg();
+        var vg=null; try{ vg=localStorage.getItem('cfg_voz'); }catch(e){} CFG.voz=vg==='aparelho'?'aparelho':vg==='danielmaria'?'danielmaria':vg==='computador'?'computador':(CFG0.voz==='computador'?'computador':'aparelho'); aplicarCfg();
         return Promise.all([Promise.resolve(u&&u.id?u.id():null),Promise.resolve(u&&u.can?u.can('data.write'):null),Promise.resolve(u&&u.me?u.me():null).catch(function(){ return null; })]).then(function(w){
           var id=w[0], pode=w[1], mail=w[2]&&w[2].email?String(w[2].email).trim().toLowerCase():'';
           return (mail&&CONVMAIL?sha256hex(mail):Promise.resolve('')).then(function(h){
