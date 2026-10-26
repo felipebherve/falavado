@@ -1889,6 +1889,8 @@ var USO={db:null,uid:null,dono:false,local:false,
   (function(){
     var b=document.getElementById('mic'), av=document.getElementById('mic-aviso'), SR=window.SpeechRecognition||window.webkitSpeechRecognition, rec=null, base='', ligado=false;
     if(!b) return;
+    /* o microfone fica só no site; dentro do Claude o ditado não funciona (pedido de Herbs, 2026-10-26) */
+    if(!window.SITE_WEB||window.SITE_CLAUDE){ b.remove(); if(av) av.remove(); $pens.style.paddingRight='14px'; return; }
     function aviso(t){ av.textContent=t; av.hidden=!t; }
     function marcar(on){ ligado=on; b.setAttribute('aria-pressed',String(on)); b.classList.toggle('ouvindo',on); b.setAttribute('aria-label',on?'Parar de ditar':'Falar o pensamento'); b.title=on?'Parar de ditar':'Falar o pensamento'; }
     function inicio(){ base=$pens.value; if(base&&!/\s$/.test(base)) base+=' '; }
