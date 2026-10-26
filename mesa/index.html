@@ -279,6 +279,12 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 @keyframes micpulsa{0%,100%{box-shadow:0 0 0 0 rgba(192,57,43,.55)}50%{box-shadow:0 0 0 9px rgba(192,57,43,0)}}
 @media (prefers-reduced-motion:reduce){.mic.ouvindo{animation:none}}
 .mic-aviso{margin:6px 2px 0;font-size:.86rem;color:var(--muted)}
+.mic.escrevendo{opacity:.6;cursor:progress}
+.mic-opcoes{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:8px 2px 0;font-size:.88rem;color:var(--muted)}
+.mic-opcoes[hidden]{display:none}
+.mic-opcoes label{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.mic-opcoes select{font:inherit;font-size:.88rem;max-width:100%;min-height:40px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.mic-opcoes select:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
 .pedeaudio{display:none}
 :root[data-voz="gemini"] .pedeaudio{display:block}
 .fila{margin:0 0 12px;color:var(--muted);font-size:.9rem}
@@ -583,7 +589,7 @@ html[data-dalt="acromat"]{filter:contrast(1.3) brightness(1.08)}
 
 <section class="novo" aria-label="Novo pensamento para a mesa">
 <h2>Leve um pensamento à mesa</h2>
-<div class="balao"><label for="pens" style="position:absolute;left:-9999px">Seu pensamento</label><textarea id="pens" maxlength="2000" placeholder="Escreva aqui o que você está pensando…"></textarea><button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Falar o pensamento" title="Falar o pensamento"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v4"/><path d="M8 22h8"/></svg></button></div><p class="mic-aviso" id="mic-aviso" hidden aria-live="polite"></p>
+<div class="balao"><label for="pens" style="position:absolute;left:-9999px">Seu pensamento</label><textarea id="pens" maxlength="2000" placeholder="Escreva aqui o que você está pensando…"></textarea><button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Falar o pensamento" title="Falar o pensamento"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v4"/><path d="M8 22h8"/></svg></button></div><p class="mic-aviso" id="mic-aviso" hidden aria-live="polite"></p><div class="mic-opcoes" id="mic-opcoes" hidden><label for="mic-sel">Microfone: <select id="mic-sel"></select></label><label for="mic-motor">Quem escreve: <select id="mic-motor"><option value="navegador">Ditado do navegador (grátis)</option><option value="gemini">Gemini (com a sua chave)</option></select></label></div>
 <h3>Quem participa</h3>
 <button type="button" class="limpar-grande" id="a-limpar">Limpar toda a escolha de participantes</button>
 <div class="atalhos grade trio">
@@ -758,7 +764,7 @@ var I18N=(function(){
 'Fechar a leitura e voltar ao site':'Close the reading and go back to the site','Voltar para a fala em tela cheia':'Back to the full-screen speech','Retrato ampliado':'Enlarged portrait',
 'Falta o anfitrião':'Host missing','Claude indisponível aqui':'Claude unavailable here','Escolha a sua':'Choose yours','Falta a chave':'Key missing','Diga quem é o anfitrião':'Say who the host is','Marque pelo menos uma':'Check at least one',
 'Majestade! Reconheci a senha do meu rei. A mesa é sua, Herbs.':'Majesty! I recognized my king\'s password. The table is yours, Herbs.',
-'Ouvir com a voz do aparelho':'Listen with the device voice','🔊 Ouvir esta fala':'🔊 Listen to this speech','Falar o pensamento':'Speak your thought','Parar de ditar':'Stop dictating','Estou ouvindo. Fale o seu pensamento; toque de novo no microfone para parar.':'I am listening. Say your thought; tap the microphone again to stop.','Este navegador não tem ditado por voz. Use o microfone do teclado do celular: ele também escreve o que você fala.':'This browser has no voice dictation. Use the microphone on your phone keyboard: it also writes what you say.','O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.':'The microphone is not allowed here. Allow the microphone for this page in the browser, or use the microphone on your phone keyboard.','Não ouvi nada. Toque no microfone e fale de novo.':'I heard nothing. Tap the microphone and speak again.','Em cada rodada ficam sempre os dois botões, Ouvir com a voz do aparelho e Ouvir com narrador, e cada fala tem o seu botão de ouvir. Aqui você escolhe o padrão: ele fica em dourado e é a voz do botão de cada fala.':'Every round always has both buttons, Listen with the device voice and Listen with the narrator, and every speech has its own listen button. Here you pick the default: it is shown in gold and is the voice of each speech button.','Voz do aparelho (grátis, padrão): o leitor natural do celular ou do computador, toca na hora':'Device voice (free, default): the built-in reader of your phone or computer, plays right away','Parar a leitura':'Stop the reading','Recolher esta rodada':'Collapse this round','← Voltar às rodadas':'← Back to the rounds',
+'Ouvir com a voz do aparelho':'Listen with the device voice','🔊 Ouvir esta fala':'🔊 Listen to this speech','Falar o pensamento':'Speak your thought',"Aqui dentro do Claude o microfone fica bloqueado. No computador, clique na caixa e aperte Windows + H para ditar (no Mac, aperte duas vezes a tecla Fn). No celular, use o 🎤 do teclado.":"Inside Claude the microphone is blocked. On a computer, click the box and press Windows + H to dictate (on a Mac, press the Fn key twice). On a phone, use the 🎤 on the keyboard.","Você não permitiu o microfone. Clique no cadeado ao lado do endereço do site, deixe Microfone em Permitir e toque no 🎤 de novo.":"The microphone was not allowed. Click the padlock next to the site address, set Microphone to Allow and tap the 🎤 again.","Nenhum microfone encontrado. Confira se ele está ligado no computador.":"No microphone found. Check that it is plugged into the computer.","O microfone escolhido não abriu. Escolha outro na lista Microfone.":"The chosen microphone did not open. Pick another one in the Microphone list.","Estou gravando. Toque de novo no microfone quando terminar, e o Gemini escreve o que você falou.":"I am recording. Tap the microphone again when you finish, and Gemini writes what you said.","O Gemini está escrevendo o que você falou…":"Gemini is writing what you said…","Pronto! O que você falou está na caixa.":"Done! What you said is in the box.","Para o Gemini escrever, marque o Gemini em Suas IAs e cole a sua chave. Ou aperte Windows + H para ditar.":"For Gemini to write, check Gemini in Your AIs and paste your key. Or press Windows + H to dictate.","O Gemini não conseguiu escrever o áudio. Tente de novo ou aperte Windows + H.":"Gemini could not write the audio. Try again or press Windows + H.","A chave do Gemini foi recusada. Confira em Suas IAs.":"The Gemini key was refused. Check it in Your AIs.","O ditado deste navegador não funciona (no Opera, por exemplo). Em Quem escreve, escolha Gemini, ou aperte Windows + H.":"This browser's dictation does not work (in Opera, for example). In Who writes, choose Gemini, or press Windows + H.","Não ouvi nada no áudio. Toque no microfone e fale de novo.":"I heard nothing in the audio. Tap the microphone and speak again.","Microfone:":"Microphone:","Quem escreve:":"Who writes:","Ditado do navegador (grátis)":"Browser dictation (free)","Gemini (com a sua chave)":"Gemini (with your key)","Microfone padrão do sistema":"System default microphone",'Parar de ditar':'Stop dictating','Estou ouvindo. Fale o seu pensamento; toque de novo no microfone para parar.':'I am listening. Say your thought; tap the microphone again to stop.','Este navegador não tem ditado por voz. Use o microfone do teclado do celular: ele também escreve o que você fala.':'This browser has no voice dictation. Use the microphone on your phone keyboard: it also writes what you say.','O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.':'The microphone is not allowed here. Allow the microphone for this page in the browser, or use the microphone on your phone keyboard.','Não ouvi nada. Toque no microfone e fale de novo.':'I heard nothing. Tap the microphone and speak again.','Em cada rodada ficam sempre os dois botões, Ouvir com a voz do aparelho e Ouvir com narrador, e cada fala tem o seu botão de ouvir. Aqui você escolhe o padrão: ele fica em dourado e é a voz do botão de cada fala.':'Every round always has both buttons, Listen with the device voice and Listen with the narrator, and every speech has its own listen button. Here you pick the default: it is shown in gold and is the voice of each speech button.','Voz do aparelho (grátis, padrão): o leitor natural do celular ou do computador, toca na hora':'Device voice (free, default): the built-in reader of your phone or computer, plays right away','Parar a leitura':'Stop the reading','Recolher esta rodada':'Collapse this round','← Voltar às rodadas':'← Back to the rounds',
 'Pedir as vozes do Gemini desta rodada':'Request the Gemini voices for this round','As vozes do Gemini têm limite diário gratuito. A narração automática fica sempre disponível.':'Gemini voices have a free daily limit. The automatic narration is always available.',
 'As falas que já têm voz do Gemini, uma depois da outra.':'The speeches that already have a Gemini voice, one after the other.',
 'Áudio do Gemini ainda não gerado para esta fala.':'Gemini audio not generated yet for this speech.','Copiar texto do estilo':'Copy style text','Selecionado, copie manualmente':'Selected, copy it manually',
@@ -1885,23 +1891,131 @@ var USO={db:null,uid:null,dono:false,local:false,
     limparRolos(); if(!sel.length){ $rolos.appendChild(el('span','vazio-rolo','Ninguém à mesa ainda: puxe a alavanca ou mostre os pensadores e escolha à mão.')); return; }
     sel.forEach(function(p){ var d=el('span','rolo parou'), im=document.createElement('img'); im.src=IM(p.img,true); im.alt=p.nome; d.appendChild(im); d.appendChild(el('span','nm',p.nome.split(' ')[0])); $rolos.appendChild(d); }); }
   pintarQ();
-  /* microfone: a pessoa fala e o pensamento vai sendo escrito (ditado do navegador) */
+  /* microfone: a pessoa fala e o pensamento vai sendo escrito.
+     No site: o navegador pede o microfone, a lista "Microfone" escolhe qual capta a voz e "Quem escreve" escolhe
+     o ditado do navegador (grátis; Chrome e Edge) ou o Gemini com a chave da pessoa (funciona também no Opera).
+     Dentro do Claude o microfone fica bloqueado: o botão explica o Windows + H e o microfone do teclado do celular. */
   (function(){
-    var b=document.getElementById('mic'), av=document.getElementById('mic-aviso'), SR=window.SpeechRecognition||window.webkitSpeechRecognition, rec=null, base='', ligado=false;
+    if(window.I18N_ES) Object.assign(window.I18N_ES,{"Aqui dentro do Claude o microfone fica bloqueado. No computador, clique na caixa e aperte Windows + H para ditar (no Mac, aperte duas vezes a tecla Fn). No celular, use o 🎤 do teclado.":"Dentro de Claude el micrófono está bloqueado. En el ordenador, haz clic en la caja y pulsa Windows + H para dictar (en Mac, pulsa dos veces la tecla Fn). En el móvil, usa el 🎤 del teclado.","Você não permitiu o microfone. Clique no cadeado ao lado do endereço do site, deixe Microfone em Permitir e toque no 🎤 de novo.":"No permitiste el micrófono. Haz clic en el candado junto a la dirección del sitio, deja Micrófono en Permitir y toca el 🎤 de nuevo.","Nenhum microfone encontrado. Confira se ele está ligado no computador.":"No se encontró ningún micrófono. Comprueba que esté conectado al ordenador.","O microfone escolhido não abriu. Escolha outro na lista Microfone.":"El micrófono elegido no se abrió. Elige otro en la lista Micrófono.","Estou gravando. Toque de novo no microfone quando terminar, e o Gemini escreve o que você falou.":"Estoy grabando. Toca de nuevo el micrófono cuando termines y Gemini escribe lo que dijiste.","O Gemini está escrevendo o que você falou…":"Gemini está escribiendo lo que dijiste…","Pronto! O que você falou está na caixa.":"¡Listo! Lo que dijiste está en la caja.","Para o Gemini escrever, marque o Gemini em Suas IAs e cole a sua chave. Ou aperte Windows + H para ditar.":"Para que Gemini escriba, marca Gemini en Tus IAs y pega tu clave. O pulsa Windows + H para dictar.","O Gemini não conseguiu escrever o áudio. Tente de novo ou aperte Windows + H.":"Gemini no pudo escribir el audio. Inténtalo de nuevo o pulsa Windows + H.","A chave do Gemini foi recusada. Confira em Suas IAs.":"La clave de Gemini fue rechazada. Revísala en Tus IAs.","O ditado deste navegador não funciona (no Opera, por exemplo). Em Quem escreve, escolha Gemini, ou aperte Windows + H.":"El dictado de este navegador no funciona (en Opera, por ejemplo). En Quién escribe, elige Gemini, o pulsa Windows + H.","Não ouvi nada no áudio. Toque no microfone e fale de novo.":"No oí nada en el audio. Toca el micrófono y habla de nuevo.","Microfone:":"Micrófono:","Quem escreve:":"Quién escribe:","Ditado do navegador (grátis)":"Dictado del navegador (gratis)","Gemini (com a sua chave)":"Gemini (con tu clave)","Microfone padrão do sistema":"Micrófono predeterminado del sistema"});
+    var b=document.getElementById('mic'), av=document.getElementById('mic-aviso'), $op=document.getElementById('mic-opcoes'), $sel=document.getElementById('mic-sel'), $mot=document.getElementById('mic-motor');
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition, OPERA=/\bOPR\//.test(navigator.userAgent);
+    var rec=null, base='', ligado=false, stream=null, grav=null, escrevendo=false;
     if(!b) return;
+    function ler(k){ try{ return localStorage.getItem(k)||''; }catch(e){ return ''; } }
+    function gravar(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
     function aviso(t){ av.textContent=t; av.hidden=!t; }
     function marcar(on){ ligado=on; b.setAttribute('aria-pressed',String(on)); b.classList.toggle('ouvindo',on); b.setAttribute('aria-label',on?'Parar de ditar':'Falar o pensamento'); b.title=on?'Parar de ditar':'Falar o pensamento'; }
     function inicio(){ base=$pens.value; if(base&&!/\s$/.test(base)) base+=' '; }
-    b.addEventListener('click',function(){
-      if(ligado){ marcar(false); try{ rec.stop(); }catch(e){} aviso(''); return; }
-      if(!SR){ aviso('Este navegador não tem ditado por voz. Use o microfone do teclado do celular: ele também escreve o que você fala.'); return; }
+    function escrever(t){ $pens.value=(base+t).slice(0,2000); $pens.dispatchEvent(new Event('input')); }
+    var WINH='Aqui dentro do Claude o microfone fica bloqueado. No computador, clique na caixa e aperte Windows + H para ditar (no Mac, aperte duas vezes a tecla Fn). No celular, use o 🎤 do teclado.';
+    /* dentro do Claude: a mesa do dono (sem adaptador), a página da skill (SITE_CLAUDE) ou o site aberto numa moldura */
+    var MOLDURA=false; try{ MOLDURA=window.top!==window; }catch(e){ MOLDURA=true; }
+    if(!window.SITE_WEB||window.SITE_CLAUDE){ b.addEventListener('click',function(){ aviso(WINH); $pens.focus(); }); return; }
+
+    /* quem escreve: o que a pessoa escolheu, ou o ditado do navegador quando ele existe (no Opera ele não funciona) */
+    $mot.value=ler('mic_motor')||((SR&&!OPERA)?'navegador':'gemini');
+    $mot.addEventListener('change',function(){ gravar('mic_motor',$mot.value); aviso(''); });
+    $sel.addEventListener('change',function(){ gravar('mic_id',$sel.value); aviso(''); });
+    function preencherLista(){
+      if(!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices) return Promise.resolve();
+      return navigator.mediaDevices.enumerateDevices().then(function(ds){
+        var mics=ds.filter(function(d){ return d.kind==='audioinput'&&d.deviceId!=='communications'; }), quer=ler('mic_id');
+        $sel.textContent='';
+        mics.forEach(function(d,i){ var o=document.createElement('option'); o.value=d.deviceId; o.textContent=d.deviceId==='default'?'Microfone padrão do sistema':(d.label||('Microfone '+(i+1))); $sel.appendChild(o); });
+        if(quer&&mics.some(function(d){ return d.deviceId===quer; })) $sel.value=quer;
+        $op.hidden=false;
+      }).catch(function(){});
+    }
+    if(navigator.mediaDevices&&navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange',function(){ if(!$op.hidden) preencherLista(); });
+    function abrirMic(){
+      var id=$sel.value||ler('mic_id'), audio=id&&id!=='default'?{deviceId:{exact:id}}:true;
+      return navigator.mediaDevices.getUserMedia({audio:audio}).catch(function(e){
+        /* o microfone guardado sumiu (desligado ou trocado): volto para o padrão do sistema */
+        if(audio!==true&&e&&(e.name==='OverconstrainedError'||e.name==='NotFoundError'||e.name==='NotReadableError')){ gravar('mic_id',''); return navigator.mediaDevices.getUserMedia({audio:true}); }
+        throw e;
+      });
+    }
+    function soltar(){ if(stream){ stream.getTracks().forEach(function(t){ t.stop(); }); stream=null; } }
+    function erroMic(e){
+      var n=e&&e.name;
+      aviso((n==='NotAllowedError'||n==='SecurityError')&&MOLDURA?WINH:n==='NotAllowedError'||n==='SecurityError'?'Você não permitiu o microfone. Clique no cadeado ao lado do endereço do site, deixe Microfone em Permitir e toque no 🎤 de novo.':
+        n==='NotFoundError'?'Nenhum microfone encontrado. Confira se ele está ligado no computador.':'O microfone escolhido não abriu. Escolha outro na lista Microfone.');
+      marcar(false); soltar();
+    }
+
+    /* ditado do navegador: entrega o microfone escolhido quando o navegador aceita; senão ele usa o padrão do sistema */
+    function ditar(){
+      if(!SR){ $mot.value='gemini'; return gravarGemini(); }
       rec=new SR(); rec.lang=(window.I18N&&I18N.local)?I18N.local():'pt-BR'; rec.continuous=true; rec.interimResults=true;
-      rec.onresult=function(e){ var t=''; for(var i=0;i<e.results.length;i++) t+=e.results[i][0].transcript; $pens.value=(base+t).slice(0,2000); $pens.dispatchEvent(new Event('input')); };
-      rec.onerror=function(e){ var er=e&&e.error; if(er==='not-allowed'||er==='service-not-allowed') aviso('O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.'); else if(er==='no-speech') aviso('Não ouvi nada. Toque no microfone e fale de novo.'); else if(er&&er!=='aborted') aviso('O ditado parou ('+er+'). Toque no microfone para continuar.'); marcar(false); };
+      var trilha=stream&&stream.getAudioTracks()[0];
+      function comecar(){ try{ rec.start(trilha); }catch(e){ rec.start(); } }
+      rec.onresult=function(e){ var t=''; for(var i=0;i<e.results.length;i++) t+=e.results[i][0].transcript; escrever(t); };
+      rec.onerror=function(e){ var er=e&&e.error;
+        if(er==='not-allowed') aviso('Você não permitiu o microfone. Clique no cadeado ao lado do endereço do site, deixe Microfone em Permitir e toque no 🎤 de novo.');
+        else if(er==='network'||er==='service-not-allowed'||er==='language-not-supported') aviso('O ditado deste navegador não funciona (no Opera, por exemplo). Em Quem escreve, escolha Gemini, ou aperte Windows + H.');
+        else if(er==='no-speech') aviso('Não ouvi nada. Toque no microfone e fale de novo.');
+        else if(er&&er!=='aborted') aviso('O ditado parou ('+er+'). Toque no microfone para continuar.');
+        marcar(false); soltar(); };
       /* o navegador encerra o ditado depois de uma pausa; enquanto o botão estiver ligado, eu volto a ouvir */
-      rec.onend=function(){ if(!ligado) return; inicio(); try{ rec.start(); }catch(e){ marcar(false); } };
+      rec.onend=function(){ if(!ligado){ soltar(); return; } inicio(); try{ comecar(); }catch(e){ marcar(false); soltar(); } };
       inicio();
-      try{ rec.start(); marcar(true); aviso('Estou ouvindo. Fale o seu pensamento; toque de novo no microfone para parar.'); }catch(e){ aviso('O microfone não foi liberado aqui. Libere o microfone para esta página no navegador, ou use o microfone do teclado do celular.'); }
+      try{ comecar(); marcar(true); aviso('Estou ouvindo. Fale o seu pensamento; toque de novo no microfone para parar.'); }catch(e){ erroMic(e); }
+    }
+
+    /* Gemini: grava o microfone escolhido em WAV (mono, 16 kHz) e pede ao Gemini da pessoa para escrever o que foi dito */
+    var MAXSEG=180;
+    function gravarGemini(){
+      if(!ler('ia_key_gemini')){ aviso('Para o Gemini escrever, marque o Gemini em Suas IAs e cole a sua chave. Ou aperte Windows + H para ditar.'); soltar(); return; }
+      var AC=window.AudioContext||window.webkitAudioContext, ctx;
+      try{ ctx=new AC({sampleRate:16000}); }catch(e){ ctx=new AC(); }
+      var fonte=ctx.createMediaStreamSource(stream), proc=ctx.createScriptProcessor(4096,1,1), pedacos=[], total=0;
+      proc.onaudioprocess=function(ev){ var d=ev.inputBuffer.getChannelData(0); pedacos.push(new Float32Array(d)); total+=d.length; if(total>=ctx.sampleRate*MAXSEG) parar(); };
+      fonte.connect(proc); proc.connect(ctx.destination);
+      grav={ctx:ctx,fonte:fonte,proc:proc,pedacos:pedacos,total:function(){ return total; },taxa:ctx.sampleRate,timer:null};
+      inicio(); marcar(true); aviso('Estou gravando. Toque de novo no microfone quando terminar, e o Gemini escreve o que você falou.');
+    }
+    function wav(pedacos,n,taxa){
+      var buf=new ArrayBuffer(44+n*2), v=new DataView(buf), o=0;
+      function str(t){ for(var i=0;i<t.length;i++) v.setUint8(o++,t.charCodeAt(i)); }
+      function u32(x){ v.setUint32(o,x,true); o+=4; } function u16(x){ v.setUint16(o,x,true); o+=2; }
+      str('RIFF'); u32(36+n*2); str('WAVE'); str('fmt '); u32(16); u16(1); u16(1); u32(taxa); u32(taxa*2); u16(2); u16(16); str('data'); u32(n*2);
+      pedacos.forEach(function(p){ for(var i=0;i<p.length;i++){ var x=Math.max(-1,Math.min(1,p[i])); v.setInt16(o,x<0?x*0x8000:x*0x7fff,true); o+=2; } });
+      return new Uint8Array(buf);
+    }
+    function base64(u8){ var s='', i, passo=0x8000; for(i=0;i<u8.length;i+=passo) s+=String.fromCharCode.apply(null,u8.subarray(i,i+passo)); return btoa(s); }
+    function parar(){
+      if(!grav) return; var g=grav; grav=null; marcar(false);
+      try{ g.proc.disconnect(); g.fonte.disconnect(); }catch(e){} try{ g.ctx.close(); }catch(e){} soltar();
+      var n=g.total(); if(n<g.taxa*0.5){ aviso('Não ouvi nada no áudio. Toque no microfone e fale de novo.'); return; }
+      var lingua=(window.I18N&&I18N.lang)?({en:'inglês',es:'espanhol'}[I18N.lang()]||'português do Brasil'):'português do Brasil';
+      escrevendo=true; b.classList.add('escrevendo'); aviso('O Gemini está escrevendo o que você falou…');
+      fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':ler('ia_key_gemini')},
+        body:JSON.stringify({contents:[{parts:[{text:'Transcreva exatamente o que a pessoa fala neste áudio, em '+lingua+', com pontuação. Responda só com o texto falado, sem comentários. Se não houver fala, responda vazio.'},{inline_data:{mime_type:'audio/wav',data:base64(wav(g.pedacos,n,g.taxa))}}]}],generationConfig:{temperature:0}})
+      }).then(function(r){
+        if(r.status===400||r.status===401||r.status===403) throw {code:'chave'};
+        if(!r.ok) throw {code:'http'}; return r.json();
+      }).then(function(j){
+        var c=j&&j.candidates&&j.candidates[0], t=c&&c.content&&c.content.parts?c.content.parts.map(function(p){ return p.text||''; }).join('').trim():'';
+        if(!t){ aviso('Não ouvi nada no áudio. Toque no microfone e fale de novo.'); return; }
+        escrever(t); aviso('Pronto! O que você falou está na caixa.');
+      }).catch(function(e){
+        aviso(e&&e.code==='chave'?'A chave do Gemini foi recusada. Confira em Suas IAs.':'O Gemini não conseguiu escrever o áudio. Tente de novo ou aperte Windows + H.');
+      }).then(function(){ escrevendo=false; b.classList.remove('escrevendo'); });
+    }
+
+    b.addEventListener('click',function(){
+      if(escrevendo) return;
+      if(ligado){ if(grav){ parar(); return; } marcar(false); try{ rec.stop(); }catch(e){} soltar(); aviso(''); return; }
+      if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+        if(SR){ ditar(); return; }
+        aviso('Este navegador não tem ditado por voz. Use o microfone do teclado do celular: ele também escreve o que você fala.'); return;
+      }
+      abrirMic().then(function(s){
+        stream=s; return preencherLista();
+      }).then(function(){
+        if(!stream) return;
+        if($mot.value==='gemini') gravarGemini(); else ditar();
+      }).catch(erroMic);
     });
   })();
   $pens.addEventListener('input',atualizar); $sort.addEventListener('input',function(){ if(MAN&&qtdMesa()>LIMC){ $sort.value=String(Math.max(0,LIMC-nomes().length)); triAviso(AV_MEMBROS); } atualizar(); });
